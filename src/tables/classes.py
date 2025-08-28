@@ -67,6 +67,8 @@ class Row:
         self.x1 = max(cell.x1 for cell in cells)
         self.y1 = max(cell.y1 for cell in cells)
 
+        self.text = [text for cell in cells if (text := cell.text)]
+
     def __repr__(self):
         return f"Row(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
 
@@ -83,6 +85,8 @@ class Column:
         self.y0 = min(cell.y0 for cell in cells)
         self.x1 = max(cell.x1 for cell in cells)
         self.y1 = max(cell.y1 for cell in cells)
+
+        self.text = [text for cell in cells if (text := cell.text)]
 
     def __repr__(self):
         return f"Column(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
@@ -108,24 +112,24 @@ class Table:
 # %%
 
 
-class PageVector:
-    def __init__(self, page_width, page_height, resolution=1):
-        self.page_width = page_width
-        self.page_height = page_height
-        self.resolution = resolution  # grid cell size in points, default 1
+# class PageVector:
+#     def __init__(self, page_width, page_height, resolution=1):
+#         self.page_width = page_width
+#         self.page_height = page_height
+#         self.resolution = resolution  # grid cell size in points, default 1
 
-        self.grid = self._init_grid()
+#         self.grid = self._init_grid()
 
-    def __repr__(self):
-        return f"PageVector(({self.page_width}, {self.page_height})-{self.resolution})"
+#     def __repr__(self):
+#         return f"PageVector(({self.page_width}, {self.page_height})-{self.resolution})"
 
-    def _init_grid(self):
-        width = int(np.ceil(self.page_width / self.resolution))
-        height = int(np.ceil(self.page_height / self.resolution))
-        grid = np.empty((height, width), dtype=object)
-        grid[:] = None
+#     def _init_grid(self):
+#         width = int(np.ceil(self.page_width / self.resolution))
+#         height = int(np.ceil(self.page_height / self.resolution))
+#         grid = np.empty((height, width), dtype=object)
+#         grid[:] = None
 
-        return grid
+#         return grid
 
 
 # %%
@@ -139,7 +143,7 @@ class Page:
         self.height = self.page.height
         self.width = self.page.width
 
-        self.page_vector = PageVector(self.width, self.height, resolution=1)
+        # self.page_vector = PageVector(self.width, self.height, resolution=1)
 
         self.chars = self.page.chars
         self.lines = self.page.lines
@@ -273,7 +277,7 @@ class Page:
         return pd.DataFrame(lines)
 
     @staticmethod
-    def _merge_intervals(intervals, threshold: float = 2.0) -> list:
+    def _merge_intervals(intervals, tol: float = 2.0) -> list:
         """Merge overlapping or nearly overlapping intervals."""
         if not intervals:
             return []
@@ -283,7 +287,7 @@ class Page:
         for current in intervals[1:]:
             prev = merged[-1]
             # If overlapping or within threshold, merge
-            if current[0] <= prev[1] + threshold:
+            if current[0] <= prev[1] + tol:
                 merged[-1] = (prev[0], max(prev[1], current[1]))
             else:
                 merged.append(current)
@@ -291,7 +295,7 @@ class Page:
 
     @staticmethod
     def _cluster_horizontal_lines(
-        df_lines: pd.DataFrame, threshold: float = 3.0
+        df_lines: pd.DataFrame, tol: float = 3.0
     ) -> pd.DataFrame:
         """
         Cluster horizontal lines that are close to each other into groups.
@@ -309,7 +313,7 @@ class Page:
 
             intervals = [(x0, x1) for x0, x1 in zip(group_df["x0"], group_df["x1"])]
 
-            merged_intervals = Page._merge_intervals(intervals, threshold=threshold)
+            merged_intervals = Page._merge_intervals(intervals, tol=tol)
 
             for start, end in merged_intervals:
                 clustered.append(
@@ -326,7 +330,7 @@ class Page:
 
     @staticmethod
     def _cluster_vertical_lines(
-        df_lines: pd.DataFrame, threshold: float = 3.0
+        df_lines: pd.DataFrame, tol: float = 3.0
     ) -> pd.DataFrame:
         """
         Cluster vertical lines that are close to each other into groups.
@@ -344,7 +348,7 @@ class Page:
 
             intervals = [(y0, y1) for y0, y1 in zip(group_df["y0"], group_df["y1"])]
 
-            merged_intervals = Page._merge_intervals(intervals, threshold=threshold)
+            merged_intervals = Page._merge_intervals(intervals, tol=tol)
 
             for start, end in merged_intervals:
                 clustered.append(
@@ -360,9 +364,7 @@ class Page:
         return pd.DataFrame(clustered)
 
     @staticmethod
-    def _squash_lines(
-        array: np.ndarray, threshold: float
-    ) -> tuple[list[np.float64], dict]:
+    def _squash_lines(array: np.ndarray, tol: float) -> tuple[list[np.float64], dict]:
         # array: sorted list of y (or x); returns new canonical values with mapping
 
         positions = sorted(array)
@@ -371,7 +373,7 @@ class Page:
         group = [positions[0]]
 
         for pos in positions[1:]:
-            if abs(pos - group[-1]) <= threshold:
+            if abs(pos - group[-1]) <= tol:
                 group.append(pos)
             else:
                 target = np.mean(group)
@@ -409,18 +411,16 @@ class Page:
 
         return hor_lines, ver_lines
 
-    def get_clustered_lines(self, threshold: float = 3.0) -> pd.DataFrame:
+    def get_clustered_lines(self, tol: float = 3.0) -> pd.DataFrame:
         hor_lines, ver_lines = self.get_all_lines()
 
         if not hor_lines.empty:
             ys = hor_lines.y0.unique()
-            _, y_mapping = Page._squash_lines(ys, threshold=threshold)
+            _, y_mapping = Page._squash_lines(ys, tol=tol)
             hor_lines["y0"] = hor_lines["y0"].map(y_mapping)
             hor_lines["y1"] = hor_lines["y1"].map(y_mapping)
 
-            clustered_horizontal = Page._cluster_horizontal_lines(
-                hor_lines, threshold=threshold
-            )
+            clustered_horizontal = Page._cluster_horizontal_lines(hor_lines, tol=tol)
             clustered_horizontal["orientation"] = "horizontal"
         else:
             clustered_horizontal = pd.DataFrame(
@@ -429,13 +429,11 @@ class Page:
 
         if not ver_lines.empty:
             xs = ver_lines.x0.unique()
-            _, x_mapping = Page._squash_lines(xs, threshold=threshold)
+            _, x_mapping = Page._squash_lines(xs, tol=tol)
             ver_lines["x0"] = ver_lines["x0"].map(x_mapping)
             ver_lines["x1"] = ver_lines["x1"].map(x_mapping)
 
-            clustered_vertical = Page._cluster_vertical_lines(
-                ver_lines, threshold=threshold
-            )
+            clustered_vertical = Page._cluster_vertical_lines(ver_lines, tol=tol)
             clustered_vertical["orientation"] = "vertical"
         else:
             clustered_vertical = pd.DataFrame(
@@ -469,7 +467,9 @@ class Page:
         return horiz_lines, vert_lines
 
     @staticmethod
-    def _assign_cell_text(char_df: pd.DataFrame, cell: Cell, tol: float = 2.0) -> str:
+    def _assign_cell_text(
+        char_df: pd.DataFrame, cell: Cell, tol: float = 2.0
+    ) -> tuple[str, list[str]]:
         chars_in_cell = char_df[
             (char_df["x0"] >= cell.x0 - tol)
             & (char_df["x1"] <= cell.x1 + tol)
@@ -481,10 +481,11 @@ class Page:
             by=["y0", "x0"], ascending=[False, True], inplace=True
         )  # Sort top-to-bottom, left-to-right
 
-        text = "".join(chars_in_cell["text"].tolist()).strip()
+        char_list = chars_in_cell["text"].tolist()
+        text = "".join(char_list).strip()
         cell.text = text
 
-        return text
+        return text, char_list
 
     def initialise_cells(self) -> list[Cell]:
         horiz_lines, vert_lines = self._hash_lines_as_spans()
@@ -693,7 +694,7 @@ class Document:
 
 if __name__ == "__main__":
     # path = "./tests/data/UBI Format 2.pdf"
-    path = "../../tests/data/ICICI Bank.pdf"
+    path = "../../tests/data/UBI Format 2.pdf"
     doc = Document(path)
     page_0 = doc.pages[0]
 
