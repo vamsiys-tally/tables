@@ -87,6 +87,25 @@ class Column:
 
 
 # %%
+
+
+class Table:
+    def __init__(self, cells: list[Cell]) -> None:
+        self.cells = cells
+        self.length = len(cells)
+
+        self.x0 = min(cell.x0 for cell in cells)
+        self.y0 = min(cell.y0 for cell in cells)
+        self.x1 = max(cell.x1 for cell in cells)
+        self.y1 = max(cell.y1 for cell in cells)
+
+    def __repr__(self):
+        return f"Table(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+
+
+# %%
+
+
 class PageVector:
     def __init__(self, page_width, page_height, resolution=1):
         self.page_width = page_width
@@ -108,6 +127,8 @@ class PageVector:
 
 
 # %%
+
+
 class Page:
     def __init__(self, pdf_page: plumber.page.Page) -> None:  # pyright: ignore[reportAttributeAccessIssue]
         self.page = pdf_page
@@ -122,36 +143,71 @@ class Page:
         self.lines = self.page.lines
         self.rects = self.page.rects
 
-        self.char_df = pd.DataFrame(self.chars)[
-            ["text", "x0", "y0", "x1", "y1", "size", "width", "height"]
-        ]
-        self.line_df = pd.DataFrame(self.lines)[
-            [
-                "x0",
-                "y0",
-                "x1",
-                "y1",
-                "linewidth",
-            ]
-        ]
-        self.line_df["orientation"] = np.where(
-            np.isclose(self.line_df["y0"], self.line_df["y1"]), "horizontal", "vertical"
+        self.char_df = Page._attribute_df(
+            self.chars,
+            mandatory=["text", "x0", "y0", "x1", "y1"],
+            selection=["size", "width", "height"],
         )
 
-        self.rect_df = pd.DataFrame(self.rects)[
-            [
-                "x0",
-                "y0",
-                "x1",
-                "y1",
-                "linewidth",
-            ]
-        ]
+        self.line_df = Page._attribute_df(
+            self.lines,
+            mandatory=["x0", "y0", "x1", "y1"],
+            selection=["linewidth", "orientation"],
+        )
+
+        if not self.line_df.empty:
+            y0 = pd.to_numeric(self.line_df["y0"], errors="coerce")
+            y1 = pd.to_numeric(self.line_df["y1"], errors="coerce")
+            self.line_df["orientation"] = np.where(
+                np.isclose(y0, y1), "horizontal", "vertical"
+            )
+        else:
+            self.line_df["orientation"] = pd.Series(dtype="object")
+
+        self.rect_df = Page._attribute_df(
+            self.rects,
+            mandatory=["x0", "y0", "x1", "y1"],
+            selection=["linewidth"],
+        )
 
         self.all_lines_df = pd.DataFrame()
 
         self.cells = []
+
         self.rows = []
+        self.columns = []
+        self.tables = []
+
+    @staticmethod
+    def _attribute_df(
+        list_dict: list[dict], mandatory: list[str], selection: list[str]
+    ) -> pd.DataFrame:
+        """
+        Create a DataFrame from a list of dictionaries, ensuring mandatory columns are present.
+        """
+
+        if not list_dict:
+            # Return empty DataFrame with all mandatory + selection columns as placeholders
+            columns = mandatory + selection
+            df = pd.DataFrame(columns=columns)
+            # Fill selection columns with NaN explicitly (optional here as empty)
+            for col in selection:
+                df[col] = np.nan
+            return df
+
+        df = pd.DataFrame(list_dict)
+
+        for col in mandatory:
+            if col not in df.columns:
+                raise ValueError(f"Mandatory column '{col}' missing in data.")
+
+        for col in selection:
+            if col not in df.columns:
+                df[col] = np.nan
+
+        final = mandatory + selection
+
+        return df[final]
 
     def _rect_to_lines(self) -> pd.DataFrame:
         """
@@ -334,7 +390,18 @@ class Page:
         """
         Get all lines from the detected rectangles and lines.
         """
-        rect_lines = self._rect_to_lines()
+        if self.rect_df.empty:
+            # No rectangles → no lines from rects
+            rect_lines = pd.DataFrame(columns=["x0", "y0", "x1", "y1", "linewidth"])
+        else:
+            rect_lines = self._rect_to_lines()
+
+        if rect_lines.empty:
+            # Return empty hor_lines and ver_lines with expected columns
+            hor_lines = pd.DataFrame(columns=["x0", "y0", "x1", "y1", "linewidth"])
+            ver_lines = pd.DataFrame(columns=["x0", "y0", "x1", "y1", "linewidth"])
+            return hor_lines, ver_lines
+
         hor_lines = self._cluster_horizontal_lines(rect_lines)
         ver_lines = self._cluster_vertical_lines(rect_lines)
 
@@ -343,25 +410,35 @@ class Page:
     def get_clustered_lines(self, threshold: float = 3.0) -> pd.DataFrame:
         hor_lines, ver_lines = self.get_all_lines()
 
-        ys = hor_lines.y0.unique()
-        _, y_mapping = Page._squash_lines(ys, threshold=threshold)
-        hor_lines["y0"] = hor_lines["y0"].map(y_mapping)
-        hor_lines["y1"] = hor_lines["y1"].map(y_mapping)
+        if not hor_lines.empty:
+            ys = hor_lines.y0.unique()
+            _, y_mapping = Page._squash_lines(ys, threshold=threshold)
+            hor_lines["y0"] = hor_lines["y0"].map(y_mapping)
+            hor_lines["y1"] = hor_lines["y1"].map(y_mapping)
 
-        xs = ver_lines.x0.unique()
-        _, x_mapping = Page._squash_lines(xs, threshold=threshold)
-        ver_lines["x0"] = ver_lines["x0"].map(x_mapping)
-        ver_lines["x1"] = ver_lines["x1"].map(x_mapping)
+            clustered_horizontal = Page._cluster_horizontal_lines(
+                hor_lines, threshold=threshold
+            )
+            clustered_horizontal["orientation"] = "horizontal"
+        else:
+            clustered_horizontal = pd.DataFrame(
+                columns=["x0", "y0", "x1", "y1", "linewidth", "orientation"]
+            )
 
-        clustered_horizontal = Page._cluster_horizontal_lines(
-            hor_lines, threshold=threshold
-        )
-        clustered_horizontal["orientation"] = "horizontal"
+        if not ver_lines.empty:
+            xs = ver_lines.x0.unique()
+            _, x_mapping = Page._squash_lines(xs, threshold=threshold)
+            ver_lines["x0"] = ver_lines["x0"].map(x_mapping)
+            ver_lines["x1"] = ver_lines["x1"].map(x_mapping)
 
-        clustered_vertical = Page._cluster_vertical_lines(
-            ver_lines, threshold=threshold
-        )
-        clustered_vertical["orientation"] = "vertical"
+            clustered_vertical = Page._cluster_vertical_lines(
+                ver_lines, threshold=threshold
+            )
+            clustered_vertical["orientation"] = "vertical"
+        else:
+            clustered_vertical = pd.DataFrame(
+                columns=["x0", "y0", "x1", "y1", "linewidth", "orientation"]
+            )
 
         self.all_lines_df = (
             pd.concat([self.line_df, clustered_horizontal, clustered_vertical])
@@ -506,6 +583,7 @@ class Page:
         directions = {
             "row": ["left", "right"],
             "column": ["top", "bottom"],
+            "table": ["left", "right", "top", "bottom"],
         }
 
         stack = [start_cell]
@@ -554,8 +632,27 @@ class Page:
 
         return columns
 
+    def get_tables(self):
+        visited = set()
+        tables = []
+
+        for cell in self.cells:
+            if cell not in visited:
+                cluster = Page.depth_first_search(cell, visited, direction="table")
+
+                if len(cluster) > 1:  # ignore stray cells
+                    tables.append(cluster)
+
+        if len(tables) > 0:
+            # Create Table objects similarly to Row and Column
+            self.tables = [Table(cells) for cells in tables]
+
+        return tables
+
 
 # %%
+
+
 class Document:
     def __init__(self, path: str) -> None:
         self.path = path
@@ -575,7 +672,7 @@ class Document:
 
 if __name__ == "__main__":
     # path = "./tests/data/UBI Format 2.pdf"
-    path = "../../tests/data/UBI Format 2.pdf"
+    path = "../../tests/data/ICICI Bank.pdf"
     doc = Document(path)
     page_0 = doc.pages[0]
 
@@ -587,3 +684,4 @@ if __name__ == "__main__":
     page_0.link_cells()
     rows = page_0.get_rows()
     columns = page_0.get_columns()
+    tables = page_0.get_tables()
