@@ -48,6 +48,8 @@ class Cell:
         self.left = None
         self.right = None
 
+        self.text = ""
+
     def __repr__(self):
         return f"Cell(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
 
@@ -466,6 +468,24 @@ class Page:
 
         return horiz_lines, vert_lines
 
+    @staticmethod
+    def _assign_cell_text(char_df: pd.DataFrame, cell: Cell, tol: float = 2.0) -> str:
+        chars_in_cell = char_df[
+            (char_df["x0"] >= cell.x0 - tol)
+            & (char_df["x1"] <= cell.x1 + tol)
+            & (char_df["y0"] >= cell.y0 - tol)
+            & (char_df["y1"] <= cell.y1 + tol)
+        ].copy()
+
+        chars_in_cell.sort_values(
+            by=["y0", "x0"], ascending=[False, True], inplace=True
+        )  # Sort top-to-bottom, left-to-right
+
+        text = "".join(chars_in_cell["text"].tolist()).strip()
+        cell.text = text
+
+        return text
+
     def initialise_cells(self) -> list[Cell]:
         horiz_lines, vert_lines = self._hash_lines_as_spans()
 
@@ -501,6 +521,7 @@ class Page:
 
                 if top and bottom and left and right:
                     cell = Cell(x0, y0, x1, y1)
+                    Page._assign_cell_text(self.char_df, cell)
                     cells.append(cell)
 
         self.cells = cells
