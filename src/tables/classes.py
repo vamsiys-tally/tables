@@ -277,7 +277,7 @@ class Page:
         return pd.DataFrame(lines)
 
     @staticmethod
-    def _merge_intervals(intervals, tol: float = 2.0) -> list:
+    def _merge_intervals(intervals, tol: float = 3.0) -> list:
         """Merge overlapping or nearly overlapping intervals."""
         if not intervals:
             return []
@@ -304,12 +304,11 @@ class Page:
 
         clustered = []
 
-        grouping = ["y0", "linewidth"]
+        grouping = ["y0"]
 
         for group_key, group_df in lines.groupby(grouping):
             # If the group has more than one line, we consider it a cluster
             y0 = group_key[0]
-            lw = group_key[1]
 
             intervals = [(x0, x1) for x0, x1 in zip(group_df["x0"], group_df["x1"])]
 
@@ -322,7 +321,6 @@ class Page:
                         "y0": y0,
                         "x1": end,
                         "y1": y0,
-                        "linewidth": lw,
                     }
                 )
 
@@ -339,12 +337,11 @@ class Page:
 
         clustered = []
 
-        grouping = ["x0", "linewidth"]
+        grouping = ["x0"]
 
         for group_key, group_df in lines.groupby(grouping):
             # If the group has more than one line, we consider it a cluster
             x0 = group_key[0]
-            lw = group_key[1]
 
             intervals = [(y0, y1) for y0, y1 in zip(group_df["y0"], group_df["y1"])]
 
@@ -357,14 +354,15 @@ class Page:
                         "y0": start,
                         "x1": x0,
                         "y1": end,
-                        "linewidth": lw,
                     }
                 )
 
         return pd.DataFrame(clustered)
 
     @staticmethod
-    def _squash_lines(array: np.ndarray, tol: float) -> tuple[list[np.float64], dict]:
+    def _squash_lines(
+        array: np.ndarray, tol: float = 3.0
+    ) -> tuple[list[np.float64], dict]:
         # array: sorted list of y (or x); returns new canonical values with mapping
 
         positions = sorted(array)
@@ -390,7 +388,7 @@ class Page:
 
         return squashed, mapping
 
-    def get_all_lines(self) -> tuple[pd.DataFrame, pd.DataFrame]:
+    def get_all_lines(self, tol: float = 3.0) -> tuple[pd.DataFrame, pd.DataFrame]:
         """
         Get all lines from the detected rectangles and lines.
         """
@@ -406,8 +404,8 @@ class Page:
             ver_lines = pd.DataFrame(columns=["x0", "y0", "x1", "y1", "linewidth"])
             return hor_lines, ver_lines
 
-        hor_lines = self._cluster_horizontal_lines(rect_lines)
-        ver_lines = self._cluster_vertical_lines(rect_lines)
+        hor_lines = self._cluster_horizontal_lines(rect_lines, tol=tol)
+        ver_lines = self._cluster_vertical_lines(rect_lines, tol=tol)
 
         return hor_lines, ver_lines
 
@@ -468,7 +466,7 @@ class Page:
 
     @staticmethod
     def _assign_cell_text(
-        char_df: pd.DataFrame, cell: Cell, tol: float = 2.0
+        char_df: pd.DataFrame, cell: Cell, tol: float = 3.0
     ) -> tuple[str, list[str]]:
         chars_in_cell = char_df[
             (char_df["x0"] >= cell.x0 - tol)
@@ -501,22 +499,22 @@ class Page:
 
                 # For top: horizontal line at y0 that covers [x0, x1]
                 top = any(
-                    y == y0 and x_start <= x0 and x_end >= x1
+                    np.isclose(y, y0, atol=3.0) and x_start <= x0 and x_end >= x1
                     for y, x_start, x_end in horiz_lines
                 )
                 # For bottom: horizontal at y1
                 bottom = any(
-                    y == y1 and x_start <= x0 and x_end >= x1
+                    np.isclose(y, y1, atol=3.0) and x_start <= x0 and x_end >= x1
                     for y, x_start, x_end in horiz_lines
                 )
                 # For left: vertical at x0 that covers [y0, y1]
                 left = any(
-                    x == x0 and y_start <= y0 and y_end >= y1
+                    np.isclose(x, x0, atol=3.0) and y_start <= y0 and y_end >= y1
                     for x, y_start, y_end in vert_lines
                 )
                 # For right: vertical at x1
                 right = any(
-                    x == x1 and y_start <= y0 and y_end >= y1
+                    np.isclose(x, x1, atol=3.0) and y_start <= y0 and y_end >= y1
                     for x, y_start, y_end in vert_lines
                 )
 
@@ -530,7 +528,7 @@ class Page:
         return cells
 
     @staticmethod
-    def bin_edge(val: float, tol: float = 1.0) -> float:
+    def bin_edge(val: float, tol: float = 3.0) -> float:
         return round(val / tol) * tol
 
     @staticmethod
@@ -543,7 +541,7 @@ class Page:
         return abs(a0 - b0) < tol and abs(a1 - b1) < tol
 
     def group_cells(
-        self, tol: float = 2.0
+        self, tol: float = 3.0
     ) -> tuple[defaultdict, defaultdict, defaultdict, defaultdict]:
         """
         Group cells based on their edges.
@@ -561,7 +559,7 @@ class Page:
 
         return left_groups, right_groups, top_groups, bottom_groups
 
-    def link_cells(self, tol: float = 2.0) -> None:
+    def link_cells(self, tol: float = 3.0) -> None:
         left_groups, right_groups, top_groups, bottom_groups = self.group_cells()
 
         for cell in self.cells:
@@ -693,17 +691,73 @@ class Document:
 # %%
 
 if __name__ == "__main__":
+    import os
+    import gc
+
     # path = "./tests/data/UBI Format 2.pdf"
-    path = "../../tests/data/UBI Format 2.pdf"
-    doc = Document(path)
-    page_0 = doc.pages[0]
+    path = "./tests/data/"
+    bordered_list = [
+        "AKOLA JANATA COMMERCIAL COOPERATIVE BANK Statement_For_193775_012103301000485.pdf",
+        "Al Ilmna.pdf",
+        "Axis bank format 2.pdf",
+        "Axis bank format 3.pdf",
+        "Axis bank format 4.pdf",
+        "Axis bank format 5.pdf",
+        "Axis bank format 6.pdf",
+        "AXIS Bank.pdf",
+        "Bhuj Commercial Co-operative Bank Ltd.PDF",
+        "Canara Bank format 4.pdf",
+        "Canara bank Format 6.pdf",
+        "Central Bank of India.pdf",
+        "CITIZENCREDIT Co-operative Bank Ltd.pdf",
+        "DBS.pdf",
+        "DEOGIRI NAGARI SAHAKARI BANK LTD.pdf",
+        # "FEDERAL BANK.pdf",
+        "ICICI Bank format 4.pdf",
+        "ICICI Bank format 5.pdf",
+        "ICICI Bank.pdf",
+        "IDBI bank format 2.pdf",
+        "idbi bank format 3.pdf",
+        "IDFC format 2.pdf",
+        "IDFC_Ashish.pdf",
+        "Kalpana Awade Bank.pdf",
+        "Maharasta gramin bank.pdf",
+        "Omprakash Deora Peoples Co-Operative Bank Ltd..pdf",
+        "Punjab national bank.pdf",
+        "Punjab Nationl Bank format 2.pdf",
+        "Sawji Bank.pdf",
+        "SBi format 2.pdf",
+        "SBI format 3.pdf",
+        "SBI format 4.pdf",
+        "SBI Format 5.pdf",
+        "SBI format 6.pdf",
+        "SBI format 7.pdf",
+        "SBI format 8.pdf",
+        "SBI format 9.pdf",
+        "UBI Format 2.pdf",
+    ]
 
-    hor_lines, ver_lines = page_0.get_all_lines()
-    lines = page_0.get_clustered_lines()
-    cells = page_0.initialise_cells()
-    print(cells)
+    for file in bordered_list:
+        print(f"Processing {file}...")
+        doc = Document(os.path.join(path, file))
+        page_0 = doc.pages[0]
 
-    page_0.link_cells()
-    rows = page_0.get_rows()
-    columns = page_0.get_columns()
-    tables = page_0.get_tables()
+        hor_lines, ver_lines = page_0.get_all_lines()
+        lines = page_0.get_clustered_lines()
+        cells = page_0.initialise_cells()
+        print(f"Cells initialized for {file}: {len(cells)}")
+
+        page_0.link_cells()
+        rows = page_0.get_rows()
+        columns = page_0.get_columns()
+        tables = page_0.get_tables()
+        print(f"Tables detected for {file}: {len(tables)}")
+
+        stub = file.split(".pdf")[0]
+
+        with open(f"./tests/results/{stub}_output.txt", "w") as f:
+            for i, cell in enumerate(page_0.cells):
+                f.write(f"Cell {i}: {cell}, Text: '{cell.text}'\n")
+
+        del doc
+        gc.collect()
