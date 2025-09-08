@@ -1,0 +1,4 @@
+Cell 0: Cell((123.0, 408.0)-(231.0, 425.0)), Text: 'Account No.'
+Cell 1: Cell((231.0, 408.0)-(269.0, 425.0)), Text: 'Currency'
+Cell 2: Cell((269.0, 408.0)-(384.0, 425.0)), Text: 'Account Balance'
+Cell 3: Cell((384.0, 408.0)-(440.0, 425.0)), Text: 'Status'

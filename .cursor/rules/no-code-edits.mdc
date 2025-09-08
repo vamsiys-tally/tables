@@ -1,0 +1,5 @@
+---
+description: No code should be changed unless explicitly requested. For any explicit request, ask for a confirmation with a clear message that the code will be modified and wait for a yes.
+globs:
+alwaysApply: false
+---

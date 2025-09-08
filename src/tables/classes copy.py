@@ -147,7 +147,6 @@ class Page:
 
         self.chars = self.page.chars
         self.lines = self.page.lines
-        self.edges = self.page.edges
         self.rects = self.page.rects
 
         self.char_df = Page._attribute_df(
@@ -1046,44 +1045,7 @@ if __name__ == "__main__":
     # path = "./tests/data/UBI Format 2.pdf"
     path = "./tests/data/"
     bordered_list = [
-        "AKOLA JANATA COMMERCIAL COOPERATIVE BANK Statement_For_193775_012103301000485.pdf",
-        "Al Ilmna.pdf",
-        "Axis bank format 2.pdf",
-        "Axis bank format 3.pdf",
-        "Axis bank format 4.pdf",
-        "Axis bank format 5.pdf",
-        "Axis bank format 6.pdf",
-        "AXIS Bank.pdf",
-        "Bhuj Commercial Co-operative Bank Ltd.PDF",
         "Canara Bank format 4.pdf",
-        "Canara bank Format 6.pdf",
-        "Central Bank of India.pdf",
-        "CITIZENCREDIT Co-operative Bank Ltd.pdf",
-        "DBS.pdf",
-        "DEOGIRI NAGARI SAHAKARI BANK LTD.pdf",
-        # "FEDERAL BANK.pdf",
-        "ICICI Bank format 4.pdf",
-        "ICICI Bank format 5.pdf",
-        "ICICI Bank.pdf",
-        "IDBI bank format 2.pdf",
-        "idbi bank format 3.pdf",
-        "IDFC format 2.pdf",
-        "IDFC_Ashish.pdf",
-        "Kalpana Awade Bank.pdf",
-        "Maharasta gramin bank.pdf",
-        "Omprakash Deora Peoples Co-Operative Bank Ltd..pdf",
-        "Punjab national bank.pdf",
-        "Punjab Nationl Bank format 2.pdf",
-        "Sawji Bank.pdf",
-        "SBi format 2.pdf",
-        "SBI format 3.pdf",
-        "SBI format 4.pdf",
-        "SBI Format 5.pdf",
-        "SBI format 6.pdf",
-        "SBI format 7.pdf",
-        "SBI format 8.pdf",
-        "SBI format 9.pdf",
-        "UBI Format 2.pdf",
     ]
 
     for file in bordered_list:
