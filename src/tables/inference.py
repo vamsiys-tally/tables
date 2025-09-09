@@ -10,15 +10,15 @@ from collections import defaultdict
 # %%
 
 
-class Rectangle:
-    def __init__(self, top_left, top_right, bottom_left, bottom_right):
-        self.top_left = top_left
-        self.top_right = top_right
-        self.bottom_left = bottom_left
-        self.bottom_right = bottom_right
+# class Rectangle:
+#     def __init__(self, top_left, top_right, bottom_left, bottom_right):
+#         self.top_left = top_left
+#         self.top_right = top_right
+#         self.bottom_left = bottom_left
+#         self.bottom_right = bottom_right
 
-        self.x0, self.y0 = top_left
-        self.x1, self.y1 = bottom_right
+#         self.x0, self.y0 = top_left
+#         self.x1, self.y1 = bottom_right
 
 
 # %%
@@ -46,6 +46,49 @@ class Cell:
 
 
 # %%
+class Row:
+    def __init__(self, cells: list[Cell]) -> None:
+        self.cells = cells
+        self.length = len(cells)
+
+        self.x0 = min(cell.x0 for cell in cells)
+        self.y0 = min(cell.y0 for cell in cells)
+        self.x1 = max(cell.x1 for cell in cells)
+        self.y1 = max(cell.y1 for cell in cells)
+
+        self.text = [cell.text for cell in cells]
+
+    def __repr__(self):
+        return f"Row(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+
+
+class Column:
+    def __init__(self, cells: list[Cell]) -> None:
+        self.cells = cells
+        self.length = len(cells)
+
+        self.x0 = min(cell.x0 for cell in cells)
+        self.y0 = min(cell.y0 for cell in cells)
+        self.x1 = max(cell.x1 for cell in cells)
+        self.y1 = max(cell.y1 for cell in cells)
+
+        self.text = [cell.text for cell in cells]
+
+    def __repr__(self):
+        return f"Column(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+
+
+# %%
+class Table:
+    def __init__(self, rows: list[Row], columns: list[Column]) -> None:
+        self.rows = rows
+        self.columns = columns
+
+    def __repr__(self):
+        return f"Table(({len(self.rows)}, {len(self.columns)}))"
+
+
+# %%
 class Page:
     def __init__(self, page) -> None:
         self.page = page
@@ -63,6 +106,10 @@ class Page:
         self.rects = pd.DataFrame()
 
         self.cells = []
+        self.rows = []
+        self.columns = []
+
+        self.tables = []
 
     def __repr__(self) -> str:
         return f"Page({self.page_number}, {self.height}x{self.width})"
@@ -296,7 +343,18 @@ class Page:
                 ):
                     self.cells[-1].text += char["text"]
 
+        self.cells = sorted(self.cells, key=lambda x: (x.x0, -x.y0))
+
         return self.cells
+
+    def get_cell_groups(self, tol=1.0):
+        self.rows = self._build_cell_groups(self.cells, type="row", tol=tol)
+        self.rows = sorted(self.rows, key=lambda x: -x.y0)
+
+        self.columns = self._build_cell_groups(self.cells, type="column", tol=tol)
+        self.columns = sorted(self.columns, key=lambda x: x.x0)
+
+        return self.rows, self.columns
 
     @staticmethod
     def _generate_grid(dimension, resolution=1):
@@ -486,6 +544,66 @@ class Page:
         results = [(rectangles[r["id"]], levels[r["id"]]) for r in rects]
         return results
 
+    @staticmethod
+    def _is_adjacent(cell1: Cell, cell2: Cell, type="row", tol=1.0):
+        if type not in ["row", "column"]:
+            raise ValueError("Type must be either 'row' or 'column'")
+
+        if type == "row":
+            return np.isclose(cell1.x1, cell2.x0, atol=tol)
+        elif type == "column":
+            return np.isclose(cell1.y1, cell2.y0, atol=tol)
+        else:
+            raise ValueError("Type must be either 'row' or 'column'")
+
+    @staticmethod
+    def _build_cell_groups(cells: list[Cell], type="row", tol=1.0):
+        if type not in ["row", "column"]:
+            raise ValueError("Type must be either 'row' or 'column'")
+
+        if type == "row":
+            coord_col = "y0"
+            sort_col = "x0"
+        elif type == "column":
+            coord_col = "x0"
+            sort_col = "y0"
+        else:
+            raise ValueError("Type must be either 'row' or 'column'")
+
+        cells_sorted = sorted(
+            cells, key=lambda c: (getattr(c, coord_col), getattr(c, sort_col))
+        )
+
+        groups = []
+        current_group = []
+
+        for i, cell in enumerate(cells_sorted):
+            if not current_group:
+                current_group.append(cell)
+                continue
+
+            prev_cell = current_group[-1]
+
+            same_level = (
+                abs(getattr(cell, coord_col) - getattr(prev_cell, coord_col)) < tol
+            )
+            adjacent = same_level and Page._is_adjacent(prev_cell, cell, type=type)
+
+            if same_level and adjacent:
+                current_group.append(cell)
+            else:
+                groups.append(
+                    Row(current_group) if type == "row" else Column(current_group)
+                )
+                current_group = [cell]
+
+        if current_group:
+            groups.append(
+                Row(current_group) if type == "row" else Column(current_group)
+            )
+
+        return groups
+
 
 # %%
 
@@ -507,8 +625,8 @@ class Document:
 
 # %%
 if __name__ == "__main__":
-    from skimage.draw import line as skline
-    import matplotlib.pyplot as plt
+    # from skimage.draw import line as skline
+    # import matplotlib.pyplot as plt
 
     import os
     import gc
@@ -560,7 +678,7 @@ if __name__ == "__main__":
         try:
             print(f"Processing {file}...")
             doc = Document(os.path.join(path, file))
-            page = doc.pages[0]
+            page = doc.pages[1]
 
             _ = page.get_page_characters()
             _ = page.get_page_lines()
@@ -573,7 +691,9 @@ if __name__ == "__main__":
 
             stub = file.split(".pdf")[0]
 
-            with open(f"./tests/results/{stub}_output_20250908_run1.txt", "w") as f:
+            with open(
+                f"./tests/results/page 2/{stub}_output_20250908_page2_run1.txt", "w"
+            ) as f:
                 for i, cell in enumerate(cells):
                     f.write(f"Cell {i}: {cell}, Text: '{cell.text}'\n")
 
