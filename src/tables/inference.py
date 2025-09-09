@@ -3,22 +3,12 @@
 import pdfplumber as plumber
 import pandas as pd
 import numpy as np
+import torch
 
 from sklearn.cluster import DBSCAN
 from collections import defaultdict
-
-# %%
-
-
-# class Rectangle:
-#     def __init__(self, top_left, top_right, bottom_left, bottom_right):
-#         self.top_left = top_left
-#         self.top_right = top_right
-#         self.bottom_left = bottom_left
-#         self.bottom_right = bottom_right
-
-#         self.x0, self.y0 = top_left
-#         self.x1, self.y1 = bottom_right
+from sentence_transformers import SentenceTransformer, util
+from tables.headers import HEADER_EMBEDDINGS
 
 
 # %%
@@ -57,6 +47,7 @@ class Row:
         self.y1 = max(cell.y1 for cell in cells)
 
         self.text = [cell.text for cell in cells]
+        self.header_row = False
 
     def __repr__(self):
         return f"Row(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
@@ -80,12 +71,26 @@ class Column:
 
 # %%
 class Table:
-    def __init__(self, rows: list[Row], columns: list[Column]) -> None:
-        self.rows = rows
-        self.columns = columns
+    def __init__(self) -> None:
+        self.rows = []
+        self.columns = []
+
+        self.header_row = None
 
     def __repr__(self):
         return f"Table(({len(self.rows)}, {len(self.columns)}))"
+
+    def add_row(self, row: Row):
+        self.rows.append(row)
+
+    def add_column(self, column: Column):
+        self.columns.append(column)
+
+    def set_header_row(self, header_row: Row):
+        self.header_row = header_row
+
+    def get_header_row(self):
+        return self.header_row
 
 
 # %%
@@ -109,6 +114,7 @@ class Page:
         self.rows = []
         self.columns = []
 
+        self.model = None
         self.tables = []
 
     def __repr__(self) -> str:
@@ -123,13 +129,6 @@ class Page:
                 mandatory=["text", "x0", "y0", "x1", "y1"],
                 selection=["size", "width", "height"],
             )
-
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     char_df[col] = char_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
 
             self.chars = char_df.drop_duplicates().reset_index(drop=True)
 
@@ -152,13 +151,6 @@ class Page:
                 axis=1,
             )
 
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     lines_df[col] = lines_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
-
             self.lines = lines_df.drop_duplicates().reset_index(drop=True)
 
         return self.lines
@@ -180,37 +172,6 @@ class Page:
                 axis=1,
             )
 
-            # coordinate_groups = [["x0", "y0"], ["x1", "y1"]]
-
-            # for orientation in ["horizontal", "vertical"]:
-            #     subset = edges_df[edges_df["orientation"] == orientation].copy()
-            #     indices = list(subset.index)
-
-            #     if not subset.empty:
-            #         for group in coordinate_groups:
-            #             points = np.vstack((subset[group].values))
-
-            #             clustered = Page._cluster_points(
-            #                 points,
-            #                 self.column_grid,
-            #                 self.row_grid,
-            #                 tol=tol,
-            #                 original_indices=indices,
-            #             )
-
-            #             for col in clustered.columns:
-            #                 subset_col = group[0] if col == "x" else group[1]
-            #                 subset.loc[indices, subset_col] = clustered[col].values
-
-            #     edges_df.loc[indices, group] = subset[group].values
-
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     edges_df[col] = edges_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
-
             self.edges = edges_df.drop_duplicates().reset_index(drop=True)
 
         return self.edges
@@ -224,13 +185,6 @@ class Page:
                 mandatory=["x0", "y0", "x1", "y1"],
                 selection=[],
             )
-
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     rects_df[col] = rects_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
 
             self.rects = rects_df.drop_duplicates().reset_index(drop=True)
 
@@ -315,17 +269,7 @@ class Page:
         return l0_rectangles
 
     def _initialise_cells(self, tol: float = 3.0):
-        # for _, rect in self.rects.iterrows():
-        #     self.cells.append(Cell(rect["x0"], rect["y0"], rect["x1"], rect["y1"]))
-        #     for _, char in self.chars.iterrows():
-        #         if (
-        #             char["x0"] >= rect["x0"] - tol
-        #             and char["x1"] <= rect["x1"] + tol
-        #             and char["y0"] >= rect["y0"] - tol
-        #             and char["y1"] <= rect["y1"] + tol
-        #         ):
-        #             self.cells[-1].text += char["text"]
-
+        # Check if the rectangles directly need to be used here.
         line_rectangles = self._detect_rectangles()
 
         for _, rect in enumerate(line_rectangles):
@@ -348,13 +292,34 @@ class Page:
         return self.cells
 
     def get_cell_groups(self, tol=1.0):
-        self.rows = self._build_cell_groups(self.cells, type="row", tol=tol)
-        self.rows = sorted(self.rows, key=lambda x: -x.y0)
+        rows = self._build_cell_groups(self.cells, type="row", tol=tol)
+        self.rows = sorted(rows, key=lambda x: -x.y0)
 
-        self.columns = self._build_cell_groups(self.cells, type="column", tol=tol)
-        self.columns = sorted(self.columns, key=lambda x: x.x0)
+        columns = self._build_cell_groups(self.cells, type="column", tol=tol)
+        self.columns = sorted(columns, key=lambda x: x.x0)
 
         return self.rows, self.columns
+
+    def get_tables(self):
+        pass
+
+    def identify_header_rows(self):
+        if self.model is None:
+            self.model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        for i, row in enumerate(self.rows):
+            row_text = [text.lower() for text in row.text]
+
+            row_embeddings = self.model.encode(row_text, convert_to_tensor=True)
+            similarities = util.pytorch_cos_sim(row_embeddings, HEADER_EMBEDDINGS)
+            max_similarity = similarities.max()
+
+            if max_similarity > 0.8:
+                row.header_row = True
+            else:
+                row.header_row = False
+
+        return self.rows
 
     @staticmethod
     def _generate_grid(dimension, resolution=1):
