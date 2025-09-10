@@ -15,11 +15,12 @@ from tables.headers import HEADER_EMBEDDINGS
 
 
 class Cell:
-    def __init__(self, x0, y0, x1, y1):
+    def __init__(self, x0, y0, x1, y1, page_number: int):
         self.x0 = x0
         self.y0 = y0
         self.x1 = x1
         self.y1 = y1
+        self.page_number = page_number
 
         self.height = abs(self.y1 - self.y0)
         self.width = abs(self.x1 - self.x0)
@@ -32,14 +33,19 @@ class Cell:
         self.text = ""
 
     def __repr__(self):
-        return f"Cell(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        return f"Cell(Pg:{self.page_number}, ({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
 
 
 # %%
 class Row:
-    def __init__(self, cells: list[Cell]) -> None:
+    active_rows = []
+
+    def __init__(self, cells: list[Cell], page_number: int) -> None:
         self.cells = cells
         self.length = len(cells)
+        self.page_number = page_number
+
+        Row.active_rows.append(self)
 
         self.x0 = min(cell.x0 for cell in cells)
         self.y0 = min(cell.y0 for cell in cells)
@@ -50,13 +56,27 @@ class Row:
         self.header_row = False
 
     def __repr__(self):
-        return f"Row(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        return (
+            f"Row(Pg:{self.page_number}, ({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        )
+
+    @classmethod
+    def get_rows(cls, page_number: int = None):
+        if page_number is None:
+            return cls.active_rows
+        else:
+            return [row for row in cls.active_rows if row.page_number == page_number]
 
 
 class Column:
-    def __init__(self, cells: list[Cell]) -> None:
+    active_columns = []
+
+    def __init__(self, cells: list[Cell], page_number: int) -> None:
         self.cells = cells
         self.length = len(cells)
+        self.page_number = page_number
+
+        Column.active_columns.append(self)
 
         self.x0 = min(cell.x0 for cell in cells)
         self.y0 = min(cell.y0 for cell in cells)
@@ -66,7 +86,23 @@ class Column:
         self.text = [cell.text for cell in cells]
 
     def __repr__(self):
-        return f"Column(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        return f"Column(Pg:{self.page_number}, ({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+
+    @classmethod
+    def get_columns(cls, page_number: int = None):
+        if page_number is None:
+            return cls.active_columns
+        else:
+            return [
+                column
+                for column in cls.active_columns
+                if column.page_number == page_number
+            ]
+
+
+# %%
+class PageRegion:
+    pass
 
 
 # %%
@@ -268,7 +304,7 @@ class Page:
 
         return l0_rectangles
 
-    def _initialise_cells(self, tol: float = 3.0):
+    def initialise_cells(self, tol: float = 3.0):
         # Check if the rectangles directly need to be used here.
         line_rectangles = self._detect_rectangles()
 
@@ -276,7 +312,7 @@ class Page:
             x0, y0 = rect["top_left"]
             x1, y1 = rect["bottom_right"]
 
-            self.cells.append(Cell(x0, y0, x1, y1))
+            self.cells.append(Cell(x0, y0, x1, y1, self.page_number))
 
             for _, char in self.chars.iterrows():
                 if (
@@ -299,27 +335,6 @@ class Page:
         self.columns = sorted(columns, key=lambda x: x.x0)
 
         return self.rows, self.columns
-
-    def get_tables(self):
-        pass
-
-    def identify_header_rows(self):
-        if self.model is None:
-            self.model = SentenceTransformer("all-MiniLM-L6-v2")
-
-        for i, row in enumerate(self.rows):
-            row_text = [text.lower() for text in row.text]
-
-            row_embeddings = self.model.encode(row_text, convert_to_tensor=True)
-            similarities = util.pytorch_cos_sim(row_embeddings, HEADER_EMBEDDINGS)
-            max_similarity = similarities.max()
-
-            if max_similarity > 0.8:
-                row.header_row = True
-            else:
-                row.header_row = False
-
-        return self.rows
 
     @staticmethod
     def _generate_grid(dimension, resolution=1):
@@ -558,13 +573,17 @@ class Page:
                 current_group.append(cell)
             else:
                 groups.append(
-                    Row(current_group) if type == "row" else Column(current_group)
+                    Row(current_group, cell.page_number)
+                    if type == "row"
+                    else Column(current_group, cell.page_number)
                 )
                 current_group = [cell]
 
         if current_group:
             groups.append(
-                Row(current_group) if type == "row" else Column(current_group)
+                Row(current_group, cell.page_number)
+                if type == "row"
+                else Column(current_group, cell.page_number)
             )
 
         return groups
@@ -581,11 +600,88 @@ class Document:
         )  # TODO: Change to an encapsulated function that handles PWD protection
 
         self.pages = []
+        self.cells = []
+        self.rows = []
+        self.columns = []
+        self.tables = []
+
+        self.model = None
+        self.header_row = None
+        self.table_structure = {}
+
         self._initialise_pages()
 
     def _initialise_pages(self):
         for page in self.pdf.pages:
             self.pages.append(Page(page))
+
+    def process_pages(self):
+        doc_rows = []
+        doc_columns = []
+
+        for page in self.pages:
+            _ = page.get_page_characters()
+            _ = page.get_page_lines()
+            _ = page.get_page_edges()
+            _ = page.get_page_rects()
+
+            _ = page.clean_all_coords()
+            _ = page.initialise_cells()
+
+            rows, columns = page.get_cell_groups()
+            doc_rows.extend(rows)
+            doc_columns.extend(columns)
+
+        self.rows = sorted(doc_rows, key=lambda x: (x.page_number, -x.y0))
+        self.columns = sorted(doc_columns, key=lambda x: (x.page_number, x.x0))
+
+        return self.rows, self.columns
+
+    def identify_header_rows(self):
+        if self.model is None:
+            self.model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        for row in self.rows:
+            if self._is_header_row(row, self.model):
+                self.header_row = row
+                break
+
+        return self.header_row
+
+    def detect_table_structure(self):
+        if self.header_row is None:
+            self.identify_header_rows()
+
+        self.table_structure = Document._detect_table_structure(self.header_row)
+
+        return self.table_structure
+
+    def get_tables(self):
+        pass
+
+    @staticmethod
+    def _detect_table_structure(row: Row):
+        num_cells = len(row.cells)
+        column_x = [cell.x0 for cell in row.cells]
+        column_width = [cell.width for cell in row.cells]
+
+        return {
+            "num_cells": num_cells,
+            "column_x": column_x,
+            "column_width": column_width,
+        }
+
+    @staticmethod
+    def _is_header_row(row: Row, model=None):
+        if model is None:
+            model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        row_text = [text.lower() for text in row.text]
+        row_embeddings = model.encode(row_text, convert_to_tensor=True)
+        similarities = util.pytorch_cos_sim(row_embeddings, HEADER_EMBEDDINGS)
+        max_similarity = similarities.max()
+
+        return max_similarity > 0.8
 
 
 # %%
@@ -651,7 +747,7 @@ if __name__ == "__main__":
             _ = page.get_page_rects()
 
             page.clean_all_coords()
-            cells = page._initialise_cells()
+            cells = page.initialise_cells()
             print(f"Cells initialized for {file}: {len(cells)}")
 
             stub = file.split(".pdf")[0]
