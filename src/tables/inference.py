@@ -3,33 +3,24 @@
 import pdfplumber as plumber
 import pandas as pd
 import numpy as np
+import torch
 
 from sklearn.cluster import DBSCAN
 from collections import defaultdict
-
-# %%
-
-
-# class Rectangle:
-#     def __init__(self, top_left, top_right, bottom_left, bottom_right):
-#         self.top_left = top_left
-#         self.top_right = top_right
-#         self.bottom_left = bottom_left
-#         self.bottom_right = bottom_right
-
-#         self.x0, self.y0 = top_left
-#         self.x1, self.y1 = bottom_right
+from sentence_transformers import SentenceTransformer, util
+from tables.headers import HEADER_EMBEDDINGS
 
 
 # %%
 
 
 class Cell:
-    def __init__(self, x0, y0, x1, y1):
+    def __init__(self, x0, y0, x1, y1, page_number: int):
         self.x0 = x0
         self.y0 = y0
         self.x1 = x1
         self.y1 = y1
+        self.page_number = page_number
 
         self.height = abs(self.y1 - self.y0)
         self.width = abs(self.x1 - self.x0)
@@ -42,14 +33,19 @@ class Cell:
         self.text = ""
 
     def __repr__(self):
-        return f"Cell(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        return f"Cell(Pg:{self.page_number}, ({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
 
 
 # %%
 class Row:
-    def __init__(self, cells: list[Cell]) -> None:
+    active_rows = []
+
+    def __init__(self, cells: list[Cell], page_number: int) -> None:
         self.cells = cells
         self.length = len(cells)
+        self.page_number = page_number
+
+        Row.active_rows.append(self)
 
         self.x0 = min(cell.x0 for cell in cells)
         self.y0 = min(cell.y0 for cell in cells)
@@ -57,15 +53,30 @@ class Row:
         self.y1 = max(cell.y1 for cell in cells)
 
         self.text = [cell.text for cell in cells]
+        self.header_row = False
 
     def __repr__(self):
-        return f"Row(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        return (
+            f"Row(Pg:{self.page_number}, ({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        )
+
+    @classmethod
+    def get_rows(cls, page_number: int = None):
+        if page_number is None:
+            return cls.active_rows
+        else:
+            return [row for row in cls.active_rows if row.page_number == page_number]
 
 
 class Column:
-    def __init__(self, cells: list[Cell]) -> None:
+    active_columns = []
+
+    def __init__(self, cells: list[Cell], page_number: int) -> None:
         self.cells = cells
         self.length = len(cells)
+        self.page_number = page_number
+
+        Column.active_columns.append(self)
 
         self.x0 = min(cell.x0 for cell in cells)
         self.y0 = min(cell.y0 for cell in cells)
@@ -75,17 +86,47 @@ class Column:
         self.text = [cell.text for cell in cells]
 
     def __repr__(self):
-        return f"Column(({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+        return f"Column(Pg:{self.page_number}, ({self.x0}, {self.y0})-({self.x1}, {self.y1}))"
+
+    @classmethod
+    def get_columns(cls, page_number: int = None):
+        if page_number is None:
+            return cls.active_columns
+        else:
+            return [
+                column
+                for column in cls.active_columns
+                if column.page_number == page_number
+            ]
+
+
+# %%
+class PageRegion:
+    pass
 
 
 # %%
 class Table:
-    def __init__(self, rows: list[Row], columns: list[Column]) -> None:
-        self.rows = rows
-        self.columns = columns
+    def __init__(self) -> None:
+        self.rows = []
+        self.columns = []
+
+        self.header_row = None
 
     def __repr__(self):
         return f"Table(({len(self.rows)}, {len(self.columns)}))"
+
+    def add_row(self, row: Row):
+        self.rows.append(row)
+
+    def add_column(self, column: Column):
+        self.columns.append(column)
+
+    def set_header_row(self, header_row: Row):
+        self.header_row = header_row
+
+    def get_header_row(self):
+        return self.header_row
 
 
 # %%
@@ -109,6 +150,7 @@ class Page:
         self.rows = []
         self.columns = []
 
+        self.model = None
         self.tables = []
 
     def __repr__(self) -> str:
@@ -123,13 +165,6 @@ class Page:
                 mandatory=["text", "x0", "y0", "x1", "y1"],
                 selection=["size", "width", "height"],
             )
-
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     char_df[col] = char_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
 
             self.chars = char_df.drop_duplicates().reset_index(drop=True)
 
@@ -152,13 +187,6 @@ class Page:
                 axis=1,
             )
 
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     lines_df[col] = lines_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
-
             self.lines = lines_df.drop_duplicates().reset_index(drop=True)
 
         return self.lines
@@ -180,37 +208,6 @@ class Page:
                 axis=1,
             )
 
-            # coordinate_groups = [["x0", "y0"], ["x1", "y1"]]
-
-            # for orientation in ["horizontal", "vertical"]:
-            #     subset = edges_df[edges_df["orientation"] == orientation].copy()
-            #     indices = list(subset.index)
-
-            #     if not subset.empty:
-            #         for group in coordinate_groups:
-            #             points = np.vstack((subset[group].values))
-
-            #             clustered = Page._cluster_points(
-            #                 points,
-            #                 self.column_grid,
-            #                 self.row_grid,
-            #                 tol=tol,
-            #                 original_indices=indices,
-            #             )
-
-            #             for col in clustered.columns:
-            #                 subset_col = group[0] if col == "x" else group[1]
-            #                 subset.loc[indices, subset_col] = clustered[col].values
-
-            #     edges_df.loc[indices, group] = subset[group].values
-
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     edges_df[col] = edges_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
-
             self.edges = edges_df.drop_duplicates().reset_index(drop=True)
 
         return self.edges
@@ -224,13 +221,6 @@ class Page:
                 mandatory=["x0", "y0", "x1", "y1"],
                 selection=[],
             )
-
-            # for col in ["x0", "y0", "x1", "y1"]:
-            #     rects_df[col] = rects_df[col].apply(
-            #         lambda x: Page._snap_to_grid(
-            #             x, self.column_grid if col in ["x0", "x1"] else self.row_grid
-            #         )
-            #     )
 
             self.rects = rects_df.drop_duplicates().reset_index(drop=True)
 
@@ -314,25 +304,15 @@ class Page:
 
         return l0_rectangles
 
-    def _initialise_cells(self, tol: float = 3.0):
-        # for _, rect in self.rects.iterrows():
-        #     self.cells.append(Cell(rect["x0"], rect["y0"], rect["x1"], rect["y1"]))
-        #     for _, char in self.chars.iterrows():
-        #         if (
-        #             char["x0"] >= rect["x0"] - tol
-        #             and char["x1"] <= rect["x1"] + tol
-        #             and char["y0"] >= rect["y0"] - tol
-        #             and char["y1"] <= rect["y1"] + tol
-        #         ):
-        #             self.cells[-1].text += char["text"]
-
+    def initialise_cells(self, tol: float = 3.0):
+        # Check if the rectangles directly need to be used here.
         line_rectangles = self._detect_rectangles()
 
         for _, rect in enumerate(line_rectangles):
             x0, y0 = rect["top_left"]
             x1, y1 = rect["bottom_right"]
 
-            self.cells.append(Cell(x0, y0, x1, y1))
+            self.cells.append(Cell(x0, y0, x1, y1, self.page_number))
 
             for _, char in self.chars.iterrows():
                 if (
@@ -348,11 +328,11 @@ class Page:
         return self.cells
 
     def get_cell_groups(self, tol=1.0):
-        self.rows = self._build_cell_groups(self.cells, type="row", tol=tol)
-        self.rows = sorted(self.rows, key=lambda x: -x.y0)
+        rows = self._build_cell_groups(self.cells, type="row", tol=tol)
+        self.rows = sorted(rows, key=lambda x: -x.y0)
 
-        self.columns = self._build_cell_groups(self.cells, type="column", tol=tol)
-        self.columns = sorted(self.columns, key=lambda x: x.x0)
+        columns = self._build_cell_groups(self.cells, type="column", tol=tol)
+        self.columns = sorted(columns, key=lambda x: x.x0)
 
         return self.rows, self.columns
 
@@ -593,13 +573,17 @@ class Page:
                 current_group.append(cell)
             else:
                 groups.append(
-                    Row(current_group) if type == "row" else Column(current_group)
+                    Row(current_group, cell.page_number)
+                    if type == "row"
+                    else Column(current_group, cell.page_number)
                 )
                 current_group = [cell]
 
         if current_group:
             groups.append(
-                Row(current_group) if type == "row" else Column(current_group)
+                Row(current_group, cell.page_number)
+                if type == "row"
+                else Column(current_group, cell.page_number)
             )
 
         return groups
@@ -616,11 +600,88 @@ class Document:
         )  # TODO: Change to an encapsulated function that handles PWD protection
 
         self.pages = []
+        self.cells = []
+        self.rows = []
+        self.columns = []
+        self.tables = []
+
+        self.model = None
+        self.header_row = None
+        self.table_structure = {}
+
         self._initialise_pages()
 
     def _initialise_pages(self):
         for page in self.pdf.pages:
             self.pages.append(Page(page))
+
+    def process_pages(self):
+        doc_rows = []
+        doc_columns = []
+
+        for page in self.pages:
+            _ = page.get_page_characters()
+            _ = page.get_page_lines()
+            _ = page.get_page_edges()
+            _ = page.get_page_rects()
+
+            _ = page.clean_all_coords()
+            _ = page.initialise_cells()
+
+            rows, columns = page.get_cell_groups()
+            doc_rows.extend(rows)
+            doc_columns.extend(columns)
+
+        self.rows = sorted(doc_rows, key=lambda x: (x.page_number, -x.y0))
+        self.columns = sorted(doc_columns, key=lambda x: (x.page_number, x.x0))
+
+        return self.rows, self.columns
+
+    def identify_header_rows(self):
+        if self.model is None:
+            self.model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        for row in self.rows:
+            if self._is_header_row(row, self.model):
+                self.header_row = row
+                break
+
+        return self.header_row
+
+    def detect_table_structure(self):
+        if self.header_row is None:
+            self.identify_header_rows()
+
+        self.table_structure = Document._detect_table_structure(self.header_row)
+
+        return self.table_structure
+
+    def get_tables(self):
+        pass
+
+    @staticmethod
+    def _detect_table_structure(row: Row):
+        num_cells = len(row.cells)
+        column_x = [cell.x0 for cell in row.cells]
+        column_width = [cell.width for cell in row.cells]
+
+        return {
+            "num_cells": num_cells,
+            "column_x": column_x,
+            "column_width": column_width,
+        }
+
+    @staticmethod
+    def _is_header_row(row: Row, model=None):
+        if model is None:
+            model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        row_text = [text.lower() for text in row.text]
+        row_embeddings = model.encode(row_text, convert_to_tensor=True)
+        similarities = util.pytorch_cos_sim(row_embeddings, HEADER_EMBEDDINGS)
+        max_similarity = similarities.max()
+
+        return max_similarity > 0.8
 
 
 # %%
@@ -686,7 +747,7 @@ if __name__ == "__main__":
             _ = page.get_page_rects()
 
             page.clean_all_coords()
-            cells = page._initialise_cells()
+            cells = page.initialise_cells()
             print(f"Cells initialized for {file}: {len(cells)}")
 
             stub = file.split(".pdf")[0]

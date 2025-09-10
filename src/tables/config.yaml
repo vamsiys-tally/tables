@@ -1,0 +1,15 @@
+
+cell_detection:
+  tol: 3.0 # This is used to determine the tolerance for cell detection.
+  min_height: 10 # This is used to determine the minimum height for a cell.
+  min_width: 10 # This is used to determine the minimum width for a cell.
+  db_scan_metric: euclidean # This is used to determine the metric for clustering.
+  db_scan_algorithm: kd_tree # This is used to determine the algorithm for clustering.
+  
+
+header_identification:
+  sentence_transformer: all-MiniLM-L6-v2 # Model used for sentence embeddings.
+  header_similarity_threshold: 0.8 # This is used to adjust the semantic similarity threshold for header rows.
+
+table_detection:
+  rows_after_non_table_row: 10 # This is used to determine the number of rows to check after a non-table row is found.
