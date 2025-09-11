@@ -1,0 +1,13 @@
+PDF: Indian bank format 3.pdf
+Top 5 detected header blocks with confidence scores:
+Block 0 vertical bounds (431.00, 482.00) confidence: 1.0000
+  Header phrases: Date, Transaction Details, Debits, Credits, Balance
+Block 1 vertical bounds (109.00, 223.00) confidence: 0.4463
+  Header phrases: 08 Apr 2024, BARB0RAOPUR/DHAVAL ARVINDBHAI PATEL/XXXXX44841/tdhav al.88@okicici/UPI/44656179 0528/rent advance/BRANCH :  ATM SERVICE BRANCH, -, INR 12,000.00, INR 64,644.45
+Block 2 vertical bounds (40.00, 109.00) confidence: 0.4443
+  Header phrases: 09 Apr 2024, KKBK0002752/ZAREKAR DATTESH RAVINDRARAO /XXXXX84415/zarekar., -, INR 2,000.00, INR 66,644.45
+Block 3 vertical bounds (482.00, 698.50) confidence: 0.4392
+  Header phrases: INDRAVADAN SHAH Account Type Savings Account Number 708807294 Customer's Address GF -3, ADITYA SHOPS , L/O PATEL PEN CENTRE SHIYAPURA,BARODA Branch Name BARODA IFSC IDIB000B011 Account Currency INR ACCOUNT ACTIVITY, Opening Balance Total Credits Total Debits Ending Balance, INR 52,644.45 + INR 1,254,281.13 - INR 1,292,956.28 INR 13,969.30
+Block 4 vertical bounds (327.00, 431.00) confidence: 0.4200
+  Header phrases: 02 Apr 2024, HDFC0008848/ATUL PHARMACY /XXXXX11317/9601311317 @hdfcbank /UPI/409342060814/gaytri dis  /BRANCH :  ATM SERVICE BRANCH, -, INR 3,709.00, INR 56,353.45
+

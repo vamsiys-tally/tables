@@ -1,0 +1,13 @@
+PDF: Kotak bank format 5.pdf
+Top 5 detected header blocks with confidence scores:
+Block 0 vertical bounds (414.00, 449.00) confidence: 1.0000
+  Header phrases: DATE, TRANSACTION DETAILS, CHEQUE/REFERENCE#, DEBIT, CREDIT, BALANCE
+Block 1 vertical bounds (401.00, 414.00) confidence: 0.5407
+  Header phrases: 01 Apr, 2024 OPENING BALANCE ..., +15.00, 15.00
+Block 2 vertical bounds (533.00, 583.00) confidence: 0.4961
+  Header phrases: Reference #, 27433454-32653971, KOTAK MAHINDRA BANK,ASHOK NIWAS,MAMA SQUARE,JALNA,JALNA,MAHARASHTRA-431203
+Block 3 vertical bounds (379.00, 401.00) confidence: 0.4831
+  Header phrases: 09 Apr, 2024 Rem Chrgs:AMB Non Maintenance Chrg for Feb-2024 (Value Date :07-APR-24), TBMS-1412329724, -15.00, 0.00
+Block 4 vertical bounds (230.75, 340.00) confidence: 0.4829
+  Header phrases: SUMMARY Savings Account(s) + Prepaid, Closing balance Average monthly/quarterly balance, 138.92 2,515.97
+
