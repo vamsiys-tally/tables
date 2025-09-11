@@ -615,11 +615,17 @@ class Document:
         for page in self.pdf.pages:
             self.pages.append(Page(page))
 
-    def process_pages(self):
+    def process_pages(self, pages: list[int] = None):
+        doc_cells = []
         doc_rows = []
         doc_columns = []
 
-        for page in self.pages:
+        if pages is None:
+            pages = self.pages
+        else:
+            pages = [self.pages[i] for i in pages]
+
+        for page in pages:
             _ = page.get_page_characters()
             _ = page.get_page_lines()
             _ = page.get_page_edges()
@@ -629,9 +635,11 @@ class Document:
             _ = page.initialise_cells()
 
             rows, columns = page.get_cell_groups()
+            doc_cells.extend(page.cells)
             doc_rows.extend(rows)
             doc_columns.extend(columns)
 
+        self.cells = sorted(doc_cells, key=lambda x: (x.page_number, -x.y0, x.x0))
         self.rows = sorted(doc_rows, key=lambda x: (x.page_number, -x.y0))
         self.columns = sorted(doc_columns, key=lambda x: (x.page_number, x.x0))
 
@@ -695,68 +703,38 @@ if __name__ == "__main__":
     # path = "./tests/data/UBI Format 2.pdf"
     path = "./tests/data/"
     bordered_list = [
-        "AKOLA JANATA COMMERCIAL COOPERATIVE BANK Statement_For_193775_012103301000485.pdf",
-        "Al Ilmna.pdf",
         "Axis bank format 2.pdf",
-        "Axis bank format 3.pdf",
-        "Axis bank format 4.pdf",
-        "Axis bank format 5.pdf",
-        "Axis bank format 6.pdf",
-        "AXIS Bank.pdf",
-        "Bhuj Commercial Co-operative Bank Ltd.PDF",
-        "Canara Bank format 4.pdf",
         "Canara bank Format 6.pdf",
         "Central Bank of India.pdf",
         "CITIZENCREDIT Co-operative Bank Ltd.pdf",
-        "DBS.pdf",
         "DEOGIRI NAGARI SAHAKARI BANK LTD.pdf",
-        # "FEDERAL BANK.pdf",
-        "ICICI Bank format 4.pdf",
-        "ICICI Bank format 5.pdf",
         "ICICI Bank.pdf",
-        "IDBI bank format 2.pdf",
-        "idbi bank format 3.pdf",
-        "IDFC format 2.pdf",
-        "IDFC_Ashish.pdf",
-        "Kalpana Awade Bank.pdf",
-        "Maharasta gramin bank.pdf",
-        "Omprakash Deora Peoples Co-Operative Bank Ltd..pdf",
         "Punjab national bank.pdf",
-        "Punjab Nationl Bank format 2.pdf",
-        "Sawji Bank.pdf",
         "SBi format 2.pdf",
-        "SBI format 3.pdf",
-        "SBI format 4.pdf",
-        "SBI Format 5.pdf",
-        "SBI format 6.pdf",
-        "SBI format 7.pdf",
-        "SBI format 8.pdf",
-        "SBI format 9.pdf",
-        "UBI Format 2.pdf",
+        # "UBI Format 2.pdf",
+        # "IDBI bank format 2.pdf"
     ]
 
     for file in bordered_list:
         try:
             print(f"Processing {file}...")
             doc = Document(os.path.join(path, file))
-            page = doc.pages[1]
 
-            _ = page.get_page_characters()
-            _ = page.get_page_lines()
-            _ = page.get_page_edges()
-            _ = page.get_page_rects()
+            pages = None if len(doc.pages) < 4 else [0, 1, 2, 3]
+            doc.process_pages(pages=pages)
 
-            page.clean_all_coords()
-            cells = page.initialise_cells()
-            print(f"Cells initialized for {file}: {len(cells)}")
+            doc.identify_header_rows()
+            doc.detect_table_structure()
 
             stub = file.split(".pdf")[0]
 
             with open(
-                f"./tests/results/page 2/{stub}_output_20250908_page2_run1.txt", "w"
+                f"./tests/results/doc/{stub}_output_20250911_doc_run1.txt", "w"
             ) as f:
-                for i, cell in enumerate(cells):
-                    f.write(f"Cell {i}: {cell}, Text: '{cell.text}'\n")
+                for i, cell in enumerate(doc.cells):
+                    f.write(
+                        f"Pg: {cell.page_number}, Cell {i}: {cell}, Text: '{cell.text}'\n"
+                    )
 
             del doc
             gc.collect()
@@ -764,7 +742,9 @@ if __name__ == "__main__":
             print(f"Error processing {file}: {e}")
             stub = file.split(".pdf")[0]
 
-            with open(f"./tests/results/{stub}_output_20250908_run1.txt", "w") as f:
+            with open(
+                f"./tests/results/doc/{stub}_output_20250911_doc_run1.txt", "w"
+            ) as f:
                 f.write(f"Error processing {file}: {e}\n")
 
             del doc
