@@ -1,0 +1,5 @@
+PDF: Kotak Bank.pdf
+Top 5 detected header blocks with confidence scores:
+Block 0 vertical bounds (552.41, 576.49) confidence: 1.0000
+  Header phrases: Date, Narration, Chq/Ref No, Withdrawal(Dr)/ Deposit(Cr), Balance
+

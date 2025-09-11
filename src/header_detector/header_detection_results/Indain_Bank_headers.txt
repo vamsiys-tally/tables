@@ -1,0 +1,13 @@
+PDF: Indain Bank.pdf
+Top 5 detected header blocks with confidence scores:
+Block 0 vertical bounds (420.00, 471.00) confidence: 1.0000
+  Header phrases: Date, Transaction Details, Debits, Credits, Balance
+Block 1 vertical bounds (471.00, 698.50) confidence: 0.4544
+  Header phrases: Account Type Account Number Customer's Address Branch Name IFSC Account Currency ACCOUNT ACTIVITY, Savings 573683823 NO 2/162/4 TIRUPATHUR THATHARAMANUR Simm anapudur SIMMANAPUDHUR Vellore Tamil Nad u ZUZUWADI IDIB000Z001 INR, Opening Balance Total Credits Total Debits Ending Balance, INR 806.37 + INR 2,541,546.79 - INR 2,534,804.99 INR 7,548.17
+Block 2 vertical bounds (306.00, 420.00) confidence: 0.4460
+  Header phrases: 01 Apr 2024, SBIN0003688/M VENKATESAN /XXXXX34765/9047234765 @axl /UPI/445869785756/Payme nt from PhonePe /BRANCH :  ATM SERVICE BRANCH, -, INR 1,350.00, INR 2,156.37
+Block 3 vertical bounds (202.00, 306.00) confidence: 0.4426
+  Header phrases: 01 Apr 2024, HDFC0000499/CONFIRMT KT TRAIN /XXXXX /confirmtkttrain.payu@hdfcb ank /UPI/409215933815/UPIInte nt/BRANCH :  ATM SERVICE BRANCH, INR 1,330.00, -, INR 826.37
+Block 4 vertical bounds (98.00, 202.00) confidence: 0.4400
+  Header phrases: 01 Apr 2024, YESB0000022/Playgames2 4x7 pvt ltd  /XXXXX /rummycircle.rzp@yesbank /UPI/409232692712/Rummy Circle /BRANCH :  ATM SERVICE BRANCH, INR 100.00, -, INR 726.37
+

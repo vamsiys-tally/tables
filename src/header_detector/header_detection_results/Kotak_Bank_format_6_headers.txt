@@ -1,0 +1,13 @@
+PDF: Kotak Bank format 6.pdf
+Top 5 detected header blocks with confidence scores:
+Block 0 vertical bounds (523.50, 557.50) confidence: 0.9165
+  Header phrases: #, TRANSACTION DATE, VALUE DATE, TRANSACTION DETAILS, CHQ / REF NO., DEBIT/CREDIT(₹), BALANCE(₹)
+Block 1 vertical bounds (325.50, 355.00) confidence: 0.4734
+  Header phrases: 6, 21 Apr 2024 04:55 PM, 21 Apr 2024, UPI/Swiggy/411239609991/Swiggy Order Id, UPI-411252240101, -268.00, 6,295.00
+Block 2 vertical bounds (226.50, 266.50) confidence: 0.4480
+  Header phrases: 9, 22 May 2024 06:39 PM, 22 May 2024, UPI/PARDESHI SANTOS/450954462139/Payment from Ph, UPI-414371483228, -126.00, 6,169.00
+Block 3 vertical bounds (355.00, 395.00) confidence: 0.4394
+  Header phrases: 5, 16 Apr 2024 06:57 PM, 16 Apr 2024, UPI/PARDESHI SANTOS/447303454850/Payment from Ph, UPI-410753087354, -161.00, 6,563.00
+Block 4 vertical bounds (157.00, 197.00) confidence: 0.4389
+  Header phrases: 11 17 Jun 2024 07:36 PM, 17 Jun 2024, UPI/PARDESHI SANTOS/453573195877/Payment from Ph, UPI-416978208469, -126.00, 5,803.00
+
