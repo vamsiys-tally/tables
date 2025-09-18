@@ -4,42 +4,10 @@ import numpy as np
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
-
-HEADER_KEYWORDS = [
-    "sr no", "srno", "sr.no.", "serial", "s.no", "serial number", "no.", "srl",
-    "sl. no.", "#", "date", "transaction date", "trans date", "trans dt", "trn dt", "txn date",
-    "date of transaction", "payment date", "entry date", "tran date", "trn. date",
-    "completion time", "date id", "post date", "value date", "val date", "value dt", "value",
-    "description", "desc", "particulars", "details", "narration", "narrative",
-    "transaction details", "remarks", "transaction description", "details of transaction",
-    "amount", "amt", "value", "transaction amount",
-    "transaction type", "txn type", "type", "credits/debits", "cr/dr", "credit/debit",
-    "credit or debit", "dr / cr", "withdrawal (dr)/deposit (cr)", "debit/credit", "debit/cr", "debit/credit",
-    "debit/credit", "withdrawal (dr)/deposit (cr)", "debit/credit", "debit", "credit",
-    "debit", "withdrawal", "payment", "dr", "dr amount", "dr.", "withdrawl(dr)",
-    "withdrawals", "debits", "withdrawal amt.", "transaction debit amount", "debit amt",
-    "paid in", "withdraw(dr amount)",
-    "credit", "deposit", "receipt", "cr", "cr amount", "cr.", "deposit(cr)",
-    "deposits", "credits", "deposit amt.", "transaction credit amount", "credit amt",
-    "withdrawn", "deposit(cr amount)",
-    "beneficiary", "payee", "dealer name", "name", "party", "recipient",
-    "ref", "ref no", "reference", "customer ref", "cust ref no", "transaction id",
-    "utr", "cheque/ref", "chq/ref no", "cheque number", "chq no", "chq/ref", "chq.",
-    "ref.no", "chq.no.", "chq-no", "chq/ref.no", "cheque no.", "chq./req. number",
-    "cheque/ref.no.", "chq./ref.no.", "chequeno.", "chq. no.", "chq no/ref no",
-    "chq./ref. number", "ref. no", "chq / ref number", "cheque/reference#", "chq / ref no.",
-    "cheque#", "receipt no", "ref no./cheque no.", "cheque no/ reference no",
-    "cheque no/reference no", "ref num", "utr number", "utr", "transaction id",
-    "tran id", "instrument no", "instrument number", "inst no", "inst number",
-    "instr. no.", "instr no", "instruments", "instrmnt number", "instrument id",
-    "balance", "bal", "closing balance", "running balance", "available balance",
-    "available bal.", "closing bal", "total amount dr/cr", "total amount", "balance amt",
-]
-
-COMMON_HEADERS = {"CR", "DR"}
+from src.header_detector.config import HEADER_KEYWORDS, COMMON_HEADERS
 
 transformer_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-header_keyword_embeddings = transformer_model.encode(HEADER_KEYWORDS, convert_to_tensor=True)
+header_keyword_embeddings = transformer_model.encode(HEADER_KEYWORDS, convert_to_tensor=True, normalize_embeddings=True)
 
 def extract_horizontal_edges(page, tol=2.0):
     """Extract horizontal edges from page lines and edges"""
@@ -52,7 +20,7 @@ def extract_horizontal_edges(page, tol=2.0):
     edge_ys = np.unique(np.concatenate((hor_lines['y0'].values, hor_lines['y1'].values)))
     return np.sort(edge_ys)
 
-def chars_to_words(chars, char_tol=2):
+def chars_to_words(chars, char_tol):
     """Convert characters to words, handling horizontal spacing"""
     words = []
     word = []
@@ -92,7 +60,7 @@ def check_y_overlap(word1, word2, overlap_threshold=0):
     
     return overlap / min_height >= overlap_threshold if min_height > 0 else False
 
-def group_words_by_logical_cells(words, x_gap_threshold=20, y_proximity_threshold=3):
+def group_words_by_logical_cells(words, x_gap_threshold, y_proximity_threshold):
     """
     Group words into logical cells by:
     1. First identifying words that are on same horizontal line (Y overlap)
@@ -207,45 +175,6 @@ def merge_word_group(word_group):
         "y1": y1
     }
 
-def words_to_phrases(words, phrase_tol=8):
-    """Convert words to phrases with multi-line header handling"""
-    if not words:
-        return []
-    
-    logical_cells = group_words_by_logical_cells(words, x_gap_threshold=6, y_proximity_threshold=5)
-    logical_cells.sort(key=lambda w: w['x0'])
-    
-    phrases = []
-    phrase = []
-    prev_x1 = None
-    
-    for cell in logical_cells:
-        if prev_x1 is not None and abs(cell["x0"] - prev_x1) > phrase_tol:
-            if phrase:
-                phrase_text = " ".join(w["text"] for w in phrase).strip()
-                phrases.append({
-                    "text": phrase_text, 
-                    "x0": phrase[0]["x0"], 
-                    "y0": min(w["y0"] for w in phrase),
-                    "x1": phrase[-1]["x1"], 
-                    "y1": max(w["y1"] for w in phrase)
-                })
-            phrase = []
-        phrase.append(cell)
-        prev_x1 = cell["x1"]
-    
-    if phrase:
-        phrase_text = " ".join(w["text"] for w in phrase).strip()
-        phrases.append({
-            "text": phrase_text, 
-            "x0": phrase[0]["x0"], 
-            "y0": min(w["y0"] for w in phrase),
-            "x1": phrase[-1]["x1"], 
-            "y1": max(w["y1"] for w in phrase)
-        })
-    
-    return phrases
-
 def compute_semantic_header_score(phrases):
     """Compute semantic similarity score for header detection"""
     texts = [p["text"].strip() for p in phrases if p["text"].strip()]
@@ -253,13 +182,17 @@ def compute_semantic_header_score(phrases):
         return 0.0
     if not texts:
         return 0.0
-    block_embeddings = transformer_model.encode(texts, convert_to_tensor=True)
-    scores = []
-    for emb in block_embeddings:
-        similarities = util.pytorch_cos_sim(emb, header_keyword_embeddings)[0]
-        max_sim, _ = torch.max(similarities, 0)
-        scores.append(max_sim.item())
-    return np.mean(scores) if scores else 0.0
+
+    # Encode and normalize once
+    block_embeddings = transformer_model.encode(
+        texts, convert_to_tensor=True, normalize_embeddings=True
+    )
+    # Dot product since both sets are normalized this will be equivalent to cosine similarity
+    scores = torch.mm(block_embeddings, header_keyword_embeddings.T)
+
+    # For each phrase, take its best match among header keywords
+    max_scores, _ = torch.max(scores, dim=1)
+    return torch.mean(max_scores).item() if len(max_scores) > 0 else 0.0
 
 def extract_header_blocks_between_edges(pdf_path, page_num=0, min_phrases_in_row=2):
     """Extract header blocks between horizontal edges with confidence scores"""
@@ -284,8 +217,8 @@ def extract_header_blocks_between_edges(pdf_path, page_num=0, min_phrases_in_row
             if chars_band.empty:
                 continue
             
-            words = chars_to_words(chars_band)
-            phrases = words_to_phrases(words,phrase_tol=1)
+            words = chars_to_words(chars_band,char_tol=2)
+            phrases = group_words_by_logical_cells(words, x_gap_threshold=6, y_proximity_threshold=5)
             
             if len(phrases) < min_phrases_in_row:
                 continue
@@ -297,7 +230,7 @@ def extract_header_blocks_between_edges(pdf_path, page_num=0, min_phrases_in_row
         return header_blocks
 
 if __name__ == "__main__":
-    pdf_folder = "../../tests/Priority Banks/Unbordered/"
+    pdf_folder = "tests/Priority Banks/Unbordered"
     output_folder = "./header_detection_results"
     os.makedirs(output_folder, exist_ok=True)
 
