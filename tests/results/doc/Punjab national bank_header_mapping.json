@@ -1,0 +1,492 @@
+[
+    {
+        "#": "1",
+        "DATE": "10-04-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "535709.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "2",
+        "DATE": "10-05-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "522709.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "3",
+        "DATE": "22-05-2023",
+        "WITHDRAWAL": "436.00",
+        "DEPOSIT": "",
+        "BALANCE": "522273.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "PMJBY RENEWAL FY:2023-2024"
+    },
+    {
+        "#": "4",
+        "DATE": "24-05-2023",
+        "WITHDRAWAL": "20.00",
+        "DEPOSIT": "",
+        "BALANCE": "522253.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "PMSBY RENEWAL FY:2023-2024"
+    },
+    {
+        "#": "5",
+        "DATE": "04-06-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "3671.00",
+        "BALANCE": "525924.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "I",
+        "NARRATION": "INTT. From :01-03-2023 to 31-05-2023"
+    },
+    {
+        "#": "6",
+        "DATE": "10-06-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "512924.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "7",
+        "DATE": "10-07-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "499924.84 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "8",
+        "DATE": "16-07-2023",
+        "WITHDRAWAL": "1.77",
+        "DEPOSIT": "",
+        "BALANCE": "499923.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "SMS CHRG FOR:01-04-2023to30-06"
+    },
+    {
+        "#": "9",
+        "DATE": "10-08-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "486923.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "10",
+        "DATE": "02-09-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "3427.00",
+        "BALANCE": "490350.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "I",
+        "NARRATION": "INTT. From :01-06-2023 to 31-08-2023"
+    },
+    {
+        "#": "11",
+        "DATE": "02-09-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "24009.00",
+        "BALANCE": "514359.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "By CLEARING -386 :"
+    },
+    {
+        "#": "12",
+        "DATE": "02-09-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "6406.00",
+        "BALANCE": "520765.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "By CLEARING -416 :"
+    },
+    {
+        "#": "13",
+        "DATE": "10-09-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "507765.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "14",
+        "DATE": "16-09-2023",
+        "WITHDRAWAL": "25000.00",
+        "DEPOSIT": "",
+        "BALANCE": "482765.07 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823681",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARIFW"
+    },
+    {
+        "#": "15",
+        "DATE": "10-10-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "469765.07 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "16",
+        "DATE": "20-10-2023",
+        "WITHDRAWAL": "2.95",
+        "DEPOSIT": "",
+        "BALANCE": "469762.12 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "SMS CHRG FOR:01-07-2023to30-09"
+    },
+    {
+        "#": "17",
+        "DATE": "26-10-2023",
+        "WITHDRAWAL": "40000.00",
+        "DEPOSIT": "",
+        "BALANCE": "429762.12 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823682",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARIFW"
+    },
+    {
+        "#": "18",
+        "DATE": "06-11-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "5516.50",
+        "BALANCE": "435278.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "00A2FKLPRADHAN MANTRI FASAL"
+    },
+    {
+        "#": "19",
+        "DATE": "08-11-2023",
+        "WITHDRAWAL": "30000.00",
+        "DEPOSIT": "",
+        "BALANCE": "405278.62 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823683",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARIFW"
+    },
+    {
+        "#": "20",
+        "DATE": "10-11-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "392278.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "21",
+        "DATE": "13-11-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "28020.00",
+        "BALANCE": "420298.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "By CLEARING -500 :"
+    },
+    {
+        "#": "22",
+        "DATE": "23-11-2023",
+        "WITHDRAWAL": "35000.00",
+        "DEPOSIT": "",
+        "BALANCE": "385298.62 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823684",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARIFW"
+    },
+    {
+        "#": "23",
+        "DATE": "03-12-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "3083.00",
+        "BALANCE": "388381.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "I",
+        "NARRATION": "INTT. From :01-09-2023 to 30-11-2023"
+    },
+    {
+        "#": "24",
+        "DATE": "04-12-2023",
+        "WITHDRAWAL": "100000.00",
+        "DEPOSIT": "",
+        "BALANCE": "288381.62 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823685",
+        "NARRATION": "NEFT OUT:PUNBH23338932688:TEJOMAY URBAN MULTIPURPOSE N:"
+    },
+    {
+        "#": "25",
+        "DATE": "07-12-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "183157.00",
+        "BALANCE": "471538.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "NEFT IN:34607707541DC:WE WE FOR EMPOWERMEN"
+    },
+    {
+        "#": "26",
+        "DATE": "Page Total",
+        "WITHDRAWAL": "334460.72",
+        "DEPOSIT": "257289.50",
+        "BALANCE": "",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": ""
+    },
+    {
+        "#": "27",
+        "DATE": "Date",
+        "WITHDRAWAL": "Withdrawal",
+        "DEPOSIT": "Deposit",
+        "BALANCE": "Balance",
+        "NAME": "Alpha",
+        "CHQ NO": "CHQ. NO.",
+        "NARRATION": "Narration"
+    },
+    {
+        "#": "28",
+        "DATE": "10-12-2023",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "458538.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "29",
+        "DATE": "28-12-2023",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "123700.00",
+        "BALANCE": "582238.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Transfer From A/C9982103211402NANEFT INWARD SETTLEMENT"
+    },
+    {
+        "#": "30",
+        "DATE": "30-12-2023",
+        "WITHDRAWAL": "25000.00",
+        "DEPOSIT": "",
+        "BALANCE": "557238.62 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823686",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARIFW"
+    },
+    {
+        "#": "31",
+        "DATE": "10-01-2024",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "544238.62 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "32",
+        "DATE": "14-01-2024",
+        "WITHDRAWAL": "8.26",
+        "DEPOSIT": "",
+        "BALANCE": "544230.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "SMS CHRG FOR:01-10-2023to31-12"
+    },
+    {
+        "#": "33",
+        "DATE": "15-01-2024",
+        "WITHDRAWAL": "5000.00",
+        "DEPOSIT": "",
+        "BALANCE": "539230.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :UPI/438168827681/P2V/9422225936-2@ybl/YOGESH RAJKU"
+    },
+    {
+        "#": "34",
+        "DATE": "17-01-2024",
+        "WITHDRAWAL": "146900.00",
+        "DEPOSIT": "",
+        "BALANCE": "392330.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "823687",
+        "NARRATION": "AJAY ENGG &amp; AGRI EQUIP CO"
+    },
+    {
+        "#": "35",
+        "DATE": "31-01-2024",
+        "WITHDRAWAL": "12724.00",
+        "DEPOSIT": "",
+        "BALANCE": "379606.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :Loan Recovery For -777800NG00000309"
+    },
+    {
+        "#": "36",
+        "DATE": "08-02-2024",
+        "WITHDRAWAL": "5000.00",
+        "DEPOSIT": "",
+        "BALANCE": "374606.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "CC ACCOUNT"
+    },
+    {
+        "#": "37",
+        "DATE": "09-02-2024",
+        "WITHDRAWAL": "30000.00",
+        "DEPOSIT": "",
+        "BALANCE": "344606.36 Cr.",
+        "NAME": "IFW",
+        "CHQ NO": "823688",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARIFW"
+    },
+    {
+        "#": "38",
+        "DATE": "10-02-2024",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "331606.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "39",
+        "DATE": "19-02-2024",
+        "WITHDRAWAL": "10000.00",
+        "DEPOSIT": "",
+        "BALANCE": "321606.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :UPI/441672575712/P2V/9422225936-2@ybl/YOGESH RAJKU"
+    },
+    {
+        "#": "40",
+        "DATE": "28-02-2024",
+        "WITHDRAWAL": "15754.00",
+        "DEPOSIT": "",
+        "BALANCE": "305852.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :UPI/405985420171/P2M/gpaybilpay.insur@axisbank/Go"
+    },
+    {
+        "#": "41",
+        "DATE": "01-03-2024",
+        "WITHDRAWAL": "26168.00",
+        "DEPOSIT": "",
+        "BALANCE": "279684.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :UPI/406116837403/P2M/nivabupa.payu@ic/NIVA BUPA"
+    },
+    {
+        "#": "42",
+        "DATE": "04-03-2024",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "14400.00",
+        "BALANCE": "294084.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "NACH/1271176802/21BCSSB/Nation"
+    },
+    {
+        "#": "43",
+        "DATE": "09-03-2024",
+        "WITHDRAWAL": "",
+        "DEPOSIT": "2850.00",
+        "BALANCE": "296934.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "I",
+        "NARRATION": "INTT. From :01-12-2023 to 29-02-2024"
+    },
+    {
+        "#": "44",
+        "DATE": "10-03-2024",
+        "WITHDRAWAL": "13000.00",
+        "DEPOSIT": "",
+        "BALANCE": "283934.36 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "D16794236CR TO777800NG00000309 :TO:YOGESH: D16794236CR"
+    },
+    {
+        "#": "45",
+        "DATE": "18-03-2024",
+        "WITHDRAWAL": "101.34",
+        "DEPOSIT": "",
+        "BALANCE": "283833.02 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :UPI/407859243487/P2M/mandarthorat470247.rzp@axisb/"
+    },
+    {
+        "#": "46",
+        "DATE": "22-03-2024",
+        "WITHDRAWAL": "30000.00",
+        "DEPOSIT": "",
+        "BALANCE": "253833.02 Cr.",
+        "NAME": "GNH",
+        "CHQ NO": "203780",
+        "NARRATION": "Cash Withdrawal At Br :JALNA, SAMBHAJI NAGARGNH"
+    },
+    {
+        "#": "47",
+        "DATE": "29-03-2024",
+        "WITHDRAWAL": "17900.00",
+        "DEPOSIT": "",
+        "BALANCE": "235933.02 Cr.",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": "Paid To :UPI/408973540428/P2M/ajinkyaautowheels@sbi/AJINKYA"
+    },
+    {
+        "#": "48",
+        "DATE": "Page Total",
+        "WITHDRAWAL": "376555.60",
+        "DEPOSIT": "140950.00",
+        "BALANCE": "",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": ""
+    },
+    {
+        "#": "49",
+        "DATE": "Grand",
+        "WITHDRAWAL": "711016.32",
+        "DEPOSIT": "398239.50",
+        "BALANCE": "",
+        "NAME": "",
+        "CHQ NO": "",
+        "NARRATION": ""
+    }
+]

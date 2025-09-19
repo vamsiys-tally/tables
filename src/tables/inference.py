@@ -1,16 +1,16 @@
 # %%
-
 import pdfplumber as plumber
 import pandas as pd
 import numpy as np
 import torch
-
+import os
+import gc
 from sklearn.cluster import DBSCAN
 from collections import defaultdict
 from sentence_transformers import SentenceTransformer, util
-from tables.headers import HEADER_EMBEDDINGS
-
-
+from tables.headers import HEADER_EMBEDDINGS,header_words
+import json
+import math
 # %%
 
 
@@ -281,6 +281,141 @@ class Page:
 
         return None
 
+    @staticmethod
+    def _assign_rectangle_hierarchy(rectangles: list[dict]) -> list[dict]:
+        rects = []
+        for i, rect in enumerate(rectangles):
+            bbox = Page._convert_rectangle_format(rect)
+            bbox["id"] = i
+            rects.append(bbox)
+
+        # Initialize containment map: rect_id -> list of contained rect_ids
+        contains_map = {r["id"]: [] for r in rects}
+
+        # Populate contains_map
+        for r_outer in rects:
+            for r_inner in rects:
+                if r_outer["id"] != r_inner["id"]:
+                    if Page._rectangle_contains(r_outer, r_inner):
+                        contains_map[r_outer["id"]].append(r_inner["id"])
+
+        # Initialize all levels as None
+        levels = {r["id"]: None for r in rects}
+
+        # Rectangles that contain no other rectangles are level 0
+        for r in rects:
+            if not contains_map[r["id"]]:
+                levels[r["id"]] = 0
+
+        # Iteratively assign levels
+        changed = True
+        while changed:
+            changed = False
+            for r in rects:
+                if levels[r["id"]] is None:
+                    child_levels = [levels[cid] for cid in contains_map[r["id"]]]
+                    # Only assign level if all child levels are assigned
+                    if None not in child_levels:
+                        levels[r["id"]] = max(child_levels) + 1 if child_levels else 0
+                        changed = True
+
+        # Collect results
+        results = [(rectangles[r["id"]], levels[r["id"]]) for r in rects]
+        return results
+
+    @staticmethod
+    def _detect_rectangles_from_intersections(
+        intersections: list[tuple[float, float]],
+    ) -> list[dict]:
+        points_by_x = defaultdict(list)
+        points_by_y = defaultdict(list)
+
+        for point in intersections:
+            x, y = point
+            points_by_x[x].append(point)
+            points_by_y[y].append(point)
+
+        x_coords = sorted(points_by_x.keys())
+        y_coords = sorted(points_by_y.keys())
+
+        rectangles = []
+        rectangle_count = 0
+
+        for i in range(len(x_coords)):
+            for j in range(i + 1, len(x_coords)):
+                x1, x2 = x_coords[i], x_coords[j]
+
+                for k in range(len(y_coords)):
+                    for l in range(k + 1, len(y_coords)):
+                        y1, y2 = y_coords[k], y_coords[l]
+
+                        corners = [(x1, y1), (x2, y1), (x1, y2), (x2, y2)]
+
+                        if all(corner in intersections for corner in corners):
+                            rectangle = {
+                                "top_left": (x1, y1),
+                                "top_right": (x2, y1),
+                                "bottom_left": (x1, y2),
+                                "bottom_right": (x2, y2),
+                            }
+                            rectangles.append(rectangle)
+                            rectangle_count += 1
+
+        return rectangles
+
+    @staticmethod
+    def _detect_minimal_rectangles(
+        intersections: list[tuple[float, float]],
+        x_coords: list[float],
+        y_coords: list[float],
+    ) -> list[dict]:
+        """
+        Detect minimal rectangles row-wise, handling per-row merges.
+
+        Args:
+            intersections: List of (x, y) points.
+            x_coords: Sorted unique x-coordinates (global, for reference).
+            y_coords: Sorted unique y-coordinates.
+
+        Returns:
+            List of rectangle dicts (level 0 per row).
+        """
+        if len(x_coords) < 2 or len(y_coords) < 2:
+            return []
+
+        inter_set = set(intersections)  # For fast lookup
+        rectangles = []
+
+        for j in range(len(y_coords) - 1):
+            y1, y2 = y_coords[j], y_coords[j + 1]
+
+            # Collect x where BOTH (x, y1) and (x, y2) exist (boundaries for this row)
+            row_x_set = set()
+            for x, y in intersections:
+                if y == y1 and (x, y2) in inter_set:
+                    row_x_set.add(x)
+                elif y == y2 and (x, y1) in inter_set:
+                    row_x_set.add(x)
+
+            if len(row_x_set) < 2:
+                continue  # No valid row boundaries
+
+            row_x = sorted(row_x_set)
+
+            # Now, create rects from consecutive row_x (max consecutive spans where boundaries exist)
+            for i in range(len(row_x) - 1):
+                x1, x2 = row_x[i], row_x[i + 1]
+                # By construction, all 4 corners exist
+                rect = {
+                    "top_left": (x1, y1),
+                    "top_right": (x2, y1),
+                    "bottom_left": (x1, y2),
+                    "bottom_right": (x2, y2),
+                }
+                rectangles.append(rect)
+
+        return rectangles
+
     def _detect_rectangles(self) -> list[dict]:
         hor_lines = pd.concat(
             [
@@ -296,14 +431,21 @@ class Page:
         )
 
         intersections = Page._find_intersections(hor_lines, vert_lines)
-        rectangles = Page._detect_rectangles_from_intersections(intersections)
 
-        hierarchy = Page._assign_rectangle_hierarchy(rectangles)
+        # rectangles = Page._detect_rectangles_from_intersections(intersections)
 
-        l0_rectangles = [rect for rect, level in hierarchy if level == 0]
+        # hierarchy = Page._assign_rectangle_hierarchy(rectangles)
 
-        return l0_rectangles
+        # l0_rectangles = [rect for rect, level in hierarchy if level == 0]
 
+        # return l0_rectangles
+
+        if not intersections:
+            return []
+        x_coords = sorted(set(x for x,y in intersections))
+        y_coords = sorted(set(y for x,y in intersections))
+        return Page._detect_minimal_rectangles(intersections, x_coords, y_coords)
+    
     def initialise_cells(self, tol: float = 3.0):
         # Check if the rectangles directly need to be used here.
         line_rectangles = self._detect_rectangles()
@@ -414,46 +556,6 @@ class Page:
         return list(intersections)
 
     @staticmethod
-    def _detect_rectangles_from_intersections(
-        intersections: list[tuple[float, float]],
-    ) -> list[dict]:
-        points_by_x = defaultdict(list)
-        points_by_y = defaultdict(list)
-
-        for point in intersections:
-            x, y = point
-            points_by_x[x].append(point)
-            points_by_y[y].append(point)
-
-        x_coords = sorted(points_by_x.keys())
-        y_coords = sorted(points_by_y.keys())
-
-        rectangles = []
-        rectangle_count = 0
-
-        for i in range(len(x_coords)):
-            for j in range(i + 1, len(x_coords)):
-                x1, x2 = x_coords[i], x_coords[j]
-
-                for k in range(len(y_coords)):
-                    for l in range(k + 1, len(y_coords)):
-                        y1, y2 = y_coords[k], y_coords[l]
-
-                        corners = [(x1, y1), (x2, y1), (x1, y2), (x2, y2)]
-
-                        if all(corner in intersections for corner in corners):
-                            rectangle = {
-                                "top_left": (x1, y1),
-                                "top_right": (x2, y1),
-                                "bottom_left": (x1, y2),
-                                "bottom_right": (x2, y2),
-                            }
-                            rectangles.append(rectangle)
-                            rectangle_count += 1
-
-        return rectangles
-
-    @staticmethod
     def _convert_rectangle_format(rectangle: dict) -> dict:
         min_x, min_y = rectangle["top_left"]
         max_x, max_y = rectangle["bottom_right"]
@@ -481,48 +583,6 @@ class Page:
             and r_outer["max_x"] >= r_inner["max_x"]
             and r_outer["max_y"] >= r_inner["max_y"]
         )
-
-    @staticmethod
-    def _assign_rectangle_hierarchy(rectangles: list[dict]) -> list[dict]:
-        rects = []
-        for i, rect in enumerate(rectangles):
-            bbox = Page._convert_rectangle_format(rect)
-            bbox["id"] = i
-            rects.append(bbox)
-
-        # Initialize containment map: rect_id -> list of contained rect_ids
-        contains_map = {r["id"]: [] for r in rects}
-
-        # Populate contains_map
-        for r_outer in rects:
-            for r_inner in rects:
-                if r_outer["id"] != r_inner["id"]:
-                    if Page._rectangle_contains(r_outer, r_inner):
-                        contains_map[r_outer["id"]].append(r_inner["id"])
-
-        # Initialize all levels as None
-        levels = {r["id"]: None for r in rects}
-
-        # Rectangles that contain no other rectangles are level 0
-        for r in rects:
-            if not contains_map[r["id"]]:
-                levels[r["id"]] = 0
-
-        # Iteratively assign levels
-        changed = True
-        while changed:
-            changed = False
-            for r in rects:
-                if levels[r["id"]] is None:
-                    child_levels = [levels[cid] for cid in contains_map[r["id"]]]
-                    # Only assign level if all child levels are assigned
-                    if None not in child_levels:
-                        levels[r["id"]] = max(child_levels) + 1 if child_levels else 0
-                        changed = True
-
-        # Collect results
-        results = [(rectangles[r["id"]], levels[r["id"]]) for r in rects]
-        return results
 
     @staticmethod
     def _is_adjacent(cell1: Cell, cell2: Cell, type="row", tol=1.0):
@@ -593,11 +653,18 @@ class Page:
 
 
 class Document:
-    def __init__(self, path: str) -> None:
+    def __init__(self, path: str, password: str | None = None) -> None:
         self.path = path
-        self.pdf = plumber.open(
-            path
-        )  # TODO: Change to an encapsulated function that handles PWD protection
+        self.password = password
+
+        try:
+            self.pdf = plumber.open(path, password=password)
+        except Exception as e:
+            raise RuntimeError(
+                f"Failed to open PDF {path}. "
+                f"{'Password may be incorrect or missing.' if password else ''} "
+                f"Error: {e}"
+            )
 
         self.pages = []
         self.cells = []
@@ -659,7 +726,7 @@ class Document:
     def detect_table_structure(self):
         if self.header_row is None:
             self.identify_header_rows()
-
+        print(f"Header Row: {self.header_row}")
         self.table_structure = Document._detect_table_structure(self.header_row)
 
         return self.table_structure
@@ -691,50 +758,114 @@ class Document:
 
         return max_similarity > 0.8
 
+    
+    def map_table_to_json(self):
+        """
+        Single function that converts table data to JSON format.
+        Dynamically finds headers and maps data using x-coordinates.
+        """
+        if self.header_row is None:
+            self.identify_header_rows()
+        
+        if self.header_row is None:
+            return []  # Return empty list if no header found
+
+        # Create header mapping with coordinates
+        header_columns = []
+        for cell in self.header_row.cells:
+            text = cell.text.lower().strip()
+            text_emb = self.model.encode([text], convert_to_tensor=True)
+            scores = util.pytorch_cos_sim(text_emb, HEADER_EMBEDDINGS)[0]
+            best_idx = int(torch.argmax(scores))
+            best_match = header_words[best_idx]
+            
+            header_columns.append({
+                "name": best_match.upper().replace(".", "").replace("/", "/"),
+                "x0": cell.x0,
+                "x1": cell.x1
+            })
+        
+        header_columns.sort(key=lambda x: x['x0'])
+        
+        # Process data rows
+        json_data = []
+        row_counter = 1
+        
+        for row in self.rows:
+            if row == self.header_row or all(cell.text.strip() == "" for cell in row.cells):
+                continue
+            
+            row_data = {"#": str(row_counter)}
+            
+            for header_col in header_columns:
+                column_name = header_col["name"]
+                matching_cell = None
+                best_match_score = float('inf')
+                
+                # Find best matching cell based on x-coordinate
+                for data_cell in row.cells:
+                    x_distance = abs(data_cell.x0 - header_col["x0"])
+                    if x_distance < best_match_score:
+                        best_match_score = x_distance
+                        matching_cell = data_cell
+                
+                # Add cell data
+                if matching_cell and best_match_score <= 20:  # 20 pixel tolerance
+                    cell_text = matching_cell.text.strip()
+                    row_data[column_name] = "" if cell_text in ["-", "", "–", "—"] else cell_text
+                else:
+                    row_data[column_name] = ""
+            
+            # Only add rows with actual data
+            if any(value != "" for key, value in row_data.items() if key != "#"):
+                json_data.append(row_data)
+                row_counter += 1
+        
+        return json_data
+
 
 # %%
 if __name__ == "__main__":
     # from skimage.draw import line as skline
     # import matplotlib.pyplot as plt
 
-    import os
-    import gc
-
     # path = "./tests/data/UBI Format 2.pdf"
-    path = "./tests/data/"
+    path = "./tests/Priority Banks"
     bordered_list = [
         "Axis bank format 2.pdf",
-        "Canara bank Format 6.pdf",
-        "Central Bank of India.pdf",
-        "CITIZENCREDIT Co-operative Bank Ltd.pdf",
-        "DEOGIRI NAGARI SAHAKARI BANK LTD.pdf",
-        "ICICI Bank.pdf",
         "Punjab national bank.pdf",
         "SBi format 2.pdf",
-        # "UBI Format 2.pdf",
-        # "IDBI bank format 2.pdf"
+        "ICICI Bank format 4.pdf"
     ]
 
     for file in bordered_list:
         try:
             print(f"Processing {file}...")
-            doc = Document(os.path.join(path, file))
+            doc = Document(os.path.join(path, file), password="")
 
-            pages = None if len(doc.pages) < 4 else [0, 1, 2, 3]
+            pages = None 
             doc.process_pages(pages=pages)
 
             doc.identify_header_rows()
             doc.detect_table_structure()
+            json_mapping = doc.map_table_to_json()
 
             stub = file.split(".pdf")[0]
 
             with open(
-                f"./tests/results/doc/{stub}_output_20250911_doc_run1.txt", "w"
+        f"./tests/results/doc/{stub}_output_20250911_doc_run1.txt", "w"
             ) as f:
                 for i, cell in enumerate(doc.cells):
                     f.write(
                         f"Pg: {cell.page_number}, Cell {i}: {cell}, Text: '{cell.text}'\n"
                     )
+
+            # 🔹 also dump the header mapping JSON here
+            json_mapping = doc.map_table_to_json()
+            with open(
+                f"./tests/results/doc/{stub}_header_mapping.json", "w"
+            ) as jf:
+                json.dump(json_mapping, jf, indent=4)
 
             del doc
             gc.collect()
@@ -750,51 +881,3 @@ if __name__ == "__main__":
             del doc
             gc.collect()
             continue
-
-    # def pdf_to_array_coords(x, y, height):
-    #     # y-axis flip because PDF origin (0,0) is bottom-left
-    #     row = height - int(round(y))
-    #     col = int(round(x))
-    #     return row, col
-
-    # height = int(page.height)
-    # width = int(page.width)
-
-    # # Create a blank canvas
-    # canvas = np.zeros((height, width), dtype=np.uint8)
-
-    # for cell in cells:
-    #     x0, y0 = cell.x0, cell.y0
-    #     x1, y1 = cell.x1, cell.y1
-
-    #     # Convert PDF coords to array indices (row, col)
-    #     r0, c0 = pdf_to_array_coords(x0, y0, height)
-    #     r1, c1 = pdf_to_array_coords(x1, y1, height)
-
-    #     # Ensure ordered indices
-    #     r_min, r_max = min(r0, r1), max(r0, r1)
-    #     c_min, c_max = min(c0, c1), max(c0, c1)
-
-    #     r_min_clamped = np.clip(r_min, 0, height - 1)
-    #     r_max_clamped = np.clip(r_max, 0, height - 1)
-    #     c_min_clamped = np.clip(c_min, 0, width - 1)
-    #     c_max_clamped = np.clip(c_max, 0, width - 1)
-
-    #     # Draw top edge
-    #     rr, cc = skline(r_min_clamped, c_min_clamped, r_min_clamped, c_max_clamped)
-    #     canvas[rr, cc] = 1
-
-    #     # Draw bottom edge
-    #     rr, cc = skline(r_max_clamped, c_min_clamped, r_max_clamped, c_max_clamped)
-    #     canvas[rr, cc] = 1
-
-    #     # Draw left edge
-    #     rr, cc = skline(r_min_clamped, c_min_clamped, r_max_clamped, c_min_clamped)
-    #     canvas[rr, cc] = 1
-
-    #     # Draw right edge
-    #     rr, cc = skline(r_min_clamped, c_max_clamped, r_max_clamped, c_max_clamped)
-    #     canvas[rr, cc] = 1
-
-    # plt.imshow(canvas, cmap="gray")
-    # plt.show()

@@ -1,0 +1,4282 @@
+[
+    {
+        "#": "1",
+        "TRAN DATE": "",
+        "CHQ NO": "",
+        "PARTICULARS": "OPENING BALANCE",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "153.44",
+        "INSTR NO": ""
+    },
+    {
+        "#": "2",
+        "TRAN DATE": "11-04-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "GST @18% on MAB Charge",
+        "DEBIT": "3.93",
+        "CREDIT": "",
+        "BALANCE": "149.51",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "3",
+        "TRAN DATE": "11-04-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "Non-Maint Avg bal chgs Feb2024",
+        "DEBIT": "21.84",
+        "CREDIT": "",
+        "BALANCE": "127.67",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "4",
+        "TRAN DATE": "21-04-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SMS Alerts Chrgs Incl GST",
+        "DEBIT": "3.24",
+        "CREDIT": "",
+        "BALANCE": "124.43",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "5",
+        "TRAN DATE": "25-04-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/411617661702/RAPIPAYF/AirtelPa/IMPSTRAN/9182210051689753000",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "2124.43",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "6",
+        "TRAN DATE": "29-04-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/412015834549/ParveenKumar/X000596/NainitalBanK/",
+        "DEBIT": "2005.90",
+        "CREDIT": "",
+        "BALANCE": "118.53",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "7",
+        "TRAN DATE": "21-05-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ACH-DR-IDFC FIRST BANK-1449513604-UTIB70202072100",
+        "DEBIT": "99.00",
+        "CREDIT": "",
+        "BALANCE": "19.53",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "8",
+        "TRAN DATE": "28-05-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "GST @18% on MAB Charge",
+        "DEBIT": "2.98",
+        "CREDIT": "",
+        "BALANCE": "16.55",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "9",
+        "TRAN DATE": "28-05-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "Non-Maint Avg bal chgs Mar2024",
+        "DEBIT": "16.55",
+        "CREDIT": "",
+        "BALANCE": ".00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "10",
+        "TRAN DATE": "29-05-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/415030271749/JASMER SO/UnionBan/Payment/",
+        "DEBIT": "",
+        "CREDIT": "5000.00",
+        "BALANCE": "5000.00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "11",
+        "TRAN DATE": "01-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB15368040088/AnilChohn/STATE BANK OF INDIA/",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "3000.00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "12",
+        "TRAN DATE": "01-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB15368059211/ParveenKumar/THE NAINITAL BANK LI/",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "1000.00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "13",
+        "TRAN DATE": "04-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SAK/CASH DEP/SAK397492271/2354/SELF",
+        "DEBIT": "",
+        "CREDIT": "39000.00",
+        "BALANCE": "40000.00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "14",
+        "TRAN DATE": "08-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/PRAVESHKUMAR/921010015483040",
+        "DEBIT": "15000.00",
+        "CREDIT": "",
+        "BALANCE": "25000.00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "15",
+        "TRAN DATE": "10-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "15000.00",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "16",
+        "TRAN DATE": "10-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "GST @18% on MAB Charge",
+        "DEBIT": "22.67",
+        "CREDIT": "",
+        "BALANCE": "14977.33",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "17",
+        "TRAN DATE": "10-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "Non-Maint Avg bal chgs Apr2024",
+        "DEBIT": "125.94",
+        "CREDIT": "",
+        "BALANCE": "14851.39",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "18",
+        "TRAN DATE": "12-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB16468465322/kukbir/PUNJAB NATIONAL BANK/",
+        "DEBIT": "1500.00",
+        "CREDIT": "",
+        "BALANCE": "13351.39",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "19",
+        "TRAN DATE": "16-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ECS Txn Chrgs Incl GST",
+        "DEBIT": "29.50",
+        "CREDIT": "",
+        "BALANCE": "13321.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "20",
+        "TRAN DATE": "18-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/G T ROAD/Panipat/180624",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "11321.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "21",
+        "TRAN DATE": "18-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB17027185569/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "6321.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "22",
+        "TRAN DATE": "25-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/417784917583/NEHA DEVI/ndianOv/Payment/",
+        "DEBIT": "",
+        "CREDIT": "2300.00",
+        "BALANCE": "8621.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "23",
+        "TRAN DATE": "25-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "8000.00",
+        "CREDIT": "",
+        "BALANCE": "621.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "24",
+        "TRAN DATE": "25-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB17798065918/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "400.00",
+        "CREDIT": "",
+        "BALANCE": "221.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "25",
+        "TRAN DATE": "27-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/417961823260/SURENDER /IndianOv/UPI/",
+        "DEBIT": "",
+        "CREDIT": "30000.00",
+        "BALANCE": "30221.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "26",
+        "TRAN DATE": "30-06-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "25221.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "27",
+        "TRAN DATE": "01-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB18355829441/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "24221.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "28",
+        "TRAN DATE": "01-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SB:914010000655368:Int.Pd:01-04-2024 to 30-06-2024",
+        "DEBIT": "",
+        "CREDIT": "42.00",
+        "BALANCE": "24263.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "29",
+        "TRAN DATE": "05-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "6300.00",
+        "CREDIT": "",
+        "BALANCE": "17963.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "30",
+        "TRAN DATE": "08-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB19027564360/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "14300.00",
+        "CREDIT": "",
+        "BALANCE": "3663.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "31",
+        "TRAN DATE": "09-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "Dr Card Charges GST ANNUAL5443XXXXXXXX0544",
+        "DEBIT": "590.00",
+        "CREDIT": "",
+        "BALANCE": "3073.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "32",
+        "TRAN DATE": "10-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB19249078580/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "500.00",
+        "CREDIT": "",
+        "BALANCE": "2573.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "33",
+        "TRAN DATE": "11-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB19362864043/kukbir/PUNJAB NATIONAL BANK/",
+        "DEBIT": "1500.00",
+        "CREDIT": "",
+        "BALANCE": "1073.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "34",
+        "TRAN DATE": "15-07-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/MALLAUDAPANIPAT/PANIPAT/150724",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "73.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "35",
+        "TRAN DATE": "01-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/421491218531/NEHA DEVI/ndianOv/Payment/",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "2073.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "36",
+        "TRAN DATE": "01-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB21480494965/ParveenKumar/THE NAINITAL BANK LI/",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "73.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "37",
+        "TRAN DATE": "05-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SAK/CASH DEP/SAK405382717/2354/SELF",
+        "DEBIT": "",
+        "CREDIT": "27000.00",
+        "BALANCE": "27073.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "38",
+        "TRAN DATE": "08-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB22152852807/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "9600.00",
+        "CREDIT": "",
+        "BALANCE": "17473.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "39",
+        "TRAN DATE": "08-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "12000.00",
+        "CREDIT": "",
+        "BALANCE": "5473.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "40",
+        "TRAN DATE": "09-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/422258774651/RAKESH K/StateBan/UPI/",
+        "DEBIT": "",
+        "CREDIT": "50000.00",
+        "BALANCE": "55473.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "41",
+        "TRAN DATE": "09-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB22264878160/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "50000.00",
+        "CREDIT": "",
+        "BALANCE": "5473.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "42",
+        "TRAN DATE": "09-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "CreditCard Payment XXXX 7580Ref#SS2VAFIVL0PWVO",
+        "DEBIT": "219.00",
+        "CREDIT": "",
+        "BALANCE": "5254.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "43",
+        "TRAN DATE": "12-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB22596115872/kukbir/PUNJAB NATIONAL BANK/",
+        "DEBIT": "1500.00",
+        "CREDIT": "",
+        "BALANCE": "3754.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "44",
+        "TRAN DATE": "12-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/422562300878/NEHA DEVI/ndianOv/Payment/",
+        "DEBIT": "",
+        "CREDIT": "5000.00",
+        "BALANCE": "8754.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "45",
+        "TRAN DATE": "13-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/422666967765/NEHA DEVI/ndianOv/Payment/",
+        "DEBIT": "",
+        "CREDIT": "3500.00",
+        "BALANCE": "12254.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "46",
+        "TRAN DATE": "13-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/RAM LAL CHOWKOATM/PANIPAT/130824",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "2254.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "47",
+        "TRAN DATE": "23-08-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SAK/CASH DEP/SAK407626171/2354/SELF",
+        "DEBIT": "",
+        "CREDIT": "30000.00",
+        "BALANCE": "32254.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "48",
+        "TRAN DATE": "03-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "CreditCard Payment XXXX 7580Ref#3D8E03E87CMJRR",
+        "DEBIT": "153.00",
+        "CREDIT": "",
+        "BALANCE": "32101.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "49",
+        "TRAN DATE": "03-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "12000.00",
+        "CREDIT": "",
+        "BALANCE": "20101.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "50",
+        "TRAN DATE": "06-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/UtarHarya/8511708031/060924",
+        "DEBIT": "9544.00",
+        "CREDIT": "",
+        "BALANCE": "10557.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "51",
+        "TRAN DATE": "11-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SAK/CASH DEP/SAK409960028/2354/SELF",
+        "DEBIT": "",
+        "CREDIT": "100000.00",
+        "BALANCE": "110557.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "52",
+        "TRAN DATE": "11-09-2024",
+        "CHQ NO": "65681",
+        "PARTICULARS": "TRF/2354/RAKESH KUMAR/TRF",
+        "DEBIT": "100000.00",
+        "CREDIT": "",
+        "BALANCE": "10557.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "53",
+        "TRAN DATE": "13-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/JioPrepaid/8511708032/130924",
+        "DEBIT": "859.00",
+        "CREDIT": "",
+        "BALANCE": "9698.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "54",
+        "TRAN DATE": "16-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB26063766453/kukbir/PUNJAB NATIONAL BANK/",
+        "DEBIT": "1500.00",
+        "CREDIT": "",
+        "BALANCE": "8198.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "55",
+        "TRAN DATE": "16-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/JioPrepaid/8511708033/160924",
+        "DEBIT": "299.00",
+        "CREDIT": "",
+        "BALANCE": "7899.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "56",
+        "TRAN DATE": "21-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB26510404645/ParveenKumar/THE NAINITAL BANK LI/",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "6899.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "57",
+        "TRAN DATE": "25-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SAK/CASH DEP/SAK411624790/2354/SELF",
+        "DEBIT": "",
+        "CREDIT": "20000.00",
+        "BALANCE": "26899.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "58",
+        "TRAN DATE": "26-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "16899.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "59",
+        "TRAN DATE": "30-09-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "14899.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "60",
+        "TRAN DATE": "01-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SB:914010000655368:Int.Pd:01-07-2024 to 30-09-2024",
+        "DEBIT": "",
+        "CREDIT": "82.00",
+        "BALANCE": "14981.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "61",
+        "TRAN DATE": "06-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "4981.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "62",
+        "TRAN DATE": "16-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SAK/CASH DEP/SAK414145974/2354/SELF",
+        "DEBIT": "",
+        "CREDIT": "40000.00",
+        "BALANCE": "44981.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "63",
+        "TRAN DATE": "16-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "36635.00",
+        "CREDIT": "",
+        "BALANCE": "8346.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "64",
+        "TRAN DATE": "17-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/JioPrepaid/8511708034/171024",
+        "DEBIT": "289.00",
+        "CREDIT": "",
+        "BALANCE": "8057.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "65",
+        "TRAN DATE": "24-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB29898862554/Baga/UNIONBANK OF INDIA/",
+        "DEBIT": "10.00",
+        "CREDIT": "",
+        "BALANCE": "8047.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "66",
+        "TRAN DATE": "24-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB29899177002/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "7000.00",
+        "CREDIT": "",
+        "BALANCE": "1047.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "67",
+        "TRAN DATE": "24-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/BSNL/8511708035/241024",
+        "DEBIT": "288.00",
+        "CREDIT": "",
+        "BALANCE": "759.89",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "68",
+        "TRAN DATE": "26-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "SMS Alerts Chrgs Incl GST",
+        "DEBIT": "1.77",
+        "CREDIT": "",
+        "BALANCE": "758.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "69",
+        "TRAN DATE": "26-10-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "Cash Txn Chrgs Incl GST",
+        "DEBIT": "177.00",
+        "CREDIT": "",
+        "BALANCE": "581.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "70",
+        "TRAN DATE": "29-10-2024",
+        "CHQ NO": "645224",
+        "PARTICULARS": "CLG/645224/281024/Punjab Nat /Shiv TradingCo",
+        "DEBIT": "",
+        "CREDIT": "150000.00",
+        "BALANCE": "150581.12",
+        "INSTR NO": ""
+    },
+    {
+        "#": "71",
+        "TRAN DATE": "01-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/G T ROAD MAINBRAN/PANIPAT/011124",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "140581.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "72",
+        "TRAN DATE": "02-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/CWRO24004/1883/021124/PANIPAT",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "120581.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "73",
+        "TRAN DATE": "03-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/UtarHarya/8511708036/031124",
+        "DEBIT": "4845.00",
+        "CREDIT": "",
+        "BALANCE": "115736.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "74",
+        "TRAN DATE": "03-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "CSHBCK/BILPAY/UtarHarya/85117080300G",
+        "DEBIT": "",
+        "CREDIT": "10.00",
+        "BALANCE": "115746.12",
+        "INSTR NO": "245"
+    },
+    {
+        "#": "75",
+        "TRAN DATE": "04-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/161980267278/NEHA DEVI/ndianOv/Payment/",
+        "DEBIT": "",
+        "CREDIT": "800.00",
+        "BALANCE": "116546.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "76",
+        "TRAN DATE": "04-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/JioPrepaid/8511708037/041124",
+        "DEBIT": "799.00",
+        "CREDIT": "",
+        "BALANCE": "115747.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "77",
+        "TRAN DATE": "05-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/BPRH185501/3265/051124/PANIPAT",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "95747.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "78",
+        "TRAN DATE": "05-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/BPRH185501/3266/051124/PANIPAT",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "75747.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "79",
+        "TRAN DATE": "05-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/BPRH185501/3271/051124/PANIPAT",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "65747.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "80",
+        "TRAN DATE": "05-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "55747.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "81",
+        "TRAN DATE": "06-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB31196626794/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "6000.00",
+        "CREDIT": "",
+        "BALANCE": "49747.12",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "82",
+        "TRAN DATE": "19-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/432418552874/DevenderValiya/X704838/INDUSINDBANKLTD/",
+        "DEBIT": "45005.90",
+        "CREDIT": "",
+        "BALANCE": "4741.22",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "83",
+        "TRAN DATE": "19-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB32490025444/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "2741.22",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "84",
+        "TRAN DATE": "22-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/469314586033/SURENDER /AXISBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "10500.00",
+        "BALANCE": "13241.22",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "85",
+        "TRAN DATE": "22-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/432702812389/SURENDER /IndianOv/UPI/",
+        "DEBIT": "",
+        "CREDIT": "9500.00",
+        "BALANCE": "22741.22",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "86",
+        "TRAN DATE": "22-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/432714766191/ParveenKumar/X000596/NainitalBanK/",
+        "DEBIT": "20005.90",
+        "CREDIT": "",
+        "BALANCE": "2735.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "87",
+        "TRAN DATE": "25-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB33030671778/Sunil/HDFCBANK/",
+        "DEBIT": "500.00",
+        "CREDIT": "",
+        "BALANCE": "2235.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "88",
+        "TRAN DATE": "29-11-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "1235.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "89",
+        "TRAN DATE": "04-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/433918962232/RAPIPAYF/AirtelPa/IMPSTRAN/9182210051689753000",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "3235.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "90",
+        "TRAN DATE": "06-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/434171552828/MANJEET K/AXISBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "3435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "91",
+        "TRAN DATE": "07-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/JioPrepaid/8511708038/071224",
+        "DEBIT": "859.00",
+        "CREDIT": "",
+        "BALANCE": "2576.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "92",
+        "TRAN DATE": "07-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/060277203412/SHARWAN K/AUSMALL /Payment/",
+        "DEBIT": "",
+        "CREDIT": "5000.00",
+        "BALANCE": "7576.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "93",
+        "TRAN DATE": "08-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "CreditCard Payment XXXX 7580Ref#DDKT82ZCNL5692",
+        "DEBIT": "590.00",
+        "CREDIT": "",
+        "BALANCE": "6986.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "94",
+        "TRAN DATE": "09-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/434451417178/RIYA TRAD/Nainital/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "7986.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "95",
+        "TRAN DATE": "10-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB34534709757/Sunil/HDFCBANK/",
+        "DEBIT": "5750.00",
+        "CREDIT": "",
+        "BALANCE": "2236.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "96",
+        "TRAN DATE": "10-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB34535722157/Neha/INDIANOVERSEAS BANK/",
+        "DEBIT": "500.00",
+        "CREDIT": "",
+        "BALANCE": "1736.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "97",
+        "TRAN DATE": "10-12-2024",
+        "CHQ NO": "740888",
+        "PARTICULARS": "CLG/740888/091224/Punjab Nat /Shiv TradingCo",
+        "DEBIT": "",
+        "CREDIT": "100000.00",
+        "BALANCE": "101736.32",
+        "INSTR NO": ""
+    },
+    {
+        "#": "98",
+        "TRAN DATE": "11-12-2024",
+        "CHQ NO": "65682",
+        "PARTICULARS": "TRF/2354/SUNIL KUMAR/TRF",
+        "DEBIT": "100000.00",
+        "CREDIT": "",
+        "BALANCE": "1736.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "99",
+        "TRAN DATE": "11-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/600191489537/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "2436.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "100",
+        "TRAN DATE": "15-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/186227628553/MANISH KU/PunjabNa/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "3436.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "101",
+        "TRAN DATE": "16-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/656938204554/SALEEM/StateBan/Payment/",
+        "DEBIT": "",
+        "CREDIT": "15000.00",
+        "BALANCE": "18436.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "102",
+        "TRAN DATE": "17-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/471877994620/KAJAL  RA/UnionBan/UPI/",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "20436.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "103",
+        "TRAN DATE": "17-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/471830013699/NEHA DEVI/UPI/NDIAN OVERSEAS BANK",
+        "DEBIT": "1.00",
+        "CREDIT": "",
+        "BALANCE": "20435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "104",
+        "TRAN DATE": "17-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/471866128168/RAHUL/UPI/HDFC BANK LTD",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "19435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "105",
+        "TRAN DATE": "18-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/415809899064/NEHA DEVI/NDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "50000.00",
+        "BALANCE": "69435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "106",
+        "TRAN DATE": "18-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/BPRH185501/3416/181224/PANIPAT",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "49435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "107",
+        "TRAN DATE": "18-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435387280571/HARSH  HARSH/UPI/State Bank Of India",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "39435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "108",
+        "TRAN DATE": "18-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435350571804/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "30000.00",
+        "CREDIT": "",
+        "BALANCE": "9435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "109",
+        "TRAN DATE": "18-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/471924984853/SUNIL KUMAR/UPI/Nainital Bank",
+        "DEBIT": "9000.00",
+        "CREDIT": "",
+        "BALANCE": "435.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "110",
+        "TRAN DATE": "18-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/471915789004/KAJAL  RA/UnionBan/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1200.00",
+        "BALANCE": "1635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "111",
+        "TRAN DATE": "19-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435409298083/ANIL TRAD/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "3000.00",
+        "BALANCE": "4635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "112",
+        "TRAN DATE": "19-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435479827871/DUMMY NAME/UPI/Punjab National Bank",
+        "DEBIT": "4000.00",
+        "CREDIT": "",
+        "BALANCE": "635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "113",
+        "TRAN DATE": "20-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435521218537/GURJEET S/PunjabNa/UPI/",
+        "DEBIT": "",
+        "CREDIT": "7000.00",
+        "BALANCE": "7635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "114",
+        "TRAN DATE": "20-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/472134935291/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "6635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "115",
+        "TRAN DATE": "20-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/472147539943/RAM GOPAL/UPI/CANARA BANK",
+        "DEBIT": "6000.00",
+        "CREDIT": "",
+        "BALANCE": "635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "116",
+        "TRAN DATE": "21-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435647460737/DEVENDER/INDUSIND /UPI/",
+        "DEBIT": "",
+        "CREDIT": "5000.00",
+        "BALANCE": "5635.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "117",
+        "TRAN DATE": "22-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435740068066/VINOD KUMAR SOSHIV K/UPI/Punjab National Bank",
+        "DEBIT": "210.00",
+        "CREDIT": "",
+        "BALANCE": "5425.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "118",
+        "TRAN DATE": "22-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/435750373375/JOSHI WINES BHOLI/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "500.00",
+        "CREDIT": "",
+        "BALANCE": "4925.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "119",
+        "TRAN DATE": "22-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/472386579328/MUKESH KUMAR/UPI/AXIS BANK",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "3925.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "120",
+        "TRAN DATE": "22-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435778175706/ANIL TRAD/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "20000.00",
+        "BALANCE": "23925.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "121",
+        "TRAN DATE": "23-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/472464901704/KAJAL  RA/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "24225.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "122",
+        "TRAN DATE": "23-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/435844517606/AJAY KUMAR/UPI/UCO BANK",
+        "DEBIT": "1200.00",
+        "CREDIT": "",
+        "BALANCE": "23025.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "123",
+        "TRAN DATE": "23-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/472405232083/KHOKHAR TRADINGCOMPA/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "4000.00",
+        "CREDIT": "",
+        "BALANCE": "19025.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "124",
+        "TRAN DATE": "23-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/404579653584/GOOGLE IN/AXISBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "10.00",
+        "BALANCE": "19035.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "125",
+        "TRAN DATE": "23-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/435849148298/PARDEEP KUMAR SO KAR/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "680.00",
+        "CREDIT": "",
+        "BALANCE": "18355.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "126",
+        "TRAN DATE": "24-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/472537500281/GURJEET SINGH/UPI/Punjab National Bank",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "13355.32",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "127",
+        "TRAN DATE": "25-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/472681429893/Google India Digital/UPI/AXIS BANK",
+        "DEBIT": "8496.98",
+        "CREDIT": "",
+        "BALANCE": "4858.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "128",
+        "TRAN DATE": "25-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/472635930091/SUPER INDIA/UPI/CICI Bank",
+        "DEBIT": "420.00",
+        "CREDIT": "",
+        "BALANCE": "4438.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "129",
+        "TRAN DATE": "25-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/436001644194/SAMTAENTERPRISES /UPI/Yes Bank Ltd",
+        "DEBIT": "200.00",
+        "CREDIT": "",
+        "BALANCE": "4238.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "130",
+        "TRAN DATE": "26-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/436124674867/MADHAV BHATIA/UPI/Yes Bank Ltd",
+        "DEBIT": "170.00",
+        "CREDIT": "",
+        "BALANCE": "4068.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "131",
+        "TRAN DATE": "26-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/436142678151/Soniya/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "100.00",
+        "CREDIT": "",
+        "BALANCE": "3968.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "132",
+        "TRAN DATE": "26-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/472781185157/Suvarnabhumi Fuels/UPI/Yes Bank Ltd",
+        "DEBIT": "641.00",
+        "CREDIT": "",
+        "BALANCE": "3327.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "133",
+        "TRAN DATE": "27-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/436282582421/ANIL TRAD/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "20000.00",
+        "BALANCE": "23327.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "134",
+        "TRAN DATE": "27-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/436254047758/NAVIN SO VINODKUMAR /UPI/Punjab National Bank",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "3327.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "135",
+        "TRAN DATE": "28-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/436325514491/ANIL TRAD/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "8500.00",
+        "BALANCE": "11827.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "136",
+        "TRAN DATE": "28-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/436362893271/NAVIN SO VINODKUMAR /UPI/Punjab National Bank",
+        "DEBIT": "8500.00",
+        "CREDIT": "",
+        "BALANCE": "3327.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "137",
+        "TRAN DATE": "29-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/473029141964/MANISH KUMAR/UPI/SARVA HARYANA GRAMIN",
+        "DEBIT": "3000.00",
+        "CREDIT": "",
+        "BALANCE": "327.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "138",
+        "TRAN DATE": "30-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/436510239772/MUTHOOTF/INDUSIND/P2AMOB/9100000000009234000",
+        "DEBIT": "",
+        "CREDIT": "43850.00",
+        "BALANCE": "44177.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "139",
+        "TRAN DATE": "30-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/392370701423/NEHA DEVI/NDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "45177.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "140",
+        "TRAN DATE": "30-12-2024",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/436578428418/GURJEET SINGH/UPI/Punjab National Bank",
+        "DEBIT": "45000.00",
+        "CREDIT": "",
+        "BALANCE": "177.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "141",
+        "TRAN DATE": "01-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "SB:914010000655368:Int.Pd:01-10-2024 to 31-12-2024",
+        "DEBIT": "",
+        "CREDIT": "176.00",
+        "BALANCE": "353.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "142",
+        "TRAN DATE": "04-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/095066041001/VINIT SHA/ICICIBan/Payment/",
+        "DEBIT": "",
+        "CREDIT": "20000.00",
+        "BALANCE": "20353.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "143",
+        "TRAN DATE": "05-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500532911419/SALEEM ./UPI/State Bank Of India",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "10353.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "144",
+        "TRAN DATE": "05-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500598420687/NEHA DEVI/UPI/NDIAN OVERSEAS BANK",
+        "DEBIT": "4000.00",
+        "CREDIT": "",
+        "BALANCE": "6353.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "145",
+        "TRAN DATE": "05-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500506139870/DEEPAK/UPI/UNION BANK OF INDIA",
+        "DEBIT": "500.00",
+        "CREDIT": "",
+        "BALANCE": "5853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "146",
+        "TRAN DATE": "05-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500569738639/DUMMY NAME/UPI/Punjab National Bank",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "3853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "147",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/216706939879/PAWAN JAN/AXISBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "35000.00",
+        "BALANCE": "38853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "148",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/BPRH185501/6886/060125/PANIPAT",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "18853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "149",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH-AXIS/BPRH185501/6888/060125/PANIPAT",
+        "DEBIT": "15000.00",
+        "CREDIT": "",
+        "BALANCE": "3853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "150",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500648413726/NAVIN SO /PunjabNa/UPI/",
+        "DEBIT": "",
+        "CREDIT": "20000.00",
+        "BALANCE": "23853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "151",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500619093590/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "3853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "152",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/500625556889/AJAY/YES BANK /Sentusi/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "5253.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "153",
+        "TRAN DATE": "06-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/537230914339/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1400.00",
+        "CREDIT": "",
+        "BALANCE": "3853.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "154",
+        "TRAN DATE": "07-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/537334955645/SUBHASH CHANDHUF /UPI/YES BANK LIMITED YBS",
+        "DEBIT": "180.00",
+        "CREDIT": "",
+        "BALANCE": "3673.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "155",
+        "TRAN DATE": "08-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/500835427081/Google India Digital/UPI/AXIS BANK",
+        "DEBIT": "2372.00",
+        "CREDIT": "",
+        "BALANCE": "1301.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "156",
+        "TRAN DATE": "08-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/500842134556/CHHABRA IMAGINGAND D/UPI/AXIS BANK",
+        "DEBIT": "600.00",
+        "CREDIT": "",
+        "BALANCE": "701.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "157",
+        "TRAN DATE": "08-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/500877531044/ANURAG MITTAL/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "300.00",
+        "CREDIT": "",
+        "BALANCE": "401.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "158",
+        "TRAN DATE": "08-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/567287166301/VINIT SHA/HDFCBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "40000.00",
+        "BALANCE": "40401.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "159",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "30401.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "160",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/UtarHarya/8511708039/090125",
+        "DEBIT": "1282.00",
+        "CREDIT": "",
+        "BALANCE": "29119.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "161",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "CSHBCK/BILPAY/UtarHarya/85117080300J",
+        "DEBIT": "",
+        "CREDIT": "10.00",
+        "BALANCE": "29129.34",
+        "INSTR NO": "245"
+    },
+    {
+        "#": "162",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/537550105273/BharatPe Merchant/Pay To/YesBank_Yespay",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "27129.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "163",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/537520617942/Anish ./UPI/State Bank Of India",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "25129.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "164",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/537579413035/ANIL PETRO/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "200.00",
+        "CREDIT": "",
+        "BALANCE": "24929.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "165",
+        "TRAN DATE": "09-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/537565335718/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "4929.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "166",
+        "TRAN DATE": "10-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/537612315062/GURJEET S/PunjabNa/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "5929.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "167",
+        "TRAN DATE": "10-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/537618886208/guru gobind singhpub/UPI/Kotak Mahindra Bank",
+        "DEBIT": "5750.00",
+        "CREDIT": "",
+        "BALANCE": "179.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "168",
+        "TRAN DATE": "10-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/188457034631/KAMLESH/UJJIVANS/Payment/",
+        "DEBIT": "",
+        "CREDIT": "5000.00",
+        "BALANCE": "5179.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "169",
+        "TRAN DATE": "10-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/501095033950/PARDEEP KUMAR SO KAR/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "70.00",
+        "CREDIT": "",
+        "BALANCE": "5109.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "170",
+        "TRAN DATE": "11-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501156868093/GURJEET SINGH/UPI/Punjab National Bank",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "4109.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "171",
+        "TRAN DATE": "13-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501335546286/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1400.00",
+        "CREDIT": "",
+        "BALANCE": "2709.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "172",
+        "TRAN DATE": "13-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/537983835767/RAJEEV KUMAR/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "70.00",
+        "CREDIT": "",
+        "BALANCE": "2639.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "173",
+        "TRAN DATE": "14-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/538055522156/ANIL PETRO/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "200.00",
+        "CREDIT": "",
+        "BALANCE": "2439.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "174",
+        "TRAN DATE": "14-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/856523753942/ARVIND KU/Nainital/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "3439.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "175",
+        "TRAN DATE": "15-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/538160081460/Shri Balaji KSK/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "500.00",
+        "CREDIT": "",
+        "BALANCE": "2939.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "176",
+        "TRAN DATE": "15-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501508725621/AJAY/YES BANK /Sentusi/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "4339.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "177",
+        "TRAN DATE": "15-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/538107573644/TURAN FILLINGSTATION/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "800.00",
+        "CREDIT": "",
+        "BALANCE": "3539.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "178",
+        "TRAN DATE": "15-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501597502909/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1400.00",
+        "CREDIT": "",
+        "BALANCE": "2139.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "179",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "Dr Card Charges GST ISSUE5391XXXXXXXX5455",
+        "DEBIT": "885.00",
+        "CREDIT": "",
+        "BALANCE": "1254.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "180",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/873193819335/RAJENDER /UNIONBAN/Payment/",
+        "DEBIT": "",
+        "CREDIT": "30000.00",
+        "BALANCE": "31254.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "181",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501628287153/ANKUSH/UPI/SARVA HARYANA GRAMIN",
+        "DEBIT": "270.00",
+        "CREDIT": "",
+        "BALANCE": "30984.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "182",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/501633183572/RAJESH KUMAR/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "100.00",
+        "CREDIT": "",
+        "BALANCE": "30884.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "183",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/501620776753/Sunny Fast Food/UPI/AXIS BANK",
+        "DEBIT": "200.00",
+        "CREDIT": "",
+        "BALANCE": "30684.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "184",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/501639788446/PRADEEP KUMAR/UPI/Yes Bank Ltd",
+        "DEBIT": "30.00",
+        "CREDIT": "",
+        "BALANCE": "30654.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "185",
+        "TRAN DATE": "16-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501628999402/MONU /KotakMah/UPI/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "30954.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "186",
+        "TRAN DATE": "17-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/538349543398/KAJAL  RA/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "32954.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "187",
+        "TRAN DATE": "17-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/538361744270/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "300.00",
+        "CREDIT": "",
+        "BALANCE": "32654.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "188",
+        "TRAN DATE": "18-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501813487558/VISHAL/CANARABA/UPI/",
+        "DEBIT": "",
+        "CREDIT": "50000.00",
+        "BALANCE": "82654.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "189",
+        "TRAN DATE": "18-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501886423461/KAJAL  RA/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "83654.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "190",
+        "TRAN DATE": "18-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501829925242/MONU /KotakMah/UPI/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "83854.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "191",
+        "TRAN DATE": "19-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/501946473534/ARVIND KUMAR/UPI/Nainital Bank",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "78854.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "192",
+        "TRAN DATE": "19-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/224156788259/NEHA DEVI/Paymen/INDIAN OVERSEAS BANK",
+        "DEBIT": "10.00",
+        "CREDIT": "",
+        "BALANCE": "78844.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "193",
+        "TRAN DATE": "19-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/538580409857/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "77844.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "194",
+        "TRAN DATE": "20-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/538657861897/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1600.00",
+        "CREDIT": "",
+        "BALANCE": "76244.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "195",
+        "TRAN DATE": "20-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/538651964849/SACHIN KUMAR SOSHIV /UPI/Yes Bank Ltd",
+        "DEBIT": "100.00",
+        "CREDIT": "",
+        "BALANCE": "76144.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "196",
+        "TRAN DATE": "20-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/502017892486/RAPIPAYF/AirtelPa/IMPSTRAN/9182210051689753000",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "78144.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "197",
+        "TRAN DATE": "20-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502029607828/GURJEET S/PunjabNa/UPI/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "78844.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "198",
+        "TRAN DATE": "22-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502227616162/AJAY/YES BANK /Sentusi/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "79844.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "199",
+        "TRAN DATE": "22-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/232690610834/SUDHIR SO VIJAYKUMAR/Paymen/SARVA HARYANA GRAMIN",
+        "DEBIT": "2550.00",
+        "CREDIT": "",
+        "BALANCE": "77294.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "200",
+        "TRAN DATE": "23-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/538960190903/MAU NASIM/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "50.00",
+        "CREDIT": "",
+        "BALANCE": "77244.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "201",
+        "TRAN DATE": "23-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502335412137/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1.00",
+        "BALANCE": "77245.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "202",
+        "TRAN DATE": "23-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502368413200/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "78645.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "203",
+        "TRAN DATE": "23-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/502366919433/DAVAINDIA Panipat/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "289.00",
+        "CREDIT": "",
+        "BALANCE": "78356.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "204",
+        "TRAN DATE": "23-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/502339819813/SHIVAM/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "120.00",
+        "CREDIT": "",
+        "BALANCE": "78236.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "205",
+        "TRAN DATE": "23-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502353121700/SATBIR S/AXISBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "120.00",
+        "BALANCE": "78356.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "206",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502451040360/DUMMY NAME/UPI/Punjab National Bank",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "76356.34",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "207",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/502406038785/ParveenKumar/X000596/NainitalBanK/",
+        "DEBIT": "2005.90",
+        "CREDIT": "",
+        "BALANCE": "74350.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "208",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/502456038717/SKTRADERS/UPI/BANK OF BARODA",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "69350.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "209",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502472402549/ANIL TRAD/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1.00",
+        "BALANCE": "69351.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "210",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502423796467/AJAY/YES BANK /Sentusi/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "70051.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "211",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/764030747245/NAVIN SO /PunjabNa/Payment/",
+        "DEBIT": "",
+        "CREDIT": "39999.00",
+        "BALANCE": "110050.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "212",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502452760493/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "111050.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "213",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502489774238/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "110050.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "214",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/IDBI TOWNASSANDH/PANIPAT/240125",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "100050.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "215",
+        "TRAN DATE": "24-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502465427437/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "100450.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "216",
+        "TRAN DATE": "26-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/502690603567/KRISHAN KUMAR/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "30.00",
+        "CREDIT": "",
+        "BALANCE": "100420.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "217",
+        "TRAN DATE": "27-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502708596394/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "3000.00",
+        "CREDIT": "",
+        "BALANCE": "97420.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "218",
+        "TRAN DATE": "27-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/040501596429/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "97620.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "219",
+        "TRAN DATE": "28-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/539428942626/BIJENDER SINGH SOSH /UPI/Punjab National Bank",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "92620.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "220",
+        "TRAN DATE": "28-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502876207074/RAMNIWAS/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "40000.00",
+        "BALANCE": "132620.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "221",
+        "TRAN DATE": "28-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/544028476930/LAL SINGH/UCOBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "133320.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "222",
+        "TRAN DATE": "28-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/539422684645/RAHUL S O BHEEMSINGH/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "40.00",
+        "CREDIT": "",
+        "BALANCE": "133280.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "223",
+        "TRAN DATE": "29-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/502927608938/SAJID/UPI/UNION BANK OF INDIA",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "131280.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "224",
+        "TRAN DATE": "29-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/RAMLAL CHOWKPANIP/PANIPAT/290125",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "121280.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "225",
+        "TRAN DATE": "29-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/922552503572/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "121680.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "226",
+        "TRAN DATE": "29-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/046809186410/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "122030.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "227",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503092004598/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "122430.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "228",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503091987626/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "150.00",
+        "BALANCE": "122580.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "229",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/090724040968/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "123980.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "230",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/979546509528/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "124680.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "231",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/411464573296/SUDHIR SO VIJAYKUMAR/Paymen/SARVA HARYANA GRAMIN",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "119680.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "232",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/HDFCH00031069828/GANPATITRAVEL ASSOCIATES/HDFCBANK/0001Pankaj propert pay",
+        "DEBIT": "",
+        "CREDIT": "100000.00",
+        "BALANCE": "219680.44",
+        "INSTR NO": "248"
+    },
+    {
+        "#": "233",
+        "TRAN DATE": "30-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/539656308378/SUNIL KUMAR/UPI/AXIS BANK",
+        "DEBIT": "50000.00",
+        "CREDIT": "",
+        "BALANCE": "169680.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "234",
+        "TRAN DATE": "31-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/307674950454/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1800.00",
+        "BALANCE": "171480.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "235",
+        "TRAN DATE": "31-01-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503155435497/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "150.00",
+        "BALANCE": "171630.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "236",
+        "TRAN DATE": "01-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503218920962/AJAY/YES BANK /Sentusi/",
+        "DEBIT": "",
+        "CREDIT": "3200.00",
+        "BALANCE": "174830.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "237",
+        "TRAN DATE": "01-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/888124770325/A2ZSUVIDH/AXISBANK/12349915/",
+        "DEBIT": "",
+        "CREDIT": "410.00",
+        "BALANCE": "175240.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "238",
+        "TRAN DATE": "01-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/503269247857/EXCEL ONE STOPSOLUTI/UPI/AXIS BANK",
+        "DEBIT": "10.00",
+        "CREDIT": "",
+        "BALANCE": "175230.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "239",
+        "TRAN DATE": "01-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/503269247857/914010000655368/010225/AXIS BANK",
+        "DEBIT": "",
+        "CREDIT": "10.00",
+        "BALANCE": "175240.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "240",
+        "TRAN DATE": "02-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/503362178204/BharatPe Merchant/Pay To/YesBank_Yespay",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "173240.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "241",
+        "TRAN DATE": "02-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/539923110893/NAVIN SO VINODKUMAR /UPI/Punjab National Bank",
+        "DEBIT": "30000.00",
+        "CREDIT": "",
+        "BALANCE": "143240.44",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "242",
+        "TRAN DATE": "03-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "CreditCard Payment XXXX 7580Ref#I35IZQTN01UECQ",
+        "DEBIT": "817.30",
+        "CREDIT": "",
+        "BALANCE": "142423.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "243",
+        "TRAN DATE": "03-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/540098084716/NAVIN SO VINODKUMAR /UPI/Punjab National Bank",
+        "DEBIT": "50000.00",
+        "CREDIT": "",
+        "BALANCE": "92423.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "244",
+        "TRAN DATE": "03-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/540061280786/GURJEET S/PunjabNa/UPI/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "93123.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "245",
+        "TRAN DATE": "03-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/781029956091/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "93523.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "246",
+        "TRAN DATE": "05-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/303829565245/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "94923.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "247",
+        "TRAN DATE": "05-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/262134757703/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "95323.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "248",
+        "TRAN DATE": "05-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/827986582207/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "96723.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "249",
+        "TRAN DATE": "06-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503712350561/RIYA TRADINGCOMPANY /UPI/Nainital Bank",
+        "DEBIT": "16500.00",
+        "CREDIT": "",
+        "BALANCE": "80223.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "250",
+        "TRAN DATE": "06-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503707160038/SAJID/UPI/UNION BANK OF INDIA",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "78223.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "251",
+        "TRAN DATE": "06-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/213718555737/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "500.00",
+        "BALANCE": "78723.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "252",
+        "TRAN DATE": "06-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/203925467933/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "79073.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "253",
+        "TRAN DATE": "07-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/095754449981/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "80473.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "254",
+        "TRAN DATE": "07-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/914805778620/RAM GOPAL/Paymen/CANARA BANK",
+        "DEBIT": "2800.00",
+        "CREDIT": "",
+        "BALANCE": "77673.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "255",
+        "TRAN DATE": "08-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "67673.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "256",
+        "TRAN DATE": "08-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "11500.00",
+        "CREDIT": "",
+        "BALANCE": "56173.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "257",
+        "TRAN DATE": "08-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/212787460751/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "56773.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "258",
+        "TRAN DATE": "08-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/503992517422/SANJAYKU/INDUSIND /UPI/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "57173.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "259",
+        "TRAN DATE": "08-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/631906060395/A2ZSUVIDH/AXISBANK/12529082/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "57573.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "260",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504069565354/VISHAL/UPI/UNION BANK OF INDIA",
+        "DEBIT": "1530.00",
+        "CREDIT": "",
+        "BALANCE": "56043.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "261",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504060290703/VISHAL/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1530.00",
+        "BALANCE": "57573.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "262",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/888137303366/ANIL TRADING CO/Paymen/HDFC BANK LTD",
+        "DEBIT": "50000.00",
+        "CREDIT": "",
+        "BALANCE": "7573.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "263",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/174845442515/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "800.00",
+        "BALANCE": "8373.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "264",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504087177929/DEEPAK/UPI/Punjab National Bank",
+        "DEBIT": "100.00",
+        "CREDIT": "",
+        "BALANCE": "8273.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "265",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/504013789129/SHIVA KIRYANASTORE /UPI/YES BANK LIMITED YBS",
+        "DEBIT": "40.00",
+        "CREDIT": "",
+        "BALANCE": "8233.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "266",
+        "TRAN DATE": "09-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/540625910009/ABHAY PRATAPSINGH S /UPI/YES BANK LIMITED YBS",
+        "DEBIT": "60.00",
+        "CREDIT": "",
+        "BALANCE": "8173.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "267",
+        "TRAN DATE": "10-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/540732004867/SURAJ SINGH/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "20.00",
+        "CREDIT": "",
+        "BALANCE": "8153.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "268",
+        "TRAN DATE": "10-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "ATM-CASH/Mahakumbh melapra/prayagraj/100225",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "3153.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "269",
+        "TRAN DATE": "11-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504208164212/AJAY/YES BANK /Sentusi/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "4553.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "270",
+        "TRAN DATE": "11-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/025557185007/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "4953.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "271",
+        "TRAN DATE": "12-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504339202409/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "5303.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "272",
+        "TRAN DATE": "12-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/067278971266/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "6703.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "273",
+        "TRAN DATE": "13-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504487523257/MONU DHAN/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "7403.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "274",
+        "TRAN DATE": "13-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504462963320/RIYA TRAD/Nainital/UPI/",
+        "DEBIT": "",
+        "CREDIT": "10000.00",
+        "BALANCE": "17403.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "275",
+        "TRAN DATE": "13-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/952520142736/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "18003.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "276",
+        "TRAN DATE": "13-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/773174524513/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "18303.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "277",
+        "TRAN DATE": "13-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/400686980046/KAMLESH/UJJIVANS/Payment/",
+        "DEBIT": "",
+        "CREDIT": "6000.00",
+        "BALANCE": "24303.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "278",
+        "TRAN DATE": "13-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/473039693323/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "24653.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "279",
+        "TRAN DATE": "14-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504553554130/UJJWAL/UPI/AXIS BANK",
+        "DEBIT": "8200.00",
+        "CREDIT": "",
+        "BALANCE": "16453.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "280",
+        "TRAN DATE": "14-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504521074229/DEEPAK/UPI/UNION BANK OF INDIA",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "11453.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "281",
+        "TRAN DATE": "14-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504537719051/DEEPAK/UNIONBAN/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "500.00",
+        "BALANCE": "11953.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "282",
+        "TRAN DATE": "14-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/439929866626/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "500.00",
+        "BALANCE": "12453.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "283",
+        "TRAN DATE": "14-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/100034711793/ANIL TRAD/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "61500.00",
+        "BALANCE": "73953.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "284",
+        "TRAN DATE": "15-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/119771274834/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "500.00",
+        "BALANCE": "74453.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "285",
+        "TRAN DATE": "15-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/087380433856/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "75853.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "286",
+        "TRAN DATE": "15-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/591728464807/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "76053.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "287",
+        "TRAN DATE": "15-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/100096105287/BHUDIVYA /CANARABA/UPI/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "76353.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "288",
+        "TRAN DATE": "16-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/504729608831/MR JAGBIR/UPI/CICI Bank",
+        "DEBIT": "400.00",
+        "CREDIT": "",
+        "BALANCE": "75953.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "289",
+        "TRAN DATE": "16-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/504769907499/DAVAINDIA Panipat/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "75.00",
+        "CREDIT": "",
+        "BALANCE": "75878.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "290",
+        "TRAN DATE": "16-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/541327695370/PARDEEP KUMAR SO KAR/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "140.00",
+        "CREDIT": "",
+        "BALANCE": "75738.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "291",
+        "TRAN DATE": "16-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504748949879/A2Z Suvid/YES BANK/PARVEEN/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "76138.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "292",
+        "TRAN DATE": "17-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504888892259/KAJAL  RA/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "3000.00",
+        "BALANCE": "79138.14",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "293",
+        "TRAN DATE": "17-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/276208303375/PhonePe/Paymen/AXIS BANK",
+        "DEBIT": "14772.06",
+        "CREDIT": "",
+        "BALANCE": "64366.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "294",
+        "TRAN DATE": "17-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/242219864318/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "64966.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "295",
+        "TRAN DATE": "17-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/004107714457/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "65166.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "296",
+        "TRAN DATE": "17-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504893216972/DEEPAK/UNIONBAN/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "66566.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "297",
+        "TRAN DATE": "18-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504915101540/RAJMEET/UPI/FEDERAL BANK",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "46566.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "298",
+        "TRAN DATE": "18-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/100230972799/RIYA TRAD/Nainital/UPI/",
+        "DEBIT": "",
+        "CREDIT": "10000.00",
+        "BALANCE": "56566.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "299",
+        "TRAN DATE": "18-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/659165582794/Bank AccountXXXXXXXX/Paymen/ICICI Bank",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "36566.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "300",
+        "TRAN DATE": "18-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/504919117492/RIYA TRADINGCOMPANY /UPI/Nainital Bank",
+        "DEBIT": "15000.00",
+        "CREDIT": "",
+        "BALANCE": "21566.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "301",
+        "TRAN DATE": "19-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/541693817191/VODAFONEIDEALIMITED /UPI/HDFC BANK LTD",
+        "DEBIT": "299.00",
+        "CREDIT": "",
+        "BALANCE": "21267.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "302",
+        "TRAN DATE": "19-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/100293229471/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "21617.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "303",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/703744470479/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "500.00",
+        "BALANCE": "22117.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "304",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "IMPS/P2A/505114395301/GANPATIT/Remiter/PankajIn/9199969147237139000",
+        "DEBIT": "",
+        "CREDIT": "174000.00",
+        "BALANCE": "196117.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "305",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505191757892/RAJAN SO /UCOBANK/kala/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "196817.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "306",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/541710696178/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "195817.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "307",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/330694288474/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "197217.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "308",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/299250289836/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "197517.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "309",
+        "TRAN DATE": "20-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/541718299326/RIYA TRADINGCOMPANY /UPI/Nainital Bank",
+        "DEBIT": "4500.00",
+        "CREDIT": "",
+        "BALANCE": "193017.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "310",
+        "TRAN DATE": "21-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/143952240214/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "193417.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "311",
+        "TRAN DATE": "21-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505269612920/AJAY/YES BANK /Sentfro/",
+        "DEBIT": "",
+        "CREDIT": "1700.00",
+        "BALANCE": "195117.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "312",
+        "TRAN DATE": "21-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/875656745909/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "195517.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "313",
+        "TRAN DATE": "21-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/148707755999/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "196917.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "314",
+        "TRAN DATE": "22-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/649341913004/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "197217.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "315",
+        "TRAN DATE": "23-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/864805789694/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "198617.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "316",
+        "TRAN DATE": "23-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505494511915/NEHA DEVI/UPI/NDIAN OVERSEAS BANK",
+        "DEBIT": "1.00",
+        "CREDIT": "",
+        "BALANCE": "198616.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "317",
+        "TRAN DATE": "23-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/357867420545/A2ZSUVIDH/AXISBANK/12925272/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "199016.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "318",
+        "TRAN DATE": "23-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505487253076/GULFAM ./UPI/Kotak Mahindra Bank",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "179016.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "319",
+        "TRAN DATE": "24-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/496052317910/SUNIL SON OFRAMPAL /Paymen/HDFC BANK LTD",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "159016.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "320",
+        "TRAN DATE": "24-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505552189915/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "21400.00",
+        "CREDIT": "",
+        "BALANCE": "137616.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "321",
+        "TRAN DATE": "24-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/776386850013/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "138016.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "322",
+        "TRAN DATE": "24-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/030289145834/ANIL KUMA/HDFCBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "138366.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "323",
+        "TRAN DATE": "24-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/542104107090/Abbas /Payto/FEDERAL BANK",
+        "DEBIT": "125.00",
+        "CREDIT": "",
+        "BALANCE": "138241.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "324",
+        "TRAN DATE": "24-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542158107530/SATBIR S/AXISBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "135.00",
+        "BALANCE": "138376.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "325",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505685602947/DEEPAK/UNIONBAN/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "139776.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "326",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505680586684/SAJID/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "139976.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "327",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/459057663879/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "140576.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "328",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542278275610/GURJEET SINGH/UPI/Punjab National Bank",
+        "DEBIT": "40.00",
+        "CREDIT": "",
+        "BALANCE": "140536.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "329",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542272771425/GULFAM ./UPI/Kotak Mahindra Bank",
+        "DEBIT": "15000.00",
+        "CREDIT": "",
+        "BALANCE": "125536.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "330",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/638134205836/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "100.00",
+        "BALANCE": "125636.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "331",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542281784101/Amit Saini/UPI/AIRTEL PAYMENTS BANK",
+        "DEBIT": "1200.00",
+        "CREDIT": "",
+        "BALANCE": "124436.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "332",
+        "TRAN DATE": "25-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505627058048/NARESH K/StateBan/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "124836.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "333",
+        "TRAN DATE": "26-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB05767666186/ParveenKumar/THE NAINITAL BANK LI/",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "122836.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "334",
+        "TRAN DATE": "26-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/306200168847/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "124236.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "335",
+        "TRAN DATE": "26-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542334022124/LOVEKESH /KotakMah/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "124586.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "336",
+        "TRAN DATE": "26-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505785865897/DUMMY NAME/UPI/AXIS BANK",
+        "DEBIT": "1.00",
+        "CREDIT": "",
+        "BALANCE": "124585.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "337",
+        "TRAN DATE": "26-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505785865897/914010000655368/260225/AXIS BANK",
+        "DEBIT": "",
+        "CREDIT": "1.00",
+        "BALANCE": "124586.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "338",
+        "TRAN DATE": "26-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505752877486/ANIL TRADING CO/UPI/HDFC BANK LTD",
+        "DEBIT": "36500.00",
+        "CREDIT": "",
+        "BALANCE": "88086.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "339",
+        "TRAN DATE": "27-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542492100510/GULFAM ./UPI/Kotak Mahindra Bank",
+        "DEBIT": "15000.00",
+        "CREDIT": "",
+        "BALANCE": "73086.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "340",
+        "TRAN DATE": "27-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/100677570671/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "800.00",
+        "BALANCE": "73886.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "341",
+        "TRAN DATE": "28-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/542515366625/Jio PrepaidRecharges/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "799.00",
+        "CREDIT": "",
+        "BALANCE": "73087.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "342",
+        "TRAN DATE": "28-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/400351407100/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "73387.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "343",
+        "TRAN DATE": "28-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/542586560858/GULFAM ./UPI/Kotak Mahindra Bank",
+        "DEBIT": "30000.00",
+        "CREDIT": "",
+        "BALANCE": "43387.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "344",
+        "TRAN DATE": "28-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/505935386405/AJAY/YES BANK /Sentfro/",
+        "DEBIT": "",
+        "CREDIT": "1700.00",
+        "BALANCE": "45087.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "345",
+        "TRAN DATE": "28-02-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/071306072148/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "45687.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "346",
+        "TRAN DATE": "01-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/506037223777/Jio PrepaidRecharges/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "899.00",
+        "CREDIT": "",
+        "BALANCE": "44788.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "347",
+        "TRAN DATE": "01-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/153525981027/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "46188.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "348",
+        "TRAN DATE": "02-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/225845050615/A2ZSUVIDH/AXISBANK/13117391/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "46588.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "349",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/804973390358/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1300.00",
+        "BALANCE": "47888.08",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "350",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/542819389450/Google India Digital/UPI/AXIS BANK",
+        "DEBIT": "234.82",
+        "CREDIT": "",
+        "BALANCE": "47653.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "351",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "MOB/TPFT/SURENDERSINGH/915010054819544",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "37653.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "352",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/506220415565/JAI SINGH/UPI/AXIS BANK",
+        "DEBIT": "12000.00",
+        "CREDIT": "",
+        "BALANCE": "25653.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "353",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/384733649734/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "25953.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "354",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/506262118214/Google India Digital/UPI/AXIS BANK",
+        "DEBIT": "718.00",
+        "CREDIT": "",
+        "BALANCE": "25235.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "355",
+        "TRAN DATE": "03-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/624801891162/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "25635.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "356",
+        "TRAN DATE": "04-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/659089281722/ANIL KUMA/HDFCBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "25985.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "357",
+        "TRAN DATE": "04-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/922136981319/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "650.00",
+        "BALANCE": "26635.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "358",
+        "TRAN DATE": "05-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/206557923753/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "28035.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "359",
+        "TRAN DATE": "05-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/298062829451/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "29435.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "360",
+        "TRAN DATE": "05-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/100997805244/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "29785.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "361",
+        "TRAN DATE": "05-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/103680030685/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "280.00",
+        "BALANCE": "30065.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "362",
+        "TRAN DATE": "06-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/506544941711/GURJEET SINGH/UPI/Punjab National Bank",
+        "DEBIT": "1100.00",
+        "CREDIT": "",
+        "BALANCE": "28965.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "363",
+        "TRAN DATE": "06-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/828177227707/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "29365.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "364",
+        "TRAN DATE": "07-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "CreditCard Payment XXXX 7580Ref#X24FA5WD2ZA4VI",
+        "DEBIT": "5094.00",
+        "CREDIT": "",
+        "BALANCE": "24271.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "365",
+        "TRAN DATE": "07-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/543204063938/Google India Digital/UPI/AXIS BANK",
+        "DEBIT": "26.00",
+        "CREDIT": "",
+        "BALANCE": "24245.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "366",
+        "TRAN DATE": "07-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/523257997274/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "24445.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "367",
+        "TRAN DATE": "08-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/506798933609/GULFAM ./UPI/Kotak Mahindra Bank",
+        "DEBIT": "19600.00",
+        "CREDIT": "",
+        "BALANCE": "4845.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "368",
+        "TRAN DATE": "08-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/399451218152/RAM GOPA/CANARABA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "5445.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "369",
+        "TRAN DATE": "09-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/971802860685/A2ZSUVIDH/AXISBANK/13303932/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "5845.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "370",
+        "TRAN DATE": "10-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/365459354866/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "2250.00",
+        "BALANCE": "8095.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "371",
+        "TRAN DATE": "11-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/080701544840/ANIL KUMA/HDFCBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "8445.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "372",
+        "TRAN DATE": "11-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/377559900219/NARESH/KARNATAKA/Payment/",
+        "DEBIT": "",
+        "CREDIT": "200.00",
+        "BALANCE": "8645.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "373",
+        "TRAN DATE": "12-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/543797283680/SAJID/UPI/UNION BANK OF INDIA",
+        "DEBIT": "1650.00",
+        "CREDIT": "",
+        "BALANCE": "6995.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "374",
+        "TRAN DATE": "12-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/328290544637/SALEEM/Paymen/State Bank Of India",
+        "DEBIT": "3000.00",
+        "CREDIT": "",
+        "BALANCE": "3995.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "375",
+        "TRAN DATE": "12-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/773295066188/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "2850.00",
+        "BALANCE": "6845.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "376",
+        "TRAN DATE": "12-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/010742960989/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "500.00",
+        "BALANCE": "7345.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "377",
+        "TRAN DATE": "13-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/507263390771/PAWAN JANGRA/UPI/Punjab National Bank",
+        "DEBIT": "6000.00",
+        "CREDIT": "",
+        "BALANCE": "1345.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "378",
+        "TRAN DATE": "13-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/101424217679/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "1695.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "379",
+        "TRAN DATE": "13-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/053648868175/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1600.00",
+        "BALANCE": "3295.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "380",
+        "TRAN DATE": "14-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/955374049441/JAI NARAI/BANK OFB/Payment/",
+        "DEBIT": "",
+        "CREDIT": "39400.00",
+        "BALANCE": "42695.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "381",
+        "TRAN DATE": "16-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/789441228190/KHOKHAR TRADINGCOMPA/Paymen/YES BANK LIMITED YBS",
+        "DEBIT": "3000.00",
+        "CREDIT": "",
+        "BALANCE": "39695.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "382",
+        "TRAN DATE": "17-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/101616058591/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "900.00",
+        "BALANCE": "40595.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "383",
+        "TRAN DATE": "17-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/507686116173/KARAN/YES BANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "40995.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "384",
+        "TRAN DATE": "17-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/507641632058/DEEPAK/UNIONBAN/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "2100.00",
+        "BALANCE": "43095.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "385",
+        "TRAN DATE": "17-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/507673511191/AJAY/YES BANK /UPI/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "44495.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "386",
+        "TRAN DATE": "17-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/040115851438/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "44895.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "387",
+        "TRAN DATE": "18-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/497387768677/ANIL KUMA/HDFCBANK/Payment/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "45245.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "388",
+        "TRAN DATE": "18-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/744920775058/SUDHIR SO/SARVAHAR/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1500.00",
+        "BALANCE": "46745.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "389",
+        "TRAN DATE": "19-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/507818597049/Vodafone Idea Ltd/UPI/CICI Bank",
+        "DEBIT": "249.00",
+        "CREDIT": "",
+        "BALANCE": "46496.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "390",
+        "TRAN DATE": "20-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/507900069300/SHARWAN K/AXISBANK/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "2000.00",
+        "BALANCE": "48496.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "391",
+        "TRAN DATE": "20-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/507964617678/PREMSINGH/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "140.00",
+        "CREDIT": "",
+        "BALANCE": "48356.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "392",
+        "TRAN DATE": "20-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/101784580898/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "650.00",
+        "BALANCE": "49006.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "393",
+        "TRAN DATE": "20-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/507938537731/RAJAN SO ARJUNDASS /UPI/UCO BANK",
+        "DEBIT": "300.00",
+        "CREDIT": "",
+        "BALANCE": "48706.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "394",
+        "TRAN DATE": "20-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/507984841352/DAVAINDIA Panipat/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "105.00",
+        "CREDIT": "",
+        "BALANCE": "48601.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "395",
+        "TRAN DATE": "20-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/161006612968/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "50001.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "396",
+        "TRAN DATE": "21-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/544609518218/DEEPAK/UPI/UNION BANK OF INDIA",
+        "DEBIT": "5000.00",
+        "CREDIT": "",
+        "BALANCE": "45001.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "397",
+        "TRAN DATE": "21-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/544647523338/Sandeep/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "40.00",
+        "CREDIT": "",
+        "BALANCE": "44961.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "398",
+        "TRAN DATE": "21-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/544693446731/KAJAL  RA/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "2500.00",
+        "BALANCE": "47461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "399",
+        "TRAN DATE": "22-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/544763998890/RAHUL/UPI/HDFC BANK LTD",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "46461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "400",
+        "TRAN DATE": "23-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/508208779784/NIKHIL BA/HDFCBANK/Sent usi/",
+        "DEBIT": "",
+        "CREDIT": "600.00",
+        "BALANCE": "47061.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "401",
+        "TRAN DATE": "23-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/601711760825/A2ZSUVIDH/AXISBANK/13625317/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "47461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "402",
+        "TRAN DATE": "24-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/862379954428/SUNIL SON OFRAMPAL /Paymen/HDFC BANK LTD",
+        "DEBIT": "20000.00",
+        "CREDIT": "",
+        "BALANCE": "27461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "403",
+        "TRAN DATE": "24-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/713477640835/A2ZSUVIDH/AXISBANK/13649501/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "28161.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "404",
+        "TRAN DATE": "24-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/713978739261/MONU/KotakMah/Payment/",
+        "DEBIT": "",
+        "CREDIT": "300.00",
+        "BALANCE": "28461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "405",
+        "TRAN DATE": "25-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2M/508430264009/SURAJ KUMAR SAW/UPI/YES BANK LIMITED YBS",
+        "DEBIT": "15000.00",
+        "CREDIT": "",
+        "BALANCE": "13461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "406",
+        "TRAN DATE": "25-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/508467763626/GULFAM ./UPI/Kotak Mahindra Bank",
+        "DEBIT": "10000.00",
+        "CREDIT": "",
+        "BALANCE": "3461.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "407",
+        "TRAN DATE": "25-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/545095307483/KUNAL WEI/JANASMAL/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "3811.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "408",
+        "TRAN DATE": "27-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "MBBPay/ViPrepaid/85117080310/270325",
+        "DEBIT": "249.00",
+        "CREDIT": "",
+        "BALANCE": "3562.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "409",
+        "TRAN DATE": "27-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/102145890263/RAJAN SO /UCOBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "350.00",
+        "BALANCE": "3912.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "410",
+        "TRAN DATE": "28-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/665194177066/BIRU/INDIANOV/Payment/",
+        "DEBIT": "",
+        "CREDIT": "1400.00",
+        "BALANCE": "5312.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "411",
+        "TRAN DATE": "29-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/102231798469/MONU DHAN/HDFCBANK/UPI/",
+        "DEBIT": "",
+        "CREDIT": "700.00",
+        "BALANCE": "6012.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "412",
+        "TRAN DATE": "29-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/508839007175/KAJAL  RA/UNIONBAN/UPI/",
+        "DEBIT": "",
+        "CREDIT": "1000.00",
+        "BALANCE": "7012.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "413",
+        "TRAN DATE": "30-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/508968326991/SAURABH /YESBANK /UPI/",
+        "DEBIT": "",
+        "CREDIT": "400.00",
+        "BALANCE": "7412.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "414",
+        "TRAN DATE": "31-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "NEFT/MB/AXOMB09097004754/ParveenKumar/THE NAINITAL BANK LI/",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "5412.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "415",
+        "TRAN DATE": "31-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/200846687971/NEHA DEVI/Paymen/INDIAN OVERSEAS BANK",
+        "DEBIT": "1000.00",
+        "CREDIT": "",
+        "BALANCE": "4412.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "416",
+        "TRAN DATE": "31-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "UPI/P2A/509056434663/DUMMY NAME/UPI/Punjab National Bank",
+        "DEBIT": "2000.00",
+        "CREDIT": "",
+        "BALANCE": "2412.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "417",
+        "TRAN DATE": "31-03-2025",
+        "CHQ NO": "",
+        "PARTICULARS": "SB:914010000655368:Int.Pd:01-01-2025 to 31-03-2025",
+        "DEBIT": "",
+        "CREDIT": "399.00",
+        "BALANCE": "2811.26",
+        "INSTR NO": "2354"
+    },
+    {
+        "#": "418",
+        "TRAN DATE": "",
+        "CHQ NO": "",
+        "PARTICULARS": "TRANSACTION TOTAL",
+        "DEBIT": "1598308.18",
+        "CREDIT": "1600966.00",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "419",
+        "TRAN DATE": "",
+        "CHQ NO": "",
+        "PARTICULARS": "CLOSING BALANCE",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "2811.26",
+        "INSTR NO": ""
+    },
+    {
+        "#": "420",
+        "TRAN DATE": "Charge breakup of Axis Account No :914010000655368 for the period (From :01-04-2024 To :31-03-2025)",
+        "CHQ NO": "",
+        "PARTICULARS": "",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "421",
+        "TRAN DATE": "Sr. No.",
+        "CHQ NO": "Period",
+        "PARTICULARS": "Recover Date",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "422",
+        "TRAN DATE": "1",
+        "CHQ NO": "03-2024",
+        "PARTICULARS": "11-04-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "423",
+        "TRAN DATE": "2",
+        "CHQ NO": "03-2024",
+        "PARTICULARS": "21-04-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "424",
+        "TRAN DATE": "3",
+        "CHQ NO": "04-2024",
+        "PARTICULARS": "28-05-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "425",
+        "TRAN DATE": "4",
+        "CHQ NO": "05-2024",
+        "PARTICULARS": "10-06-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "426",
+        "TRAN DATE": "5",
+        "CHQ NO": "05-2024",
+        "PARTICULARS": "16-06-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "427",
+        "TRAN DATE": "6",
+        "CHQ NO": "09-2024",
+        "PARTICULARS": "26-10-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    },
+    {
+        "#": "428",
+        "TRAN DATE": "7",
+        "CHQ NO": "09-2024",
+        "PARTICULARS": "26-10-2024",
+        "DEBIT": "",
+        "CREDIT": "",
+        "BALANCE": "",
+        "INSTR NO": ""
+    }
+]
