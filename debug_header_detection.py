@@ -86,11 +86,52 @@ def debug_pdf(pdf_path: str):
     print(f"Tables found: {len(result.tables)}")
     for table in result.tables:
         print(f"\nTable: {table.table_id}")
+        print(f"  Pages: {table.page_numbers}")
         print(f"  Content type: {table.content_type.value if table.content_type else None}")
-        print(f"  Header rows: {table.header_row_indices}")
-        print(f"  Columns ({len(table.columns)}):")
-        for col in table.columns:
-            print(f"    - {col.semantic_type}: '{col.header_text}'")
+        print(f"  Column count: {len(table.columns)}")
+        # Only show column headers for the first 3 columns
+        headers = [c.header_text for c in table.columns[:3]]
+        print(f"  First 3 headers: {headers}")
+        # Check if this is a transaction table
+        semantic_types = {c.semantic_type for c in table.columns if c.semantic_type}
+        print(f"  Semantic types: {semantic_types}")
+
+    # Run the recognizer on transaction tables to see the extracted data
+    print("\n--- Transaction Table Recognition ---")
+    from tables.recognizer import TableRecognizer
+
+    transaction_tables = [t for t in result.tables if t.content_type and t.content_type.value == "transaction"]
+    print(f"Transaction tables: {len(transaction_tables)}")
+
+    if transaction_tables:
+        # Pick the one with most standard headers
+        best_table = None
+        best_score = 0
+        for t in transaction_tables:
+            score = sum(1 for c in t.columns if c.semantic_type in ['date', 'debit', 'credit', 'balance', 'description'])
+            if score > best_score:
+                best_score = score
+                best_table = t
+
+        if best_table:
+            print(f"\nBest transaction table: {best_table.table_id}")
+            print(f"  Pages: {best_table.page_numbers}")
+            print(f"  Bounds per page: {best_table.bounds_per_page}")
+            print(f"  Columns: {[c.header_text for c in best_table.columns]}")
+
+            # Create a proper detection result for this table
+            recognizer = TableRecognizer()
+            recognized = recognizer.recognize(pdf, result)
+
+            # Find the recognized table matching our best_table
+            for rec_table in recognized.tables:
+                if rec_table.table_id == best_table.table_id:
+                    print(f"  Rows extracted: {len(rec_table.rows)}")
+                    print(f"  First 5 rows:")
+                    for i, row in enumerate(rec_table.rows[:5]):
+                        print(f"    Row {i}: date={row.transaction_date}, desc={row.description[:30] if row.description else None}..., "
+                              f"debit={row.debit_amount}, credit={row.credit_amount}, balance={row.balance}")
+                    break
 
 
 if __name__ == "__main__":
