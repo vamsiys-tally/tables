@@ -24,6 +24,13 @@ from pathlib import Path
 from typing import Optional, Any
 import logging
 
+# Try to import tqdm for progress bar
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
+
 from tests.evaluation.csv_loader import (
     load_ground_truth,
     discover_ground_truth_files,
@@ -45,6 +52,11 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger(__name__)
+
+# Suppress verbose logging from PDF and embedding libraries
+logging.getLogger("pdfminer").setLevel(logging.WARNING)
+logging.getLogger("pdfplumber").setLevel(logging.WARNING)
+logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
 
 
 # =============================================================================
@@ -140,16 +152,45 @@ class EvaluationRunner:
             logger.warning("No ground truth files found")
             return self.tracker.current_metrics
 
-        logger.info(f"Found {len(gt_files)} ground truth files")
+        print(f"Found {len(gt_files)} ground truth files")
 
-        # Process each file
-        for gt_file in gt_files:
+        # Process each file with progress bar
+        if HAS_TQDM:
+            file_iterator = tqdm(
+                gt_files,
+                desc="Evaluating",
+                unit="file",
+                ncols=100,
+            )
+        else:
+            file_iterator = gt_files
+            print("Processing files...")
+
+        matched_total = 0
+        gt_total = 0
+
+        for i, gt_file in enumerate(file_iterator):
             try:
                 result = self._evaluate_file(gt_file)
                 if result:
                     # Add to tracker
                     file_bank = extract_bank_from_path(str(gt_file.file_path))
                     self.tracker.add_result(result, bank=file_bank)
+                    matched_total += result.matched_count
+                    gt_total += result.gt_count
+
+                    # Update progress bar description
+                    if HAS_TQDM:
+                        accuracy = matched_total / gt_total if gt_total > 0 else 0
+                        file_iterator.set_postfix({
+                            "acc": f"{accuracy:.1%}",
+                            "matched": matched_total,
+                        })
+                    else:
+                        # Simple print-based progress
+                        if (i + 1) % 10 == 0:
+                            accuracy = matched_total / gt_total if gt_total > 0 else 0
+                            print(f"  [{i+1}/{len(gt_files)}] Accuracy: {accuracy:.1%}")
 
                     # Generate error report if needed
                     if not result.is_perfect and self.report_generator:
@@ -168,16 +209,18 @@ class EvaluationRunner:
 
     def _find_file(self, file_name: str) -> list[GroundTruthFile]:
         """Find a specific ground truth file."""
-        # Search in ground truth directory
-        pattern = f"**/{file_name}"
-        if not file_name.endswith(".csv"):
-            pattern = f"**/{file_name}.csv"
+        # Get file stem (without extension)
+        stem = Path(file_name).stem
 
-        matches = list(self.ground_truth_dir.glob(pattern))
+        # Search for JSON and CSV files
+        matches = []
+        for ext in [".json", ".csv"]:
+            pattern = f"**/{stem}{ext}"
+            matches.extend(self.ground_truth_dir.glob(pattern))
 
         if not matches:
-            # Try with PDF extension
-            pattern = f"**/{Path(file_name).stem}.csv"
+            # Try exact match with any extension
+            pattern = f"**/{file_name}"
             matches = list(self.ground_truth_dir.glob(pattern))
 
         return [
@@ -242,42 +285,127 @@ class EvaluationRunner:
 
     def _extract_from_pdf(self, pdf_path: Path) -> list[dict[str, Any]]:
         """
-        Extract transactions from a PDF file.
-
-        This method should be implemented to call the actual extraction pipeline.
+        Extract transactions from a PDF file using the extraction pipeline.
 
         Args:
             pdf_path: Path to PDF file
 
         Returns:
-            List of extracted transaction dictionaries
+            List of extracted transaction dictionaries with original field names
         """
-        # TODO: Integrate with actual extraction pipeline
-        # For now, return empty list - extraction not yet implemented
-        #
-        # Example integration:
-        # from tables.reader.file_classifier import classify_file
-        # from tables.detector.table_detector import TableDetector
-        # from tables.recognizer.cell_extractor import CellExtractor
-        #
-        # classification = classify_file(pdf_path)
-        # if classification.status != "success":
-        #     return []
-        #
-        # detector = TableDetector()
-        # tables = detector.detect(classification.pdf_document)
-        #
-        # extractor = CellExtractor()
-        # transactions = []
-        # for table in tables:
-        #     rows = extractor.extract(table)
-        #     for row in rows:
-        #         transactions.append(row.to_dict())
-        #
-        # return transactions
+        try:
+            from tables.reader.pdf_document import PDFDocument
+            from tables.detector import detect_tables
+            from tables.recognizer import recognize_tables
+        except ImportError as e:
+            logger.error(f"Failed to import extraction modules: {e}")
+            return []
 
-        logger.debug(f"Extraction not yet integrated for: {pdf_path}")
-        return []
+        try:
+            # Load PDF
+            pdf = PDFDocument.open(str(pdf_path))
+
+            # Detect tables
+            detection_result = detect_tables(pdf)
+
+            if not detection_result.tables:
+                logger.warning(f"No tables detected in: {pdf_path}")
+                return []
+
+            # Extract transactions
+            extraction_result = recognize_tables(pdf, detection_result)
+
+            if not extraction_result.tables:
+                logger.warning(f"No transactions extracted from: {pdf_path}")
+                return []
+
+            # Convert to list of dicts with original field names
+            transactions = []
+            for table in extraction_result.tables:
+                # Build field name mapping from column schemas
+                field_mapping = self._build_field_mapping(table.columns)
+
+                for row in table.rows:
+                    txn_dict = self._row_to_dict(row, field_mapping)
+                    transactions.append(txn_dict)
+
+            logger.info(f"Extracted {len(transactions)} transactions from {pdf_path.name}")
+            return transactions
+
+        except Exception as e:
+            logger.error(f"Extraction failed for {pdf_path}: {e}")
+            return []
+
+    def _build_field_mapping(self, columns: list) -> dict[str, str]:
+        """
+        Build mapping from semantic type to original header name.
+
+        Args:
+            columns: List of ColumnSchema from extraction
+
+        Returns:
+            Dict mapping semantic type to original header text
+        """
+        from tables.models.transaction import SemanticType
+
+        mapping = {}
+        for col in columns:
+            # Use original header text if available, otherwise use column name
+            header_text = col.source_header_text or col.name
+            mapping[col.semantic_type.value] = header_text
+
+        return mapping
+
+    def _row_to_dict(self, row, field_mapping: dict[str, str]) -> dict[str, Any]:
+        """
+        Convert a TransactionRow to a dict with original field names.
+
+        Args:
+            row: TransactionRow from extraction
+            field_mapping: Mapping from semantic type to header name
+
+        Returns:
+            Dict with original field names
+        """
+        result = {}
+
+        # Map each field using the original header names
+        if row.transaction_date is not None:
+            header = field_mapping.get("date", "Transaction Date")
+            result[header] = row.transaction_date.strftime("%d/%m/%Y")
+
+        if row.value_date is not None:
+            header = field_mapping.get("value_date", "Value Date")
+            result[header] = row.value_date.strftime("%d-%b-%Y")
+
+        if row.description:
+            header = field_mapping.get("description", "Description")
+            result[header] = row.description
+
+        if row.reference:
+            header = field_mapping.get("reference", "Reference")
+            result[header] = row.reference
+
+        # Debit amount
+        header = field_mapping.get("debit", "Withdrawals")
+        if row.debit_amount is not None:
+            result[header] = f"{row.debit_amount:,.2f}"
+        else:
+            result[header] = ""
+
+        # Credit amount
+        header = field_mapping.get("credit", "Deposits")
+        if row.credit_amount is not None:
+            result[header] = f"{row.credit_amount:,.2f}"
+        else:
+            result[header] = ""
+
+        # Balance
+        if row.balance is not None:
+            header = field_mapping.get("balance", "Running Balance")
+            result[header] = f"{row.balance:,.2f}"
+
+        return result
 
     def _generate_error_report(
         self,
