@@ -306,7 +306,9 @@ class PDFDocument:
         """Check if the PDF was encrypted (password-protected)."""
         if self._pdf is None:
             return False
-        return self._pdf.is_encrypted
+        # pdfplumber doesn't expose is_encrypted directly
+        # Check if a password was used to open the document
+        return self._pdf.password is not None
 
     @property
     def metadata(self) -> dict[str, Any]:

@@ -47,12 +47,15 @@ def temp_dir() -> Generator[Path, None, None]:
 @pytest.fixture
 def sample_pdf_content() -> bytes:
     """
-    Minimal valid PDF content for testing.
+    Minimal valid PDF content for testing WITH text content.
+
+    This PDF contains actual text so it won't be detected as scanned.
 
     Returns:
-        Bytes of a minimal valid PDF
+        Bytes of a minimal valid PDF with text
     """
-    # Minimal PDF structure (empty page)
+    # PDF with text content "Hello World" - needed so it's not detected as scanned
+    # This is a minimal PDF that includes a text stream
     return b"""%PDF-1.4
 1 0 obj
 << /Type /Catalog /Pages 2 0 R >>
@@ -61,36 +64,58 @@ endobj
 << /Type /Pages /Kids [3 0 R] /Count 1 >>
 endobj
 3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 44 >>
+stream
+BT
+/F1 12 Tf
+100 700 Td
+(Hello World) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 xref
-0 4
+0 6
 0000000000 65535 f
 0000000009 00000 n
 0000000058 00000 n
 0000000115 00000 n
+0000000266 00000 n
+0000000361 00000 n
 trailer
-<< /Size 4 /Root 1 0 R >>
+<< /Size 6 /Root 1 0 R >>
 startxref
-196
+435
 %%EOF"""
 
 
 @pytest.fixture
-def valid_pdf_path(temp_dir: Path, sample_pdf_content: bytes) -> Path:
+def valid_pdf_path() -> Path:
     """
-    Create a valid PDF file for testing.
+    Get path to a real valid PDF file for testing.
 
-    Args:
-        temp_dir: Temporary directory fixture
-        sample_pdf_content: PDF content fixture
+    Uses a real bank statement PDF from tests/data/ for accurate testing.
 
     Returns:
-        Path to the created PDF file
+        Path to a valid PDF file
     """
-    pdf_path = temp_dir / "test.pdf"
-    pdf_path.write_bytes(sample_pdf_content)
-    return pdf_path
+    # Use a real PDF from the test data
+    real_pdf = TEST_DATA_DIR / "HDFC Bank .pdf"
+    if real_pdf.exists():
+        return real_pdf
+
+    # Fallback to any available PDF
+    for pdf in TEST_DATA_DIR.glob("*.pdf"):
+        return pdf
+
+    # If no real PDFs, skip test
+    pytest.skip("No real PDF files available in tests/data/")
+    raise FileNotFoundError("No PDF files found")  # For type checker
 
 
 @pytest.fixture
