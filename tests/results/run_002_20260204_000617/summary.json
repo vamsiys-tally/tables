@@ -1,0 +1,2156 @@
+{
+  "run_id": "run_002_20260204_000617",
+  "timestamp": "2026-02-04T00:06:17.111972",
+  "git_commit": "7b13bb4",
+  "duration_seconds": 792.87385,
+  "notes": "",
+  "metrics": {
+    "files": {
+      "total": 219,
+      "perfect": 1,
+      "with_errors": 218
+    },
+    "transactions": {
+      "ground_truth": 37776,
+      "extracted": 22589,
+      "matched": 1123,
+      "missed": 16474,
+      "extra": 1287,
+      "accuracy": 0.0297278695468022
+    },
+    "error_breakdown": {
+      "DATE_MISMATCH": 6923,
+      "NOT_EXTRACTED": 16474,
+      "EXTRA_ROW": 1287,
+      "DESC_MISMATCH": 12802,
+      "BALANCE_MISMATCH": 102,
+      "DEBIT_MISMATCH": 279,
+      "CREDIT_MISMATCH": 38,
+      "REF_MISMATCH": 35
+    },
+    "by_bank": {
+      "akola_janta_commercial_cooperative_bank": {
+        "category_name": "akola_janta_commercial_cooperative_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 815,
+        "total_matched": 0,
+        "total_missed": 19,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 796,
+          "NOT_EXTRACTED": 19
+        }
+      },
+      "andhra_bank": {
+        "category_name": "andhra_bank",
+        "file_count": 3,
+        "perfect_count": 0,
+        "total_gt": 139,
+        "total_matched": 83,
+        "total_missed": 54,
+        "total_extra": 10,
+        "accuracy": 0.5971223021582733,
+        "error_breakdown": {
+          "EXTRA_ROW": 10,
+          "DATE_MISMATCH": 2,
+          "NOT_EXTRACTED": 54
+        }
+      },
+      "au_bank": {
+        "category_name": "au_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 202,
+        "total_matched": 0,
+        "total_missed": 0,
+        "total_extra": 11,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 202,
+          "EXTRA_ROW": 11
+        }
+      },
+      "axis_bank": {
+        "category_name": "axis_bank",
+        "file_count": 27,
+        "perfect_count": 0,
+        "total_gt": 7211,
+        "total_matched": 62,
+        "total_missed": 1959,
+        "total_extra": 191,
+        "accuracy": 0.008597975315490223,
+        "error_breakdown": {
+          "DESC_MISMATCH": 4987,
+          "EXTRA_ROW": 191,
+          "DATE_MISMATCH": 200,
+          "NOT_EXTRACTED": 1959,
+          "BALANCE_MISMATCH": 3
+        }
+      },
+      "bandhan_bank": {
+        "category_name": "bandhan_bank",
+        "file_count": 7,
+        "perfect_count": 0,
+        "total_gt": 334,
+        "total_matched": 0,
+        "total_missed": 226,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 86,
+          "NOT_EXTRACTED": 226,
+          "DEBIT_MISMATCH": 22
+        }
+      },
+      "bank_of_india": {
+        "category_name": "bank_of_india",
+        "file_count": 7,
+        "perfect_count": 0,
+        "total_gt": 1213,
+        "total_matched": 0,
+        "total_missed": 381,
+        "total_extra": 18,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 832,
+          "EXTRA_ROW": 18,
+          "NOT_EXTRACTED": 381
+        }
+      },
+      "bank_of_maharashtra": {
+        "category_name": "bank_of_maharashtra",
+        "file_count": 5,
+        "perfect_count": 0,
+        "total_gt": 742,
+        "total_matched": 0,
+        "total_missed": 28,
+        "total_extra": 14,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 489,
+          "EXTRA_ROW": 14,
+          "DATE_MISMATCH": 225,
+          "NOT_EXTRACTED": 28
+        }
+      },
+      "bhuj_commercial_cooperative_bank": {
+        "category_name": "bhuj_commercial_cooperative_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 295,
+        "total_matched": 0,
+        "total_missed": 295,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 295
+        }
+      },
+      "bupgb_bank": {
+        "category_name": "bupgb_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 26,
+        "total_matched": 0,
+        "total_missed": 24,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 2,
+          "NOT_EXTRACTED": 24
+        }
+      },
+      "canara_bank": {
+        "category_name": "canara_bank",
+        "file_count": 11,
+        "perfect_count": 0,
+        "total_gt": 896,
+        "total_matched": 0,
+        "total_missed": 896,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 896
+        }
+      },
+      "central_bank_of_india": {
+        "category_name": "central_bank_of_india",
+        "file_count": 4,
+        "perfect_count": 0,
+        "total_gt": 489,
+        "total_matched": 0,
+        "total_missed": 124,
+        "total_extra": 5,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 4,
+          "DESC_MISMATCH": 361,
+          "EXTRA_ROW": 5,
+          "NOT_EXTRACTED": 124
+        }
+      },
+      "city_union_bank": {
+        "category_name": "city_union_bank",
+        "file_count": 3,
+        "perfect_count": 0,
+        "total_gt": 545,
+        "total_matched": 229,
+        "total_missed": 38,
+        "total_extra": 0,
+        "accuracy": 0.42018348623853213,
+        "error_breakdown": {
+          "DATE_MISMATCH": 233,
+          "CREDIT_MISMATCH": 10,
+          "DEBIT_MISMATCH": 30,
+          "BALANCE_MISMATCH": 2,
+          "NOT_EXTRACTED": 38,
+          "REF_MISMATCH": 3
+        }
+      },
+      "corporation_bank": {
+        "category_name": "corporation_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 15,
+        "total_matched": 0,
+        "total_missed": 15,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 15
+        }
+      },
+      "dbs_bank": {
+        "category_name": "dbs_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 92,
+        "total_matched": 0,
+        "total_missed": 0,
+        "total_extra": 2,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 92,
+          "EXTRA_ROW": 2
+        }
+      },
+      "dcb_bank": {
+        "category_name": "dcb_bank",
+        "file_count": 3,
+        "perfect_count": 0,
+        "total_gt": 722,
+        "total_matched": 0,
+        "total_missed": 722,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 722
+        }
+      },
+      "equitas_bank": {
+        "category_name": "equitas_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 211,
+        "total_matched": 0,
+        "total_missed": 211,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 211
+        }
+      },
+      "federal_bank": {
+        "category_name": "federal_bank",
+        "file_count": 4,
+        "perfect_count": 0,
+        "total_gt": 1076,
+        "total_matched": 0,
+        "total_missed": 0,
+        "total_extra": 101,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 1076,
+          "EXTRA_ROW": 101
+        }
+      },
+      "fincare_bank": {
+        "category_name": "fincare_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 118,
+        "total_matched": 35,
+        "total_missed": 34,
+        "total_extra": 0,
+        "accuracy": 0.2966101694915254,
+        "error_breakdown": {
+          "DATE_MISMATCH": 41,
+          "REF_MISMATCH": 1,
+          "DEBIT_MISMATCH": 7,
+          "NOT_EXTRACTED": 34
+        }
+      },
+      "hdfc_bank": {
+        "category_name": "hdfc_bank",
+        "file_count": 2,
+        "perfect_count": 1,
+        "total_gt": 212,
+        "total_matched": 88,
+        "total_missed": 0,
+        "total_extra": 0,
+        "accuracy": 0.41509433962264153,
+        "error_breakdown": {
+          "CREDIT_MISMATCH": 5,
+          "DEBIT_MISMATCH": 119
+        }
+      },
+      "icici_bank": {
+        "category_name": "icici_bank",
+        "file_count": 4,
+        "perfect_count": 0,
+        "total_gt": 120,
+        "total_matched": 0,
+        "total_missed": 10,
+        "total_extra": 102,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 110,
+          "EXTRA_ROW": 102,
+          "NOT_EXTRACTED": 10
+        }
+      },
+      "idbi_bank": {
+        "category_name": "idbi_bank",
+        "file_count": 5,
+        "perfect_count": 0,
+        "total_gt": 1789,
+        "total_matched": 0,
+        "total_missed": 606,
+        "total_extra": 5,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 864,
+          "NOT_EXTRACTED": 606,
+          "DATE_MISMATCH": 319,
+          "EXTRA_ROW": 5
+        }
+      },
+      "idfc_bank": {
+        "category_name": "idfc_bank",
+        "file_count": 12,
+        "perfect_count": 0,
+        "total_gt": 3288,
+        "total_matched": 0,
+        "total_missed": 2970,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 2970,
+          "DATE_MISMATCH": 318
+        }
+      },
+      "indian_bank": {
+        "category_name": "indian_bank",
+        "file_count": 11,
+        "perfect_count": 0,
+        "total_gt": 2429,
+        "total_matched": 66,
+        "total_missed": 1655,
+        "total_extra": 2,
+        "accuracy": 0.027171675586661177,
+        "error_breakdown": {
+          "DATE_MISMATCH": 616,
+          "NOT_EXTRACTED": 1655,
+          "CREDIT_MISMATCH": 14,
+          "DEBIT_MISMATCH": 73,
+          "DESC_MISMATCH": 5,
+          "EXTRA_ROW": 2
+        }
+      },
+      "indian_overseas_bank": {
+        "category_name": "indian_overseas_bank",
+        "file_count": 10,
+        "perfect_count": 0,
+        "total_gt": 2178,
+        "total_matched": 0,
+        "total_missed": 0,
+        "total_extra": 19,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 2178,
+          "EXTRA_ROW": 19
+        }
+      },
+      "indian_post_payments_bank": {
+        "category_name": "indian_post_payments_bank",
+        "file_count": 5,
+        "perfect_count": 0,
+        "total_gt": 176,
+        "total_matched": 0,
+        "total_missed": 0,
+        "total_extra": 31,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 113,
+          "BALANCE_MISMATCH": 6,
+          "DEBIT_MISMATCH": 26,
+          "EXTRA_ROW": 31,
+          "DATE_MISMATCH": 31
+        }
+      },
+      "indusInd_bank": {
+        "category_name": "indusInd_bank",
+        "file_count": 3,
+        "perfect_count": 0,
+        "total_gt": 469,
+        "total_matched": 0,
+        "total_missed": 201,
+        "total_extra": 250,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DESC_MISMATCH": 268,
+          "EXTRA_ROW": 250,
+          "NOT_EXTRACTED": 201
+        }
+      },
+      "maharashtra_gramin_bank": {
+        "category_name": "maharashtra_gramin_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 23,
+        "total_matched": 0,
+        "total_missed": 22,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 1,
+          "NOT_EXTRACTED": 22
+        }
+      },
+      "nsdl_payments_bank": {
+        "category_name": "nsdl_payments_bank",
+        "file_count": 4,
+        "perfect_count": 0,
+        "total_gt": 1186,
+        "total_matched": 0,
+        "total_missed": 1081,
+        "total_extra": 3,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 99,
+          "DESC_MISMATCH": 6,
+          "NOT_EXTRACTED": 1081,
+          "EXTRA_ROW": 3
+        }
+      },
+      "omprakash_deora_peoples_cooperative_bank": {
+        "category_name": "omprakash_deora_peoples_cooperative_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 12,
+        "total_matched": 0,
+        "total_missed": 12,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 12
+        }
+      },
+      "pnb_bank": {
+        "category_name": "pnb_bank",
+        "file_count": 15,
+        "perfect_count": 0,
+        "total_gt": 1716,
+        "total_matched": 0,
+        "total_missed": 573,
+        "total_extra": 76,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 573,
+          "DESC_MISMATCH": 1032,
+          "DATE_MISMATCH": 21,
+          "EXTRA_ROW": 76,
+          "BALANCE_MISMATCH": 90
+        }
+      },
+      "punjab_and_sind_bank": {
+        "category_name": "punjab_and_sind_bank",
+        "file_count": 4,
+        "perfect_count": 0,
+        "total_gt": 646,
+        "total_matched": 0,
+        "total_missed": 646,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 646
+        }
+      },
+      "sbi_bank": {
+        "category_name": "sbi_bank",
+        "file_count": 29,
+        "perfect_count": 0,
+        "total_gt": 4363,
+        "total_matched": 36,
+        "total_missed": 2350,
+        "total_extra": 397,
+        "accuracy": 0.00825120330048132,
+        "error_breakdown": {
+          "DATE_MISMATCH": 1977,
+          "NOT_EXTRACTED": 2350,
+          "EXTRA_ROW": 397
+        }
+      },
+      "standard_chartered_bank": {
+        "category_name": "standard_chartered_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 13,
+        "total_matched": 0,
+        "total_missed": 13,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 13
+        }
+      },
+      "the_nasik_road_deolali_vyapari_sahakari_bank": {
+        "category_name": "the_nasik_road_deolali_vyapari_sahakari_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 98,
+        "total_matched": 0,
+        "total_missed": 98,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 98
+        }
+      },
+      "tjsb_sahakari_bank": {
+        "category_name": "tjsb_sahakari_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 38,
+        "total_matched": 0,
+        "total_missed": 38,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 38
+        }
+      },
+      "uco_bank": {
+        "category_name": "uco_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 28,
+        "total_matched": 0,
+        "total_missed": 0,
+        "total_extra": 2,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 28,
+          "EXTRA_ROW": 2
+        }
+      },
+      "ujjivan_small_finance_bank": {
+        "category_name": "ujjivan_small_finance_bank",
+        "file_count": 3,
+        "perfect_count": 0,
+        "total_gt": 972,
+        "total_matched": 457,
+        "total_missed": 11,
+        "total_extra": 22,
+        "accuracy": 0.47016460905349794,
+        "error_breakdown": {
+          "DATE_MISMATCH": 277,
+          "CREDIT_MISMATCH": 7,
+          "DESC_MISMATCH": 220,
+          "NOT_EXTRACTED": 11,
+          "EXTRA_ROW": 22
+        }
+      },
+      "union_bank": {
+        "category_name": "union_bank",
+        "file_count": 12,
+        "perfect_count": 0,
+        "total_gt": 1955,
+        "total_matched": 67,
+        "total_missed": 386,
+        "total_extra": 1,
+        "accuracy": 0.034271099744245526,
+        "error_breakdown": {
+          "DESC_MISMATCH": 1337,
+          "EXTRA_ROW": 1,
+          "NOT_EXTRACTED": 386,
+          "DATE_MISMATCH": 153,
+          "BALANCE_MISMATCH": 1,
+          "DEBIT_MISMATCH": 2,
+          "REF_MISMATCH": 7,
+          "CREDIT_MISMATCH": 2
+        }
+      },
+      "unknown_bank": {
+        "category_name": "unknown_bank",
+        "file_count": 1,
+        "perfect_count": 0,
+        "total_gt": 47,
+        "total_matched": 0,
+        "total_missed": 47,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 47
+        }
+      },
+      "yes_bank": {
+        "category_name": "yes_bank",
+        "file_count": 11,
+        "perfect_count": 0,
+        "total_gt": 877,
+        "total_matched": 0,
+        "total_missed": 729,
+        "total_extra": 25,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "NOT_EXTRACTED": 729,
+          "REF_MISMATCH": 24,
+          "DATE_MISMATCH": 124,
+          "EXTRA_ROW": 25
+        }
+      }
+    }
+  },
+  "files_with_errors": [
+    {
+      "file": "akola_janta_commercial_cooperative_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 815,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "andhra_bank_1.json",
+      "accuracy": 1.0,
+      "matched": 31,
+      "gt": 31,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "andhra_bank_2.json",
+      "accuracy": 0.9629629629629629,
+      "matched": 52,
+      "gt": 54,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "andhra_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 54,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "au_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 202,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "axis_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 114,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 715,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 476,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_12.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 519,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_13.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 74,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_14.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 485,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_15.json",
+      "accuracy": 0.9841269841269841,
+      "matched": 62,
+      "gt": 63,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "axis_bank_16.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 294,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_17.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 245,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_18.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 534,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_19.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "axis_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 50,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_20.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 243,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_21.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 118,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_22.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 416,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_23.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 18,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_24.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 313,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_25.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 80,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_26.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 336,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_27.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 265,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 253,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 187,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 323,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 536,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "axis_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "axis_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 341,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bandhan_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 7,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "bandhan_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 2,
+      "issue": "DEBIT_MISMATCH"
+    },
+    {
+      "file": "bandhan_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 10,
+      "issue": "DEBIT_MISMATCH"
+    },
+    {
+      "file": "bandhan_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "bandhan_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 132,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "bandhan_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 16,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "bandhan_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 96,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "bank_of_india_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 75,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_india_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 131,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_india_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 200,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_india_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 273,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_india_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_india_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 100,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_india_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 363,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "bank_of_maharashtra_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 189,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_maharashtra_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 120,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "bank_of_maharashtra_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 85,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_maharashtra_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 182,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "bank_of_maharashtra_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 166,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "bhuj_commercial_cooperative_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 295,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "bupgb_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 26,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 98,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 64,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 51,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 11,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 10,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 88,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 49,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 128,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 139,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "canara_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 187,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "central_bank_of_india_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 7,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "central_bank_of_india_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 358,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "central_bank_of_india_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 62,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "central_bank_of_india_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 62,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "city_union_bank_1.json",
+      "accuracy": 0.9333333333333333,
+      "matched": 14,
+      "gt": 15,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "city_union_bank_2.json",
+      "accuracy": 0.3409090909090909,
+      "matched": 135,
+      "gt": 396,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "city_union_bank_3.json",
+      "accuracy": 0.5970149253731343,
+      "matched": 80,
+      "gt": 134,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "corporation_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 15,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "dbs_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 92,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "dcb_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 135,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "dcb_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 560,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "dcb_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 27,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "equitas_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 211,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "federal_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 207,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "federal_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 207,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "federal_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 610,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "federal_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 52,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "fincare_bank_1.json",
+      "accuracy": 0.2966101694915254,
+      "matched": 35,
+      "gt": 118,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "hdfc_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 124,
+      "issue": "DEBIT_MISMATCH"
+    },
+    {
+      "file": "icici_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 42,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "icici_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 59,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "icici_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 13,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "icici_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 6,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idbi_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 38,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "idbi_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 1266,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "idbi_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 50,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "idbi_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 45,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "idbi_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 390,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "idfc_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 8,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 273,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 90,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_12.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 479,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 26,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 276,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 178,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "idfc_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 528,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 178,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "idfc_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 900,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 273,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "idfc_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 79,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 134,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "indian_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 262,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 30,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "indian_bank_2.json",
+      "accuracy": 0.9838709677419355,
+      "matched": 61,
+      "gt": 62,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 13,
+      "issue": "CREDIT_MISMATCH"
+    },
+    {
+      "file": "indian_bank_4.json",
+      "accuracy": 0.058823529411764705,
+      "matched": 5,
+      "gt": 85,
+      "issue": "DEBIT_MISMATCH"
+    },
+    {
+      "file": "indian_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 30,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 30,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 1491,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 250,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 42,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indian_overseas_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 18,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 263,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 165,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 356,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 35,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 168,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 493,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 117,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 226,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_overseas_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 337,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_post_payments_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 7,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "indian_post_payments_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 40,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_post_payments_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 27,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_post_payments_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 99,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indian_post_payments_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 3,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "indusInd_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 268,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "indusInd_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 122,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "indusInd_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 79,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "maharashtra_gramin_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 23,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "nsdl_payments_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 176,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "nsdl_payments_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 494,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "nsdl_payments_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 494,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "nsdl_payments_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 22,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "omprakash_deora_peoples_cooperative_bank.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 12,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 6,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 271,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 368,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_12.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 15,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_13.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 51,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_14.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 45,
+      "issue": "BALANCE_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_15.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 52,
+      "issue": "BALANCE_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 124,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 55,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 190,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 181,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 28,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 143,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "pnb_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 102,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "pnb_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 85,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "punjab_and_sind_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 65,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "punjab_and_sind_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 188,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "punjab_and_sind_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 119,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "punjab_and_sind_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 274,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 27,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 22,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_11.json",
+      "accuracy": 0.972972972972973,
+      "matched": 36,
+      "gt": 37,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_12.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 299,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "sbi_bank_13.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 47,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_14.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 149,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_15.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_16.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 40,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_17.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 101,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_18.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 299,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_19.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 613,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 217,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_20.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 78,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_21.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 73,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_22.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 172,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_23.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 158,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_24.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 253,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_25.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 223,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_26.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 74,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_27.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 10,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_28.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 6,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_29.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 32,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 83,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 54,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 103,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 299,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 299,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "sbi_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 225,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "sbi_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 299,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "standard_chartered_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 13,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "the_nasik_road_deolali_vyapari_sahakari_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 98,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "tjsb_sahakari_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 38,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "uco_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 28,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "ujjivan_small_finance_bank_1.json",
+      "accuracy": 0.3815789473684211,
+      "matched": 174,
+      "gt": 456,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "ujjivan_small_finance_bank_2.json",
+      "accuracy": 0.25523012552301255,
+      "matched": 61,
+      "gt": 239,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "ujjivan_small_finance_bank_3.json",
+      "accuracy": 0.8014440433212996,
+      "matched": 222,
+      "gt": 277,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "union_bank_1.json",
+      "accuracy": 0.08064516129032258,
+      "matched": 5,
+      "gt": 62,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "union_bank_10.json",
+      "accuracy": 0.9629629629629629,
+      "matched": 26,
+      "gt": 27,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "union_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 97,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "union_bank_12.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 57,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "union_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 13,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "union_bank_3.json",
+      "accuracy": 0.6,
+      "matched": 6,
+      "gt": 10,
+      "issue": "DEBIT_MISMATCH"
+    },
+    {
+      "file": "union_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 67,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "union_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 27,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "union_bank_6.json",
+      "accuracy": 0.0020768431983385254,
+      "matched": 2,
+      "gt": 963,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "union_bank_7.json",
+      "accuracy": 0.22340425531914893,
+      "matched": 21,
+      "gt": 94,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "union_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 71,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "union_bank_9.json",
+      "accuracy": 0.014989293361884369,
+      "matched": 7,
+      "gt": 467,
+      "issue": "DESC_MISMATCH"
+    },
+    {
+      "file": "unknown_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 47,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 168,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 41,
+      "issue": "REF_MISMATCH"
+    },
+    {
+      "file": "yes_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 66,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 20,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 2,
+      "issue": "EXTRA_ROW"
+    },
+    {
+      "file": "yes_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 2,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 176,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 122,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "yes_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 155,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 61,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 64,
+      "issue": "NOT_EXTRACTED"
+    }
+  ],
+  "comparison_to_previous": null
+}
