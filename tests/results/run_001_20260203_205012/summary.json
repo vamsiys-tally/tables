@@ -1,0 +1,122 @@
+{
+  "run_id": "run_001_20260203_205012",
+  "timestamp": "2026-02-03T20:50:12.020525",
+  "git_commit": "07ef736",
+  "duration_seconds": 151.935908,
+  "notes": "",
+  "metrics": {
+    "files": {
+      "total": 11,
+      "perfect": 0,
+      "with_errors": 11
+    },
+    "transactions": {
+      "ground_truth": 877,
+      "extracted": 87,
+      "matched": 0,
+      "missed": 790,
+      "extra": 0,
+      "accuracy": 0.0
+    },
+    "error_breakdown": {
+      "DATE_MISMATCH": 87,
+      "NOT_EXTRACTED": 790
+    },
+    "by_bank": {
+      "yes_bank": {
+        "category_name": "yes_bank",
+        "file_count": 11,
+        "perfect_count": 0,
+        "total_gt": 877,
+        "total_matched": 0,
+        "total_missed": 790,
+        "total_extra": 0,
+        "accuracy": 0.0,
+        "error_breakdown": {
+          "DATE_MISMATCH": 87,
+          "NOT_EXTRACTED": 790
+        }
+      }
+    }
+  },
+  "files_with_errors": [
+    {
+      "file": "yes_bank_1.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 168,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_10.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 41,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_11.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 66,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "yes_bank_2.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 20,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_3.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 2,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "yes_bank_4.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 2,
+      "issue": "DATE_MISMATCH"
+    },
+    {
+      "file": "yes_bank_5.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 176,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_6.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 122,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_7.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 155,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_8.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 61,
+      "issue": "NOT_EXTRACTED"
+    },
+    {
+      "file": "yes_bank_9.json",
+      "accuracy": 0.0,
+      "matched": 0,
+      "gt": 64,
+      "issue": "NOT_EXTRACTED"
+    }
+  ],
+  "comparison_to_previous": null
+}

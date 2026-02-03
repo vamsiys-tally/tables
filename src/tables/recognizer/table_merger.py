@@ -230,8 +230,8 @@ class TableMerger:
                 continue
 
             # Get page dimensions for boundary detection
-            page_dims = pdf_document.get_page_dimensions(page_number)
-            page_height = page_dims[1] if page_dims else 800.0
+            page_info = pdf_document.get_page_info(page_number)
+            page_height = page_info.height if page_info else 800.0
 
             # Calculate boundary info
             boundary_info = PageBoundaryInfo(

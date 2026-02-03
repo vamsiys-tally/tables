@@ -399,10 +399,14 @@ class TableDetector:
         page_number: int,
     ) -> list[TableRegion]:
         """
-        Detect potential table regions using text clustering.
+        Detect potential table regions using header-first detection.
 
-        Tables are identified by regular vertical spacing and
-        column-like horizontal alignment.
+        Strategy:
+            1. Group all text blocks into rows
+            2. Sort rows by y-coordinate (top to bottom)
+            3. Find rows that look like table headers (using keyword matching)
+            4. For each header row, build a table region from header down
+            5. Include all subsequent rows until a clear non-table row is found
 
         Args:
             text_blocks: Text blocks on the page
@@ -421,7 +425,118 @@ class TableDetector:
         if len(row_clusters) < self.min_table_rows:
             return []
 
-        # Find regions with consistent column structure
+        # Sort rows by y-coordinate (top to bottom)
+        row_clusters_sorted = sorted(row_clusters, key=lambda c: min(b.y0 for b in c))
+
+        # Build text rows (text blocks per row) - sorted by y
+        text_rows: list[list[TextBlock]] = []
+        for cluster in row_clusters_sorted:
+            row_blocks: list[TextBlock] = []
+            for block in text_blocks:
+                if any(block.bbox.is_horizontally_aligned(box, tolerance=5.0) for box in cluster):
+                    if block not in row_blocks:
+                        row_blocks.append(block)
+            row_blocks.sort(key=lambda b: b.bbox.x0)
+            text_rows.append(row_blocks)
+
+        # Find header rows
+        regions: list[TableRegion] = []
+        used_rows: set[int] = set()
+
+        for row_idx, text_row in enumerate(text_rows):
+            if row_idx in used_rows:
+                continue
+
+            # Check if this row is a potential header row
+            row_texts = [block.text for block in text_row]
+            if len(row_texts) < 3:  # Headers typically have at least 3 columns
+                continue
+
+            from tables.detector.keywords import is_likely_header_row
+            if not is_likely_header_row(row_texts, min_matches=2):
+                continue
+
+            # Found a header row! Build table region from here
+            logger.debug(f"Found potential header row at index {row_idx}: {row_texts}")
+
+            # Collect rows for this table
+            table_row_clusters: list[list[BoundingBox]] = [row_clusters_sorted[row_idx]]
+            table_text_blocks: list[TextBlock] = list(text_row)
+            used_rows.add(row_idx)
+
+            # Get expected column count from header
+            expected_cols = len(text_row)
+            consecutive_non_table_rows = 0
+            max_consecutive_non_table = 2  # Allow up to 2 non-table rows before stopping
+
+            # Include subsequent rows that look like data rows
+            for data_idx in range(row_idx + 1, len(text_rows)):
+                if data_idx in used_rows:
+                    continue
+
+                data_row = text_rows[data_idx]
+                data_cluster = row_clusters_sorted[data_idx]
+
+                # Check if this row could be a data row
+                col_count = len(data_row)
+
+                # Data row criteria:
+                # 1. Has similar column count (within range of header ±3)
+                # 2. OR has at least 2 columns
+                is_data_like = (
+                    abs(col_count - expected_cols) <= 3 or
+                    (col_count >= 2 and col_count <= expected_cols + 2)
+                )
+
+                if is_data_like:
+                    table_row_clusters.append(data_cluster)
+                    for block in data_row:
+                        if block not in table_text_blocks:
+                            table_text_blocks.append(block)
+                    used_rows.add(data_idx)
+                    consecutive_non_table_rows = 0
+                else:
+                    consecutive_non_table_rows += 1
+                    if consecutive_non_table_rows >= max_consecutive_non_table:
+                        break
+
+            # Create region if we have enough rows
+            if len(table_row_clusters) >= self.min_table_rows:
+                region = self._create_region_from_rows(
+                    table_row_clusters,
+                    table_text_blocks,
+                    page_number,
+                )
+                if region:
+                    regions.append(region)
+
+        # If no header-based regions found, fall back to column-count method
+        if not regions:
+            regions = self._detect_regions_by_column_count(
+                text_blocks, row_clusters_sorted, page_number
+            )
+
+        return regions
+
+    def _detect_regions_by_column_count(
+        self,
+        text_blocks: list[TextBlock],
+        row_clusters: list[list[BoundingBox]],
+        page_number: int,
+    ) -> list[TableRegion]:
+        """
+        Fallback method: detect regions by consistent column count.
+
+        Used when header-based detection doesn't find any tables.
+
+        Args:
+            text_blocks: Text blocks on the page
+            row_clusters: Rows sorted by y-coordinate
+            page_number: Page number
+
+        Returns:
+            List of TableRegion objects
+        """
         regions: list[TableRegion] = []
         current_region_rows: list[list[BoundingBox]] = []
         current_region_blocks: list[TextBlock] = []
@@ -531,6 +646,9 @@ class TableDetector:
             # Sort by x-coordinate (left to right)
             row_blocks.sort(key=lambda b: b.bbox.x0)
             rows.append(row_blocks)
+
+        # Sort rows by y-coordinate (top to bottom) so header rows come first
+        rows.sort(key=lambda row: min(b.bbox.y0 for b in row) if row else 0)
 
         return rows
 
