@@ -59,6 +59,103 @@ DEFAULT_SLM_MODEL = "all-MiniLM-L6-v2"
 
 
 # =============================================================================
+# SLM Model Cache (Module-level singleton)
+# =============================================================================
+
+class _SLMModelCache:
+    """
+    Module-level cache for SLM model to avoid reloading per file.
+
+    The model is loaded once and shared across all HeaderDetector instances.
+    This significantly improves performance when processing multiple files.
+    """
+
+    _instance = None
+    _model = None
+    _header_embeddings: Optional[dict[str, Any]] = None
+    _model_name: str = DEFAULT_SLM_MODEL
+    _initialized: bool = False
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def get_model(self) -> Optional[Any]:
+        """Get the cached SLM model, loading if necessary."""
+        if self._model is None and not self._initialized:
+            self._load_model()
+        return self._model
+
+    def get_embeddings(self) -> Optional[dict[str, Any]]:
+        """Get the precomputed header embeddings."""
+        if self._header_embeddings is None and self._model is not None:
+            self._precompute_embeddings()
+        return self._header_embeddings
+
+    def _load_model(self) -> None:
+        """Load the SLM model once."""
+        self._initialized = True
+        try:
+            from sentence_transformers import SentenceTransformer
+            logger.info(f"Loading SLM model: {self._model_name} (cached)")
+            self._model = SentenceTransformer(self._model_name)
+            self._precompute_embeddings()
+        except ImportError:
+            logger.warning(
+                "sentence-transformers not installed. SLM fallback disabled."
+            )
+            self._model = None
+        except Exception as e:
+            logger.warning(f"Failed to load SLM model: {e}. SLM fallback disabled.")
+            self._model = None
+
+    def _precompute_embeddings(self) -> None:
+        """Precompute embeddings for all known header keywords."""
+        if self._model is None:
+            return
+
+        import numpy as np
+
+        self._header_embeddings = {}
+
+        for semantic_type, keywords in HEADER_KEYWORDS.items():
+            embeddings = self._model.encode(keywords, convert_to_numpy=True)
+            self._header_embeddings[semantic_type] = {
+                "keywords": keywords,
+                "embeddings": embeddings,
+                "mean_embedding": np.mean(embeddings, axis=0),
+            }
+
+        logger.info(
+            f"Precomputed embeddings for {len(self._header_embeddings)} semantic types"
+        )
+
+    def is_available(self) -> bool:
+        """Check if SLM model is available."""
+        return self.get_model() is not None
+
+
+# Global cache instance
+_slm_cache = _SLMModelCache()
+
+
+def get_slm_model() -> Optional[Any]:
+    """Get the cached SLM model."""
+    return _slm_cache.get_model()
+
+
+def get_header_embeddings() -> Optional[dict[str, Any]]:
+    """Get the cached header embeddings."""
+    return _slm_cache.get_embeddings()
+
+
+def is_slm_available() -> bool:
+    """Check if SLM model is available."""
+    return _slm_cache.is_available()
+
+
+# =============================================================================
 # Data Structures
 # =============================================================================
 
@@ -265,53 +362,21 @@ class HeaderDetector:
         self.slm_threshold = slm_threshold
         self.use_slm = use_slm
         self.min_matches_for_header = min_matches_for_header
-        self._slm_model = None
-        self._header_embeddings: Optional[dict[str, Any]] = None
 
     @property
     def slm_model(self):
-        """Lazy-load the SLM model."""
-        if self._slm_model is None and self.use_slm:
-            try:
-                from sentence_transformers import SentenceTransformer
-                logger.info(f"Loading SLM model: {DEFAULT_SLM_MODEL}")
-                self._slm_model = SentenceTransformer(DEFAULT_SLM_MODEL)
-                self._precompute_header_embeddings()
-            except ImportError:
-                logger.warning(
-                    "sentence-transformers not installed. SLM fallback disabled."
-                )
-                self.use_slm = False
-            except Exception as e:
-                logger.warning(f"Failed to load SLM model: {e}. SLM fallback disabled.")
-                self.use_slm = False
-        return self._slm_model
+        """Get the cached SLM model."""
+        if not self.use_slm:
+            return None
+        model = get_slm_model()
+        if model is None:
+            self.use_slm = False
+        return model
 
-    def _precompute_header_embeddings(self) -> None:
-        """
-        Precompute embeddings for all known header keywords.
-
-        This is done once when the model is loaded to speed up
-        subsequent similarity comparisons.
-        """
-        if self._slm_model is None:
-            return
-
-        import numpy as np
-
-        self._header_embeddings = {}
-
-        for semantic_type, keywords in HEADER_KEYWORDS.items():
-            # Embed all keywords for this type
-            embeddings = self._slm_model.encode(keywords, convert_to_numpy=True)
-            # Store mean embedding as representative
-            self._header_embeddings[semantic_type] = {
-                "keywords": keywords,
-                "embeddings": embeddings,
-                "mean_embedding": np.mean(embeddings, axis=0),
-            }
-
-        logger.info(f"Precomputed embeddings for {len(self._header_embeddings)} semantic types")
+    @property
+    def _header_embeddings(self) -> Optional[dict[str, Any]]:
+        """Get the cached header embeddings."""
+        return get_header_embeddings()
 
     def detect_headers(self, texts: list[str]) -> list[HeaderMatch]:
         """
@@ -558,7 +623,7 @@ class HeaderDetector:
             from numpy.linalg import norm
 
             # Encode the input text
-            text_embedding = self._slm_model.encode([text], convert_to_numpy=True)[0]
+            text_embedding = self.slm_model.encode([text], convert_to_numpy=True)[0]
 
             best_type: Optional[str] = None
             best_similarity = 0.0
