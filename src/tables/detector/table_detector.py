@@ -567,7 +567,8 @@ class TableDetector:
         Detect column boundaries and create column definitions.
 
         Uses header information and text alignment to determine
-        column boundaries.
+        column boundaries. For unbordered tables, uses whitespace
+        gap detection for more accurate column separation.
 
         Args:
             region: Table region
@@ -588,7 +589,42 @@ class TableDetector:
         else:
             return []
 
-        # Calculate column boundaries
+        # For unbordered tables, use whitespace gap detection
+        is_unbordered = (
+            region.structure and
+            region.structure.structure_type == StructureType.UNBORDERED
+        )
+
+        if is_unbordered:
+            return self._detect_columns_by_gaps(
+                region, header_rows, header_blocks, primary_header
+            )
+
+        # Standard approach for bordered/semi-bordered tables
+        return self._detect_columns_by_alignment(
+            region, header_blocks, primary_header
+        )
+
+    def _detect_columns_by_alignment(
+        self,
+        region: TableRegion,
+        header_blocks: list[TextBlock],
+        primary_header: HeaderRow,
+    ) -> list[ColumnDefinition]:
+        """
+        Detect columns using text block alignment.
+
+        Standard approach for bordered and semi-bordered tables
+        where text alignment is reliable.
+
+        Args:
+            region: Table region
+            header_blocks: Text blocks from header row
+            primary_header: Header row detection result
+
+        Returns:
+            List of ColumnDefinition objects
+        """
         columns: list[ColumnDefinition] = []
 
         for i, (block, match) in enumerate(zip(header_blocks, primary_header.matches)):
@@ -606,28 +642,204 @@ class TableDetector:
                         x0 = min(x0, data_block.bbox.x0 - 2)
                         x1 = max(x1, data_block.bbox.x1 + 2)
 
-            # Create column definition
-            data_type = DataType.UNKNOWN
-            if match.semantic_type == "date":
-                data_type = DataType.DATE
-            elif match.semantic_type in ("debit", "credit", "balance", "amount"):
-                data_type = DataType.NUMERIC
-            elif match.semantic_type in ("description", "reference"):
-                data_type = DataType.TEXT
-
-            column = ColumnDefinition(
-                column_id=i,
-                x0=x0,
-                x1=x1,
-                header_text=match.text,
-                semantic_type=match.semantic_type,
-                data_type=data_type,
-                confidence=match.confidence,
-                source_header_row=primary_header.row_index,
+            column = self._create_column_definition(
+                i, x0, x1, match, primary_header.row_index
             )
             columns.append(column)
 
         return columns
+
+    def _detect_columns_by_gaps(
+        self,
+        region: TableRegion,
+        header_rows: list[HeaderRow],
+        header_blocks: list[TextBlock],
+        primary_header: HeaderRow,
+    ) -> list[ColumnDefinition]:
+        """
+        Detect columns using whitespace gap detection.
+
+        For unbordered tables where text alignment alone may not
+        be sufficient. Uses gaps between text blocks to identify
+        column boundaries.
+
+        Args:
+            region: Table region
+            header_rows: All detected header rows
+            header_blocks: Text blocks from header row
+            primary_header: Primary header row result
+
+        Returns:
+            List of ColumnDefinition objects
+        """
+        # Collect all x-coordinates from all text blocks (excluding headers)
+        data_rows = region.rows[primary_header.row_index + 1:]
+        if not data_rows:
+            # Fall back to alignment-based detection
+            return self._detect_columns_by_alignment(
+                region, header_blocks, primary_header
+            )
+
+        # Get all text block boundaries
+        all_x_positions: list[tuple[float, float]] = []  # (x0, x1) for each block
+
+        for row in data_rows:
+            for block in row:
+                all_x_positions.append((block.bbox.x0, block.bbox.x1))
+
+        # Add header positions too
+        for block in header_blocks:
+            all_x_positions.append((block.bbox.x0, block.bbox.x1))
+
+        if not all_x_positions:
+            return self._detect_columns_by_alignment(
+                region, header_blocks, primary_header
+            )
+
+        # Find column boundaries using gap detection
+        column_boundaries = self._find_column_boundaries_from_gaps(
+            all_x_positions, region.bounds
+        )
+
+        if len(column_boundaries) < len(header_blocks):
+            # If gap detection doesn't match headers, fall back
+            return self._detect_columns_by_alignment(
+                region, header_blocks, primary_header
+            )
+
+        # Map headers to column boundaries
+        columns: list[ColumnDefinition] = []
+
+        for i, (block, match) in enumerate(zip(header_blocks, primary_header.matches)):
+            # Find which column boundary this header belongs to
+            header_center = block.center_x
+            best_col_idx = 0
+            best_distance = float('inf')
+
+            for col_idx, (x0, x1) in enumerate(column_boundaries):
+                col_center = (x0 + x1) / 2
+                distance = abs(header_center - col_center)
+                if distance < best_distance:
+                    best_distance = distance
+                    best_col_idx = col_idx
+
+            if best_col_idx < len(column_boundaries):
+                x0, x1 = column_boundaries[best_col_idx]
+            else:
+                x0, x1 = block.bbox.x0 - 5, block.bbox.x1 + 5
+
+            column = self._create_column_definition(
+                i, x0, x1, match, primary_header.row_index
+            )
+            columns.append(column)
+
+        return columns
+
+    def _find_column_boundaries_from_gaps(
+        self,
+        x_positions: list[tuple[float, float]],
+        region_bounds: BoundingBox,
+    ) -> list[tuple[float, float]]:
+        """
+        Find column boundaries by detecting whitespace gaps.
+
+        Analyzes the x-coordinate distribution of text blocks
+        to find gaps that indicate column separations.
+
+        Args:
+            x_positions: List of (x0, x1) tuples for all text blocks
+            region_bounds: Bounds of the table region
+
+        Returns:
+            List of (x0, x1) tuples for each detected column
+        """
+        if not x_positions:
+            return []
+
+        # Sort by x0
+        sorted_positions = sorted(x_positions, key=lambda p: p[0])
+
+        # Find gaps between text blocks
+        # A gap is where the right edge of one block is far from the left edge of the next
+        min_gap_size = MIN_COLUMN_WIDTH * 0.5  # At least half column width gap
+
+        # Build a list of all "coverage" ranges
+        coverage_ranges: list[tuple[float, float]] = []
+        current_start = sorted_positions[0][0]
+        current_end = sorted_positions[0][1]
+
+        for x0, x1 in sorted_positions[1:]:
+            if x0 <= current_end + min_gap_size:
+                # Overlaps or close - extend current range
+                current_end = max(current_end, x1)
+            else:
+                # Gap found - save current range and start new
+                coverage_ranges.append((current_start, current_end))
+                current_start = x0
+                current_end = x1
+
+        # Don't forget the last range
+        coverage_ranges.append((current_start, current_end))
+
+        # Convert coverage ranges to column boundaries
+        # Expand slightly for tolerance
+        column_boundaries: list[tuple[float, float]] = []
+        for i, (start, end) in enumerate(coverage_ranges):
+            # Use midpoint between columns as boundary
+            x0 = start - 2
+            if i > 0:
+                prev_end = coverage_ranges[i - 1][1]
+                x0 = (prev_end + start) / 2
+
+            x1 = end + 2
+            if i < len(coverage_ranges) - 1:
+                next_start = coverage_ranges[i + 1][0]
+                x1 = (end + next_start) / 2
+
+            column_boundaries.append((x0, x1))
+
+        return column_boundaries
+
+    def _create_column_definition(
+        self,
+        column_id: int,
+        x0: float,
+        x1: float,
+        match: Any,  # HeaderMatch
+        header_row_index: int,
+    ) -> ColumnDefinition:
+        """
+        Create a ColumnDefinition from header match and boundaries.
+
+        Args:
+            column_id: Column index
+            x0: Left boundary
+            x1: Right boundary
+            match: HeaderMatch object
+            header_row_index: Source header row index
+
+        Returns:
+            ColumnDefinition object
+        """
+        # Determine data type from semantic type
+        data_type = DataType.UNKNOWN
+        if match.semantic_type == "date":
+            data_type = DataType.DATE
+        elif match.semantic_type in ("debit", "credit", "balance", "amount"):
+            data_type = DataType.NUMERIC
+        elif match.semantic_type in ("description", "reference"):
+            data_type = DataType.TEXT
+
+        return ColumnDefinition(
+            column_id=column_id,
+            x0=x0,
+            x1=x1,
+            header_text=match.text,
+            semantic_type=match.semantic_type,
+            data_type=data_type,
+            confidence=match.confidence,
+            source_header_row=header_row_index,
+        )
 
     def _get_lines_in_region(
         self,
