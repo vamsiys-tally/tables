@@ -212,6 +212,8 @@ HEADER_KEYWORDS = {
 | Header spans multiple rows | Multi-row header detection | Combine header rows |
 | No clear headers | Header detection failure | Use column position heuristics |
 | Watermarks/logos in table area | Image vs text differentiation | Filter non-text elements |
+| **Watermarks (text-based)** | Diagonal text, repeated patterns, low opacity | Filter by: rotation angle, repetition across page, opacity < threshold, non-standard fonts |
+| **Text touching/crossing borders** | Text bleeds into adjacent cells | Use fuzzy column boundaries with tolerance; assign based on max x-overlap |
 | Footer rows (totals) | Position + keyword detection | Mark as footer, not transaction |
 
 ### 2.4 Flow
@@ -346,6 +348,9 @@ def should_merge_with_previous(current_row, previous_row):
 | Date format variations | Multiple date formats in same doc | Multi-format date parser |
 | Currency symbols mixed in amounts | Symbol detection | Strip and normalize |
 | Thousands separators (Indian: 1,00,000) | Indian number format | Locale-aware parsing |
+| **Text over/touching borders** | Text bleeds beyond cell boundaries | Fuzzy cell assignment with tolerance; assign to column with max x-overlap |
+| **Entirely empty cells** | Column exists but cell has no text | Insert null placeholder; preserve column count from header structure |
+| **Watermarks in document** | Diagonal/repeated text interfering with detection | Filter by: position (diagonal), low opacity, repeated patterns, non-table fonts |
 
 ### 3.4 Flow
 
