@@ -48,6 +48,11 @@ from tables.detector.table_detector import (
     TableDetector,
     detect_tables,
 )
+from tables.detector.watermark_filter import (
+    WatermarkFilter,
+    filter_watermarks,
+    is_likely_watermark,
+)
 
 __all__ = [
     # Keywords
@@ -61,6 +66,10 @@ __all__ = [
     # Header detection
     "HeaderDetector",
     "HeaderMatch",
+    # Watermark filtering
+    "WatermarkFilter",
+    "filter_watermarks",
+    "is_likely_watermark",
     # Main detection
     "TableDetector",
     "detect_tables",

@@ -67,6 +67,10 @@ from tables.detector.keywords import (
     HEADER_KEYWORDS,
     normalize_header_text,
 )
+from tables.detector.watermark_filter import (
+    WatermarkFilter,
+    filter_watermarks,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -167,7 +171,9 @@ class TableDetector:
     Attributes:
         structure_classifier: Classifier for table visual structure
         header_detector: Detector for table headers
+        watermark_filter: Filter for removing watermark text
         use_slm: Whether to enable SLM-based header detection
+        filter_watermarks: Whether to filter watermark text
         min_table_rows: Minimum rows for a valid table
 
     Example:
@@ -180,6 +186,7 @@ class TableDetector:
         self,
         use_slm: bool = True,
         min_table_rows: int = MIN_TABLE_ROWS,
+        filter_watermarks: bool = True,
     ):
         """
         Initialize the table detector.
@@ -187,10 +194,13 @@ class TableDetector:
         Args:
             use_slm: Enable SLM-based header detection fallback
             min_table_rows: Minimum rows to consider a valid table
+            filter_watermarks: Enable watermark text filtering
         """
         self.structure_classifier = StructureClassifier()
         self.header_detector = HeaderDetector(use_slm=use_slm)
+        self.watermark_filter = WatermarkFilter() if filter_watermarks else None
         self.use_slm = use_slm
+        self.filter_watermarks = filter_watermarks
         self.min_table_rows = min_table_rows
 
     def detect(
@@ -338,6 +348,9 @@ class TableDetector:
         """
         Extract text blocks with positions from a page.
 
+        Optionally filters watermark text to avoid interference
+        with table detection.
+
         Args:
             pdf_document: PDFDocument instance
             page_number: Page number
@@ -350,6 +363,16 @@ class TableDetector:
         try:
             # Get words with positions from pdfplumber
             words = pdf_document.get_page_words(page_number)
+
+            # Apply watermark filtering if enabled
+            if self.watermark_filter and words:
+                result = self.watermark_filter.filter_words(words)
+                if result.removal_count > 0:
+                    logger.debug(
+                        f"Page {page_number}: Filtered {result.removal_count} "
+                        f"watermark words"
+                    )
+                words = result.filtered_words
 
             for word in words:
                 text = word.get("text", "").strip()
@@ -913,6 +936,7 @@ def detect_tables(
     pdf_document: Any,
     pages: Optional[list[int]] = None,
     use_slm: bool = True,
+    filter_watermarks: bool = True,
 ) -> TableDetectionResult:
     """
     Convenience function to detect tables in a PDF document.
@@ -921,6 +945,7 @@ def detect_tables(
         pdf_document: PDFDocument instance
         pages: Optional list of page numbers to process
         use_slm: Enable SLM-based header detection
+        filter_watermarks: Enable watermark text filtering
 
     Returns:
         TableDetectionResult with detected tables
@@ -931,5 +956,5 @@ def detect_tables(
         >>> result = detect_tables(pdf)
         >>> print(f"Found {result.table_count} tables")
     """
-    detector = TableDetector(use_slm=use_slm)
+    detector = TableDetector(use_slm=use_slm, filter_watermarks=filter_watermarks)
     return detector.detect(pdf_document, pages=pages)
