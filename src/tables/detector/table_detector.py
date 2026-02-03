@@ -514,8 +514,9 @@ class TableDetector:
                 if region:
                     regions.append(region)
 
-        # If no header-based regions found, fall back to column-count method
-        if not regions:
+        # If no header-based regions found on page 0, try fallback
+        # For subsequent pages, skip fallback - they'll be handled as continuations
+        if not regions and page_number == 0:
             regions = self._detect_regions_by_column_count(
                 text_blocks, row_clusters_sorted, page_number
             )
@@ -688,9 +689,10 @@ class TableDetector:
         """
         Detect column boundaries and create column definitions.
 
-        Uses header information and text alignment to determine
-        column boundaries. For unbordered tables, uses whitespace
-        gap detection for more accurate column separation.
+        Uses gap-based column boundary detection from data rows,
+        then assigns header blocks to those columns. This properly
+        handles multi-word headers like "Transaction Date" that
+        appear as separate text blocks but belong to one column.
 
         Args:
             region: Table region
@@ -711,20 +713,10 @@ class TableDetector:
         else:
             return []
 
-        # For unbordered tables, use whitespace gap detection
-        is_unbordered = (
-            region.structure and
-            region.structure.structure_type == StructureType.UNBORDERED
-        )
-
-        if is_unbordered:
-            return self._detect_columns_by_gaps(
-                region, header_rows, header_blocks, primary_header
-            )
-
-        # Standard approach for bordered/semi-bordered tables
-        return self._detect_columns_by_alignment(
-            region, header_blocks, primary_header
+        # Always use gap-based detection to properly merge multi-word headers
+        # This handles cases like "Transaction Date" appearing as two words
+        return self._detect_columns_by_gaps(
+            region, header_rows, header_blocks, primary_header
         )
 
     def _detect_columns_by_alignment(
@@ -781,9 +773,10 @@ class TableDetector:
         """
         Detect columns using whitespace gap detection.
 
-        For unbordered tables where text alignment alone may not
-        be sufficient. Uses gaps between text blocks to identify
-        column boundaries.
+        Uses gaps in both header row and data rows to identify
+        column boundaries. This properly handles multi-word headers
+        like "Transaction Date" while keeping separate columns like
+        "Transaction Date" and "Value Date" apart.
 
         Args:
             region: Table region
@@ -794,61 +787,278 @@ class TableDetector:
         Returns:
             List of ColumnDefinition objects
         """
-        # Collect all x-coordinates from all text blocks (excluding headers)
-        data_rows = region.rows[primary_header.row_index + 1:]
-        if not data_rows:
-            # Fall back to alignment-based detection
-            return self._detect_columns_by_alignment(
-                region, header_blocks, primary_header
+        # First, find gaps in the header row itself
+        # This is crucial for separating columns like "Transaction Date" | "Value Date"
+        header_gaps = self._find_header_gaps(header_blocks)
+
+        # If header has clear gaps, use those as primary column separators
+        if len(header_gaps) >= 1:
+            return self._detect_columns_from_header_gaps(
+                header_blocks, header_gaps, primary_header
             )
 
-        # Get all text block boundaries
-        all_x_positions: list[tuple[float, float]] = []  # (x0, x1) for each block
+        # Fallback: use data row patterns for column boundaries
+        data_rows = region.rows[primary_header.row_index + 1:]
+        if not data_rows:
+            # No data rows - create one column per header block
+            return self._create_columns_from_header_blocks(
+                header_blocks, primary_header
+            )
+
+        # Get all text block boundaries from data rows
+        all_x_positions: list[tuple[float, float]] = []
 
         for row in data_rows:
             for block in row:
                 all_x_positions.append((block.bbox.x0, block.bbox.x1))
 
-        # Add header positions too
-        for block in header_blocks:
-            all_x_positions.append((block.bbox.x0, block.bbox.x1))
-
         if not all_x_positions:
-            return self._detect_columns_by_alignment(
-                region, header_blocks, primary_header
+            return self._create_columns_from_header_blocks(
+                header_blocks, primary_header
             )
 
-        # Find column boundaries using gap detection
+        # Find column boundaries using gap detection on data rows
         column_boundaries = self._find_column_boundaries_from_gaps(
             all_x_positions, region.bounds
         )
 
-        if len(column_boundaries) < len(header_blocks):
-            # If gap detection doesn't match headers, fall back
-            return self._detect_columns_by_alignment(
-                region, header_blocks, primary_header
-            )
+        # Group header blocks by which column boundary they belong to
+        column_to_headers: dict[int, list[tuple[TextBlock, Any]]] = {}
 
-        # Map headers to column boundaries
-        columns: list[ColumnDefinition] = []
-
-        for i, (block, match) in enumerate(zip(header_blocks, primary_header.matches)):
-            # Find which column boundary this header belongs to
+        for block, match in zip(header_blocks, primary_header.matches):
             header_center = block.center_x
             best_col_idx = 0
             best_distance = float('inf')
 
             for col_idx, (x0, x1) in enumerate(column_boundaries):
+                if x0 <= header_center <= x1:
+                    best_col_idx = col_idx
+                    best_distance = 0
+                    break
                 col_center = (x0 + x1) / 2
                 distance = abs(header_center - col_center)
                 if distance < best_distance:
                     best_distance = distance
                     best_col_idx = col_idx
 
-            if best_col_idx < len(column_boundaries):
-                x0, x1 = column_boundaries[best_col_idx]
-            else:
-                x0, x1 = block.bbox.x0 - 5, block.bbox.x1 + 5
+            if best_col_idx not in column_to_headers:
+                column_to_headers[best_col_idx] = []
+            column_to_headers[best_col_idx].append((block, match))
+
+        # Create columns, merging header texts within same boundary
+        columns: list[ColumnDefinition] = []
+
+        for col_idx in sorted(column_to_headers.keys()):
+            headers_in_col = column_to_headers[col_idx]
+            x0, x1 = column_boundaries[col_idx]
+
+            headers_in_col.sort(key=lambda h: h[0].bbox.x0)
+            merged_text = " ".join(h[0].text for h in headers_in_col)
+
+            best_match = headers_in_col[0][1]
+            for _, match in headers_in_col:
+                if match.confidence > best_match.confidence:
+                    best_match = match
+                if match.semantic_type and not best_match.semantic_type:
+                    best_match = match
+
+            from tables.detector.header_detector import HeaderMatch
+            merged_match = HeaderMatch(
+                text=merged_text,
+                normalized_text=merged_text.lower(),
+                semantic_type=best_match.semantic_type,
+                confidence=best_match.confidence,
+                match_method=best_match.match_method,
+                column_index=col_idx,
+            )
+
+            column = self._create_column_definition(
+                col_idx, x0, x1, merged_match, primary_header.row_index
+            )
+            columns.append(column)
+
+        return columns
+
+    def _find_header_gaps(
+        self,
+        header_blocks: list[TextBlock],
+    ) -> list[float]:
+        """
+        Find significant gaps between header blocks.
+
+        A gap is considered significant if it's larger than the typical
+        spacing between words within a multi-word header.
+
+        Args:
+            header_blocks: Text blocks from header row (sorted by x)
+
+        Returns:
+            List of x-positions where column separations occur
+        """
+        if len(header_blocks) < 2:
+            return []
+
+        # Calculate gaps between consecutive header blocks
+        gaps: list[tuple[float, float]] = []  # (gap_size, gap_position)
+
+        for i in range(len(header_blocks) - 1):
+            current_block = header_blocks[i]
+            next_block = header_blocks[i + 1]
+
+            gap_start = current_block.bbox.x1
+            gap_end = next_block.bbox.x0
+            gap_size = gap_end - gap_start
+
+            if gap_size > 0:
+                gap_position = (gap_start + gap_end) / 2
+                gaps.append((gap_size, gap_position))
+
+        if not gaps:
+            return []
+
+        # Find the minimum gap (baseline word spacing within headers)
+        gap_sizes = [g[0] for g in gaps]
+        min_gap = min(gap_sizes)
+
+        # A column separator gap should be significantly larger than word spacing
+        # Use 3x minimum gap as threshold (to distinguish "Transaction Date" from separate columns)
+        # Also ensure a minimum threshold of 8 points to handle edge cases
+        threshold = max(min_gap * 3.0, 8.0)
+
+        # Return positions of significant gaps
+        significant_gaps = [pos for size, pos in gaps if size >= threshold]
+
+        logger.debug(
+            f"Header gaps: min={min_gap:.1f}, threshold={threshold:.1f}, "
+            f"gaps={[(f'{s:.1f}', f'{p:.1f}') for s, p in gaps]}, "
+            f"significant={len(significant_gaps)}"
+        )
+
+        return significant_gaps
+
+    def _detect_columns_from_header_gaps(
+        self,
+        header_blocks: list[TextBlock],
+        header_gaps: list[float],
+        primary_header: HeaderRow,
+    ) -> list[ColumnDefinition]:
+        """
+        Detect columns using gaps found in the header row.
+
+        Groups adjacent header blocks between gaps into single columns.
+
+        Args:
+            header_blocks: Text blocks from header row
+            header_gaps: X-positions of column separations
+            primary_header: Header row detection result
+
+        Returns:
+            List of ColumnDefinition objects
+        """
+        columns: list[ColumnDefinition] = []
+
+        # Sort gaps to use as dividers
+        sorted_gaps = sorted(header_gaps)
+
+        # Group header blocks by which gap range they fall into
+        current_group: list[tuple[TextBlock, Any]] = []
+        current_gap_idx = 0
+
+        for block, match in zip(header_blocks, primary_header.matches):
+            block_center = block.center_x
+
+            # Check if we've passed a gap boundary
+            while (current_gap_idx < len(sorted_gaps) and
+                   block_center > sorted_gaps[current_gap_idx]):
+                # Save current group as a column
+                if current_group:
+                    col = self._create_merged_column(
+                        len(columns), current_group, primary_header.row_index
+                    )
+                    columns.append(col)
+                    current_group = []
+                current_gap_idx += 1
+
+            current_group.append((block, match))
+
+        # Don't forget the last group
+        if current_group:
+            col = self._create_merged_column(
+                len(columns), current_group, primary_header.row_index
+            )
+            columns.append(col)
+
+        return columns
+
+    def _create_merged_column(
+        self,
+        column_id: int,
+        header_group: list[tuple[TextBlock, Any]],
+        header_row_index: int,
+    ) -> ColumnDefinition:
+        """
+        Create a column definition from a group of header blocks.
+
+        Args:
+            column_id: Column index
+            header_group: List of (TextBlock, HeaderMatch) tuples
+            header_row_index: Source header row index
+
+        Returns:
+            ColumnDefinition with merged header text
+        """
+        # Sort by x-position
+        header_group.sort(key=lambda h: h[0].bbox.x0)
+
+        # Calculate bounds from all blocks in group
+        x0 = min(h[0].bbox.x0 for h in header_group) - 5
+        x1 = max(h[0].bbox.x1 for h in header_group) + 5
+
+        # Merge header texts
+        merged_text = " ".join(h[0].text for h in header_group)
+
+        # Find best semantic match
+        best_match = header_group[0][1]
+        for _, match in header_group:
+            if match.confidence > best_match.confidence:
+                best_match = match
+            if match.semantic_type and not best_match.semantic_type:
+                best_match = match
+
+        from tables.detector.header_detector import HeaderMatch
+        merged_match = HeaderMatch(
+            text=merged_text,
+            normalized_text=merged_text.lower(),
+            semantic_type=best_match.semantic_type,
+            confidence=best_match.confidence,
+            match_method=best_match.match_method,
+            column_index=column_id,
+        )
+
+        return self._create_column_definition(
+            column_id, x0, x1, merged_match, header_row_index
+        )
+
+    def _create_columns_from_header_blocks(
+        self,
+        header_blocks: list[TextBlock],
+        primary_header: HeaderRow,
+    ) -> list[ColumnDefinition]:
+        """
+        Create one column per header block (fallback method).
+
+        Args:
+            header_blocks: Text blocks from header row
+            primary_header: Header row detection result
+
+        Returns:
+            List of ColumnDefinition objects
+        """
+        columns: list[ColumnDefinition] = []
+
+        for i, (block, match) in enumerate(zip(header_blocks, primary_header.matches)):
+            x0 = block.bbox.x0 - 5
+            x1 = block.bbox.x1 + 5
 
             column = self._create_column_definition(
                 i, x0, x1, match, primary_header.row_index
@@ -1073,6 +1283,7 @@ class TableDetector:
                     page_num,
                     page_tables,
                     processed_pages,
+                    pdf_document,
                 )
                 all_tables.append(merged_table)
 
@@ -1086,41 +1297,177 @@ class TableDetector:
         start_page: int,
         page_tables: dict[int, list[TableDefinition]],
         processed_pages: set[int],
+        pdf_document: Any = None,
     ) -> TableDefinition:
         """
         Try to merge a table with continuation tables on subsequent pages.
+
+        Also handles pages without detected tables that might be continuation
+        pages (e.g., when the header doesn't repeat).
 
         Args:
             table: Starting table
             start_page: Starting page number
             page_tables: All detected tables by page
             processed_pages: Set of already processed pages
+            pdf_document: PDFDocument for checking continuation pages
 
         Returns:
             Merged TableDefinition (may be unchanged if no merge)
         """
         current_table = table
         current_page = start_page
+        max_pages_to_check = 50  # Prevent infinite loops
 
-        while True:
+        while current_page - start_page < max_pages_to_check:
             next_page = current_page + 1
 
-            if next_page not in page_tables or next_page in processed_pages:
+            if next_page in processed_pages:
                 break
 
-            # Look for a continuation table on the next page
-            next_tables = page_tables[next_page]
-            continuation = self._find_continuation_table(current_table, next_tables)
+            if next_page in page_tables:
+                # Next page has detected tables - try to merge
+                next_tables = page_tables[next_page]
+                continuation = self._find_continuation_table(current_table, next_tables)
 
-            if continuation:
-                # Merge the tables
-                current_table = self._merge_tables(current_table, continuation)
-                processed_pages.add(next_page)
-                current_page = next_page
+                if continuation:
+                    current_table = self._merge_tables(current_table, continuation)
+                    processed_pages.add(next_page)
+                    current_page = next_page
+                else:
+                    # Tables exist but none match - stop merging
+                    break
+            elif pdf_document is not None:
+                # No detected tables on next page - check if it's a continuation page
+                # A continuation page has tabular data but no header row
+                if next_page >= pdf_document.page_count:
+                    break  # No more pages
+
+                page_info = pdf_document.get_page_info(next_page)
+                if page_info is None:
+                    break
+
+                # Check if the page has data that looks like table continuation
+                text_blocks = self._extract_text_blocks(pdf_document, next_page)
+                if not text_blocks:
+                    break  # Empty page
+
+                # Check if data on this page aligns with the table columns
+                continuation_bounds = self._find_continuation_bounds(
+                    current_table, text_blocks, next_page
+                )
+
+                if continuation_bounds:
+                    # Extend the table to include this page
+                    current_table = self._extend_table_to_page(
+                        current_table, next_page, continuation_bounds
+                    )
+                    processed_pages.add(next_page)
+                    current_page = next_page
+                else:
+                    break  # Not a continuation page
             else:
                 break
 
         return current_table
+
+    def _find_continuation_bounds(
+        self,
+        table: TableDefinition,
+        text_blocks: list[TextBlock],
+        page_number: int,
+    ) -> Optional[BoundingBox]:
+        """
+        Check if text blocks on a page look like continuation data for a table.
+
+        Args:
+            table: The table we're checking continuation for
+            text_blocks: Text blocks on the candidate page
+            page_number: Page number being checked
+
+        Returns:
+            BoundingBox of the continuation data, or None if not a continuation
+        """
+        if not text_blocks:
+            return None
+
+        # Get table's x-range from existing bounds
+        if not table.bounds_per_page:
+            return None
+
+        table_bounds = list(table.bounds_per_page.values())[0]
+        table_x0, table_x1 = table_bounds.x0, table_bounds.x1
+
+        # Group text blocks into rows
+        boxes = [block.bbox for block in text_blocks]
+        from tables.utils.geometry import cluster_by_y_coordinate
+        row_clusters = cluster_by_y_coordinate(boxes, tolerance=5.0)
+
+        if not row_clusters:
+            return None
+
+        # Check if rows have similar x-range to the table
+        matching_rows = 0
+        min_y, max_y = float('inf'), float('-inf')
+        min_x, max_x = float('inf'), float('-inf')
+
+        for cluster in row_clusters:
+            row_x0 = min(b.x0 for b in cluster)
+            row_x1 = max(b.x1 for b in cluster)
+
+            # Check horizontal overlap with table
+            overlap = min(row_x1, table_x1) - max(row_x0, table_x0)
+            overlap_ratio = overlap / (table_x1 - table_x0) if table_x1 > table_x0 else 0
+
+            # Row should significantly overlap with table columns
+            if overlap_ratio >= 0.5 and len(cluster) >= 2:  # At least 50% overlap
+                matching_rows += 1
+                for box in cluster:
+                    min_y = min(min_y, box.y0)
+                    max_y = max(max_y, box.y1)
+                    min_x = min(min_x, box.x0)
+                    max_x = max(max_x, box.x1)
+
+        # Need enough matching rows to be considered a continuation
+        if matching_rows >= 3:  # At least 3 data rows
+            return BoundingBox(x0=min_x, y0=min_y, x1=max_x, y1=max_y)
+
+        return None
+
+    def _extend_table_to_page(
+        self,
+        table: TableDefinition,
+        page_number: int,
+        bounds: BoundingBox,
+    ) -> TableDefinition:
+        """
+        Extend a table to include a continuation page.
+
+        Args:
+            table: Table to extend
+            page_number: Page number to add
+            bounds: Bounds of data on the new page
+
+        Returns:
+            Extended TableDefinition
+        """
+        new_pages = sorted(set(table.page_numbers + [page_number]))
+        new_bounds = {**table.bounds_per_page, page_number: bounds}
+
+        return TableDefinition(
+            table_id=table.table_id,
+            page_numbers=new_pages,
+            columns=table.columns,
+            structure_type=table.structure_type,
+            content_type=table.content_type,
+            bounds_per_page=new_bounds,
+            header_row_indices=table.header_row_indices,
+            header_repeats_on_pages=False,  # Header doesn't repeat
+            is_multi_page=True,
+            continuation_confidence=0.7,
+            detection_confidence=table.detection_confidence,
+            warnings=table.warnings,
+        )
 
     def _find_continuation_table(
         self,
@@ -1131,9 +1478,9 @@ class TableDetector:
         Find a table that is a continuation of the given table.
 
         Criteria for continuation:
-        - Similar column structure
+        - Similar column structure (count and semantic types)
         - Similar horizontal position
-        - Either no headers or repeated headers
+        - Similar header text (not completely different headers)
 
         Args:
             table: Table to find continuation for
@@ -1147,14 +1494,37 @@ class TableDetector:
             if abs(len(candidate.columns) - len(table.columns)) > 1:
                 continue
 
-            # Check column semantic types match
-            table_types = [c.semantic_type for c in table.columns if c.semantic_type]
-            candidate_types = [c.semantic_type for c in candidate.columns if c.semantic_type]
+            # Check column semantic types match (bidirectional)
+            table_types = set(c.semantic_type for c in table.columns if c.semantic_type)
+            candidate_types = set(c.semantic_type for c in candidate.columns if c.semantic_type)
 
-            # At least 50% of types should match
             if table_types and candidate_types:
-                matches = sum(1 for t in table_types if t in candidate_types)
-                if matches / len(table_types) < 0.5:
+                # Calculate bidirectional overlap
+                intersection = table_types & candidate_types
+                # Require at least 60% overlap from both sides
+                if not intersection:
+                    continue
+                table_overlap = len(intersection) / len(table_types)
+                candidate_overlap = len(intersection) / len(candidate_types)
+                if table_overlap < 0.6 or candidate_overlap < 0.6:
+                    continue
+
+            # Check header text similarity
+            table_headers = [normalize_header_text(c.header_text) for c in table.columns]
+            candidate_headers = [normalize_header_text(c.header_text) for c in candidate.columns]
+
+            # Compare header texts - at least 50% should be similar
+            header_matches = 0
+            for th in table_headers:
+                for ch in candidate_headers:
+                    if th and ch and (th == ch or th in ch or ch in th):
+                        header_matches += 1
+                        break
+
+            if len(table_headers) > 0:
+                header_similarity = header_matches / len(table_headers)
+                # If headers are completely different, it's likely a new table
+                if header_similarity < 0.3:
                     continue
 
             # Check horizontal alignment (similar x-range)
@@ -1258,13 +1628,37 @@ class TableDetector:
             has_amount = bool(semantic_types & {"debit", "credit", "balance", "amount"})
 
             if has_date and has_amount:
-                # Additional check: headers should contain typical transaction keywords
-                # This prevents tables like "SAC / HSN code" from being classified as transaction
-                transaction_header_keywords = {"transaction", "txn", "debit", "credit", "withdrawal", "deposit", "balance"}
-                has_transaction_header = any(
-                    any(kw in header.lower() for kw in transaction_header_keywords)
-                    for header in header_texts
-                )
+                # Additional check: headers should closely match transaction keywords
+                # Strict matching to avoid false positives like "Term Deposit"
+                transaction_header_keywords = {
+                    "transaction", "txn", "tran", "debit", "credit", "withdrawal",
+                    "deposit", "balance", "particulars", "description", "narration", "details"
+                }
+
+                has_transaction_header = False
+                for header in header_texts:
+                    header_lower = header.lower()
+                    words = header_lower.split()
+
+                    if not words:
+                        continue
+
+                    for kw in transaction_header_keywords:
+                        # Case 1: Header equals the keyword (e.g., "Debit", "Credit")
+                        if header_lower == kw:
+                            has_transaction_header = True
+                            break
+                        # Case 2: First word is the keyword (e.g., "Transaction Date", "Debit Amount")
+                        if words[0] == kw:
+                            has_transaction_header = True
+                            break
+                        # Case 3: For "details/particulars of X" patterns where last word is keyword
+                        if len(words) >= 2 and words[0] in ("details", "particulars") and words[-1] == "transaction":
+                            has_transaction_header = True
+                            break
+                    if has_transaction_header:
+                        break
+
                 if has_transaction_header:
                     table.content_type = ContentType.TRANSACTION
                     return

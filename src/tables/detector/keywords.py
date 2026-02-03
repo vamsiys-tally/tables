@@ -382,6 +382,49 @@ def get_keywords_for_type(semantic_type: str) -> list[str]:
     return HEADER_KEYWORDS.get(semantic_type, [])
 
 
+def _is_word_boundary_match(text: str, keyword: str) -> bool:
+    """
+    Check if keyword matches at word boundaries in text.
+
+    A word boundary match means the keyword is either:
+    - The entire text
+    - At the start with a non-alphanumeric after
+    - At the end with a non-alphanumeric before
+    - Surrounded by non-alphanumeric characters
+
+    Args:
+        text: Normalized text to search in
+        keyword: Keyword to find
+
+    Returns:
+        True if keyword matches at word boundaries
+    """
+    if keyword not in text:
+        return False
+
+    # Find all positions where keyword appears
+    start = 0
+    while True:
+        pos = text.find(keyword, start)
+        if pos == -1:
+            break
+
+        end_pos = pos + len(keyword)
+
+        # Check left boundary
+        left_ok = (pos == 0 or not text[pos - 1].isalnum())
+
+        # Check right boundary
+        right_ok = (end_pos == len(text) or not text[end_pos].isalnum())
+
+        if left_ok and right_ok:
+            return True
+
+        start = pos + 1
+
+    return False
+
+
 def find_semantic_type(text: str, threshold: float = 0.0) -> Optional[tuple[str, float]]:
     """
     Find the semantic type for a given header text.
@@ -398,7 +441,7 @@ def find_semantic_type(text: str, threshold: float = 0.0) -> Optional[tuple[str,
 
     Confidence Scoring:
         - Exact match: 1.0
-        - Text contains keyword: 0.8
+        - Text contains keyword (word boundary): 0.8
         - Keyword contains text: 0.6
 
     Example:
@@ -422,8 +465,14 @@ def find_semantic_type(text: str, threshold: float = 0.0) -> Optional[tuple[str,
             # Exact match (highest confidence)
             if normalized == keyword:
                 confidence = 1.0
-            # Text contains the keyword
+            # Text contains the keyword - require word boundary match for short keywords
             elif keyword in normalized:
+                # For short keywords (3 chars or less), require word boundary match
+                # This prevents "no" from matching in "non-dbs"
+                if len(keyword) <= 3:
+                    if not _is_word_boundary_match(normalized, keyword):
+                        continue  # Skip this keyword, not a valid match
+
                 # Longer keywords matching = higher confidence
                 confidence = 0.7 + (0.2 * len(keyword) / len(normalized))
                 confidence = min(confidence, 0.9)  # Cap at 0.9 for contains
@@ -442,12 +491,57 @@ def find_semantic_type(text: str, threshold: float = 0.0) -> Optional[tuple[str,
     return None
 
 
+def _looks_like_data_value(text: str) -> bool:
+    """
+    Check if text looks like a data value rather than a header.
+
+    Data values include:
+    - Numbers (with or without decimals, commas, currency symbols)
+    - Dates (various formats)
+    - Account numbers (long digit sequences)
+    - Amounts with currency indicators
+
+    Args:
+        text: Text to check
+
+    Returns:
+        True if text appears to be a data value
+    """
+    if not text:
+        return False
+
+    normalized = text.strip()
+
+    # Remove common prefixes/suffixes for checking
+    cleaned = normalized.replace(",", "").replace("₹", "").replace("Rs", "").replace("INR", "")
+    cleaned = cleaned.replace(":", "").strip()
+
+    # Pure numbers (including decimals) - likely amounts or IDs
+    if re.match(r"^-?\d+\.?\d*$", cleaned):
+        return True
+
+    # Numbers with commas (like 1,00,000 or 100,000)
+    if re.match(r"^-?[\d,]+\.?\d*$", cleaned) and any(c.isdigit() for c in cleaned):
+        return True
+
+    # Date patterns (DD-MM-YYYY, DD/MM/YYYY, etc.)
+    if re.match(r"^\d{1,2}[-/]\d{1,2}[-/]\d{2,4}$", cleaned):
+        return True
+
+    # Long sequences of digits (account numbers, transaction IDs)
+    digits_only = re.sub(r"[^0-9]", "", normalized)
+    if len(digits_only) >= 6:  # 6+ digit sequences are likely IDs
+        return True
+
+    return False
+
+
 def is_likely_header_row(texts: list[str], min_matches: int = 2) -> bool:
     """
     Determine if a list of texts likely represents a header row.
 
     A row is considered a header if it contains multiple recognized
-    header keywords and does not contain exclusion patterns.
+    header keywords and does not contain too many data values.
 
     Args:
         texts: List of cell texts from a potential header row
@@ -462,17 +556,28 @@ def is_likely_header_row(texts: list[str], min_matches: int = 2) -> bool:
         >>> is_likely_header_row(["01/01/2024", "ATM Withdrawal", "500.00", "", "10000.00"])
         False
     """
+    # First check: if most cells look like data values, this is not a header row
+    data_value_count = sum(1 for t in texts if _looks_like_data_value(t))
+    if len(texts) > 0 and data_value_count / len(texts) > 0.3:
+        # More than 30% of cells are data values - not a header
+        return False
+
     matches = 0
     matched_types: set[str] = set()
 
     for text in texts:
         normalized = normalize_header_text(text)
 
+        # Skip cells that look like data values
+        if _looks_like_data_value(text):
+            continue
+
         # Check for exclusions
         if any(excl in normalized for excl in HEADER_EXCLUSIONS):
             continue
 
-        result = find_semantic_type(text, threshold=0.5)
+        # Use higher threshold (0.7) to reduce false positives
+        result = find_semantic_type(text, threshold=0.7)
         if result:
             semantic_type, confidence = result
             if semantic_type not in matched_types:
