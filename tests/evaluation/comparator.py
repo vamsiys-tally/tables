@@ -343,6 +343,10 @@ class TransactionComparator:
         """
         Compare a GT transaction with an extracted transaction.
 
+        Compares using original field names from raw_data (since field names
+        vary per bank/PDF). Falls back to normalized field comparison if
+        raw_data fields don't match.
+
         Args:
             gt_txn: Ground truth transaction
             ext_txn: Extracted transaction dict
@@ -353,94 +357,100 @@ class TransactionComparator:
         """
         comparisons: list[FieldComparison] = []
 
-        # Compare date
-        ext_date = self._extract_date(ext_txn)
-        date_matches = self._compare_dates(gt_txn.date, ext_date)
-        comparisons.append(FieldComparison(
-            field_name="date",
-            gt_value=gt_txn.date,
-            extracted_value=ext_date,
-            matches=date_matches,
-        ))
+        # Get raw data for direct comparison (original field names)
+        gt_raw = gt_txn.raw_data
 
-        # Compare description
-        ext_desc = ext_txn.get("description", "")
-        desc_matches = self._compare_descriptions(gt_txn.description, ext_desc)
-        comparisons.append(FieldComparison(
-            field_name="description",
-            gt_value=gt_txn.description,
-            extracted_value=ext_desc,
-            matches=desc_matches,
-        ))
+        # Compare each field from ground truth raw_data
+        all_match = True
+        first_mismatch_type = MismatchType.MATCH
 
-        # Compare debit
-        ext_debit = self._extract_amount(ext_txn, "debit")
-        debit_matches = self._compare_amounts(gt_txn.debit, ext_debit)
-        comparisons.append(FieldComparison(
-            field_name="debit",
-            gt_value=gt_txn.debit,
-            extracted_value=ext_debit,
-            matches=debit_matches,
-        ))
+        for field_name, gt_value in gt_raw.items():
+            ext_value = ext_txn.get(field_name, "")
 
-        # Compare credit
-        ext_credit = self._extract_amount(ext_txn, "credit")
-        credit_matches = self._compare_amounts(gt_txn.credit, ext_credit)
-        comparisons.append(FieldComparison(
-            field_name="credit",
-            gt_value=gt_txn.credit,
-            extracted_value=ext_credit,
-            matches=credit_matches,
-        ))
+            # Normalize both values for comparison
+            gt_str = str(gt_value).strip() if gt_value else ""
+            ext_str = str(ext_value).strip() if ext_value else ""
 
-        # Compare balance
-        ext_balance = self._extract_amount(ext_txn, "balance")
-        balance_matches = self._compare_amounts(gt_txn.balance, ext_balance)
-        comparisons.append(FieldComparison(
-            field_name="balance",
-            gt_value=gt_txn.balance,
-            extracted_value=ext_balance,
-            matches=balance_matches,
-        ))
+            # Determine field type and compare appropriately
+            field_matches = self._compare_field_values(field_name, gt_str, ext_str)
 
-        # Compare reference (optional)
-        ext_ref = ext_txn.get("reference", "")
-        ref_matches = self._compare_references(gt_txn.reference, ext_ref)
-        comparisons.append(FieldComparison(
-            field_name="reference",
-            gt_value=gt_txn.reference,
-            extracted_value=ext_ref,
-            matches=ref_matches,
-        ))
+            comparisons.append(FieldComparison(
+                field_name=field_name,
+                gt_value=gt_str,
+                extracted_value=ext_str,
+                matches=field_matches,
+            ))
 
-        # Determine overall match
-        all_match = all(fc.matches for fc in comparisons)
-
-        # Determine mismatch type
-        mismatch_type = MismatchType.MATCH
-        if not all_match:
-            if not date_matches:
-                mismatch_type = MismatchType.DATE_MISMATCH
-            elif not desc_matches:
-                mismatch_type = MismatchType.DESCRIPTION_MISMATCH
-            elif not debit_matches:
-                mismatch_type = MismatchType.DEBIT_MISMATCH
-            elif not credit_matches:
-                mismatch_type = MismatchType.CREDIT_MISMATCH
-            elif not balance_matches:
-                mismatch_type = MismatchType.BALANCE_MISMATCH
-            elif not ref_matches:
-                mismatch_type = MismatchType.REFERENCE_MISMATCH
+            if not field_matches and all_match:
+                all_match = False
+                first_mismatch_type = self._get_mismatch_type_for_field(field_name)
 
         return TransactionMatch(
             gt_row=gt_txn.row_number,
             extracted_row=ext_idx,
             is_match=all_match,
-            mismatch_type=mismatch_type,
+            mismatch_type=first_mismatch_type,
             field_comparisons=comparisons,
             gt_transaction=gt_txn,
             extracted_transaction=ext_txn,
         )
+
+    def _compare_field_values(
+        self,
+        field_name: str,
+        gt_value: str,
+        ext_value: str,
+    ) -> bool:
+        """
+        Compare two field values, using appropriate comparison based on field type.
+
+        Args:
+            field_name: Name of the field (used to infer type)
+            gt_value: Ground truth value as string
+            ext_value: Extracted value as string
+
+        Returns:
+            True if values match
+        """
+        # Empty check
+        if not gt_value and not ext_value:
+            return True
+
+        # Detect if this is a date field
+        field_lower = field_name.lower()
+        if "date" in field_lower:
+            gt_date = parse_date(gt_value)
+            ext_date = parse_date(ext_value)
+            return self._compare_dates(gt_date, ext_date)
+
+        # Detect if this is an amount field
+        amount_keywords = ["debit", "credit", "withdrawal", "deposit", "balance", "amount", "dr", "cr"]
+        if any(kw in field_lower for kw in amount_keywords):
+            gt_amount = parse_amount(gt_value)
+            ext_amount = parse_amount(ext_value)
+            return self._compare_amounts(gt_amount, ext_amount)
+
+        # Default: normalized text comparison
+        return normalize_text(gt_value) == normalize_text(ext_value)
+
+    def _get_mismatch_type_for_field(self, field_name: str) -> MismatchType:
+        """Get the mismatch type for a given field name."""
+        field_lower = field_name.lower()
+
+        if "date" in field_lower:
+            return MismatchType.DATE_MISMATCH
+        elif "description" in field_lower or "particular" in field_lower or "narration" in field_lower:
+            return MismatchType.DESCRIPTION_MISMATCH
+        elif "debit" in field_lower or "withdrawal" in field_lower or "dr" in field_lower:
+            return MismatchType.DEBIT_MISMATCH
+        elif "credit" in field_lower or "deposit" in field_lower or "cr" in field_lower:
+            return MismatchType.CREDIT_MISMATCH
+        elif "balance" in field_lower:
+            return MismatchType.BALANCE_MISMATCH
+        elif "ref" in field_lower or "cheque" in field_lower:
+            return MismatchType.REFERENCE_MISMATCH
+        else:
+            return MismatchType.DESCRIPTION_MISMATCH  # Default
 
     def _extract_date(self, ext_txn: dict[str, Any]) -> Optional[date]:
         """Extract date from extracted transaction."""

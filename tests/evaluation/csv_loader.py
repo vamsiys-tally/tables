@@ -1,22 +1,25 @@
 """
-Ground Truth CSV Loader.
+Ground Truth Loader.
 
-Loads ground truth CSV files and converts them to comparable transaction objects.
+Loads ground truth files (CSV or JSON) and converts them to comparable transaction objects.
+Supports flexible field names - auto-detects field types from value patterns.
 
-CSV Format:
-    date,value_date,description,reference,debit,credit,balance
+Supported Formats:
+    - JSON: Array of transaction objects (recommended)
+    - CSV: With header row
 
 Example:
-    >>> transactions = load_ground_truth("tests/data/ground_truth/hdfc/hdfc_001.csv")
-    >>> len(transactions)
-    45
+    >>> gt = load_ground_truth("tests/data/ground_truth/yes_bank/yes_001.json")
+    >>> print(f"Loaded {gt.transaction_count} transactions")
 """
 
 from __future__ import annotations
 
 import csv
+import json
+import re
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Optional, Any
@@ -254,40 +257,84 @@ def normalize_text(value: str) -> str:
 # Loader Functions
 # =============================================================================
 
-def load_ground_truth(csv_path: str | Path) -> GroundTruthFile:
+def load_ground_truth(file_path: str | Path) -> GroundTruthFile:
     """
-    Load ground truth transactions from a CSV file.
+    Load ground truth transactions from a JSON or CSV file.
 
     Args:
-        csv_path: Path to the CSV file
+        file_path: Path to the ground truth file (.json or .csv)
 
     Returns:
         GroundTruthFile with parsed transactions
 
     Example:
-        >>> gt = load_ground_truth("tests/data/ground_truth/hdfc/hdfc_001.csv")
+        >>> gt = load_ground_truth("tests/data/ground_truth/yes_bank/yes_001.json")
         >>> print(f"Loaded {gt.transaction_count} transactions")
     """
-    csv_path = Path(csv_path)
+    file_path = Path(file_path)
 
-    result = GroundTruthFile(file_path=csv_path)
+    result = GroundTruthFile(file_path=file_path)
 
     # Find corresponding PDF
-    pdf_path = csv_path.with_suffix(".pdf")
+    pdf_path = file_path.with_suffix(".pdf")
     if pdf_path.exists():
         result.pdf_path = pdf_path
 
-    if not csv_path.exists():
-        result.parse_errors.append(f"File not found: {csv_path}")
+    if not file_path.exists():
+        result.parse_errors.append(f"File not found: {file_path}")
         return result
 
+    # Dispatch based on file extension
+    suffix = file_path.suffix.lower()
+    if suffix == ".json":
+        _load_json_file(file_path, result)
+    elif suffix == ".csv":
+        _load_csv_file(file_path, result)
+    else:
+        result.parse_errors.append(f"Unsupported file format: {suffix}")
+
+    logger.debug(f"Loaded {result.transaction_count} transactions from {file_path}")
+
+    return result
+
+
+def _load_json_file(file_path: Path, result: GroundTruthFile) -> None:
+    """Load transactions from a JSON file."""
     try:
-        with open(csv_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        # Expect array of transaction objects
+        if not isinstance(data, list):
+            result.parse_errors.append("JSON must be an array of transactions")
+            return
+
+        for row_num, row in enumerate(data, start=1):
+            if not isinstance(row, dict):
+                result.parse_errors.append(f"Row {row_num}: Expected object, got {type(row).__name__}")
+                continue
+
+            try:
+                txn = _parse_row(row, row_num)
+                result.transactions.append(txn)
+            except Exception as e:
+                result.parse_errors.append(f"Row {row_num}: {e}")
+
+    except json.JSONDecodeError as e:
+        result.parse_errors.append(f"Invalid JSON: {e}")
+    except Exception as e:
+        result.parse_errors.append(f"Failed to read JSON: {e}")
+
+
+def _load_csv_file(file_path: Path, result: GroundTruthFile) -> None:
+    """Load transactions from a CSV file."""
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
 
             for row_num, row in enumerate(reader, start=2):  # Start at 2 (1 is header)
                 try:
-                    txn = _parse_csv_row(row, row_num)
+                    txn = _parse_row(row, row_num)
                     result.transactions.append(txn)
                 except Exception as e:
                     result.parse_errors.append(f"Row {row_num}: {e}")
@@ -295,39 +342,124 @@ def load_ground_truth(csv_path: str | Path) -> GroundTruthFile:
     except Exception as e:
         result.parse_errors.append(f"Failed to read CSV: {e}")
 
-    logger.debug(f"Loaded {result.transaction_count} transactions from {csv_path}")
 
-    return result
-
-
-def _parse_csv_row(row: dict[str, str], row_number: int) -> GroundTruthTransaction:
+def _parse_row(row: dict[str, Any], row_number: int) -> GroundTruthTransaction:
     """
-    Parse a single CSV row into a GroundTruthTransaction.
+    Parse a row into a GroundTruthTransaction.
 
-    Expected columns (case-insensitive):
-        date, value_date, description, reference, debit, credit, balance
+    Auto-detects field types from values when field names don't match standard names.
+    Stores original data in raw_data for direct comparison.
 
     Args:
-        row: CSV row as dictionary
+        row: Row as dictionary (from JSON or CSV)
         row_number: Row number for error reporting
 
     Returns:
         Parsed GroundTruthTransaction
     """
-    # Normalize column names (lowercase, strip)
-    normalized_row = {k.lower().strip(): v for k, v in row.items()}
+    # Convert all values to strings for raw_data
+    raw_data = {k: str(v) if v is not None else "" for k, v in row.items()}
+
+    # Try to identify fields by name first, then by value patterns
+    detected = _detect_fields(row)
 
     return GroundTruthTransaction(
         row_number=row_number,
-        date=parse_date(normalized_row.get("date", "")),
-        value_date=parse_date(normalized_row.get("value_date", "")),
-        description=normalized_row.get("description", "").strip(),
-        reference=normalized_row.get("reference", "").strip() or None,
-        debit=parse_amount(normalized_row.get("debit", "")),
-        credit=parse_amount(normalized_row.get("credit", "")),
-        balance=parse_amount(normalized_row.get("balance", "")),
-        raw_data=dict(row),
+        date=detected.get("date"),
+        value_date=detected.get("value_date"),
+        description=detected.get("description", ""),
+        reference=detected.get("reference"),
+        debit=detected.get("debit"),
+        credit=detected.get("credit"),
+        balance=detected.get("balance"),
+        raw_data=raw_data,
     )
+
+
+def _detect_fields(row: dict[str, Any]) -> dict[str, Any]:
+    """
+    Auto-detect field types from a row.
+
+    Uses field name patterns and value patterns to identify:
+    - Date fields (transaction date, value date)
+    - Amount fields (debit, credit, balance)
+    - Description field
+
+    Args:
+        row: Row dictionary
+
+    Returns:
+        Dictionary with detected field values
+    """
+    result: dict[str, Any] = {}
+
+    # Normalize keys for matching
+    key_map = {k.lower().strip().replace("_", " "): k for k in row.keys()}
+
+    # Field name patterns (priority order)
+    date_patterns = ["transaction date", "date", "txn date", "trans date", "posting date"]
+    value_date_patterns = ["value date", "valuedate", "val date"]
+    description_patterns = ["description", "particulars", "narration", "remarks", "details"]
+    reference_patterns = [
+        "cheque no/reference no", "reference no", "reference", "ref no", "ref",
+        "cheque no", "chq no", "transaction id", "txn id", "utr"
+    ]
+    debit_patterns = ["withdrawals", "withdrawal", "debit", "dr", "debit amount"]
+    credit_patterns = ["deposits", "deposit", "credit", "cr", "credit amount"]
+    balance_patterns = ["running balance", "balance", "closing balance", "available balance"]
+
+    def find_field(patterns: list[str]) -> Optional[str]:
+        """Find the original key matching any pattern."""
+        for pattern in patterns:
+            if pattern in key_map:
+                return key_map[pattern]
+        return None
+
+    def get_value(key: Optional[str]) -> Any:
+        """Get value for a key, or None."""
+        if key is None:
+            return None
+        return row.get(key)
+
+    # Find fields by name patterns
+    date_key = find_field(date_patterns)
+    value_date_key = find_field(value_date_patterns)
+    desc_key = find_field(description_patterns)
+    ref_key = find_field(reference_patterns)
+    debit_key = find_field(debit_patterns)
+    credit_key = find_field(credit_patterns)
+    balance_key = find_field(balance_patterns)
+
+    # Parse found fields
+    date_val = get_value(date_key)
+    if date_val:
+        result["date"] = parse_date(str(date_val))
+
+    value_date_val = get_value(value_date_key)
+    if value_date_val:
+        result["value_date"] = parse_date(str(value_date_val))
+
+    desc_val = get_value(desc_key)
+    if desc_val:
+        result["description"] = str(desc_val).strip()
+
+    ref_val = get_value(ref_key)
+    if ref_val and str(ref_val).strip():
+        result["reference"] = str(ref_val).strip()
+
+    debit_val = get_value(debit_key)
+    if debit_val:
+        result["debit"] = parse_amount(str(debit_val))
+
+    credit_val = get_value(credit_key)
+    if credit_val:
+        result["credit"] = parse_amount(str(credit_val))
+
+    balance_val = get_value(balance_key)
+    if balance_val:
+        result["balance"] = parse_amount(str(balance_val))
+
+    return result
 
 
 def discover_ground_truth_files(
@@ -335,7 +467,7 @@ def discover_ground_truth_files(
     bank: Optional[str] = None,
 ) -> list[GroundTruthFile]:
     """
-    Discover all ground truth CSV files in a directory.
+    Discover all ground truth files (JSON or CSV) in a directory.
 
     Args:
         base_dir: Base directory to search (e.g., tests/data/ground_truth)
@@ -360,15 +492,15 @@ def discover_ground_truth_files(
         if not search_dir.exists():
             logger.warning(f"Bank directory not found: {search_dir}")
             return []
-        csv_files = list(search_dir.glob("*.csv"))
+        gt_files = list(search_dir.glob("*.json")) + list(search_dir.glob("*.csv"))
     else:
-        csv_files = list(base_dir.glob("**/*.csv"))
+        gt_files = list(base_dir.glob("**/*.json")) + list(base_dir.glob("**/*.csv"))
 
     # Create GroundTruthFile objects (lazy - not loaded yet)
     results = []
-    for csv_path in sorted(csv_files):
-        gt_file = GroundTruthFile(file_path=csv_path)
-        pdf_path = csv_path.with_suffix(".pdf")
+    for gt_path in sorted(gt_files):
+        gt_file = GroundTruthFile(file_path=gt_path)
+        pdf_path = gt_path.with_suffix(".pdf")
         if pdf_path.exists():
             gt_file.pdf_path = pdf_path
         results.append(gt_file)
