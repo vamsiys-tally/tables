@@ -508,6 +508,64 @@ class PDFDocument:
 
         return rects
 
+    def get_page_words(self, page_number: int) -> list[dict[str, Any]]:
+        """
+        Extract all words with positions from a page.
+
+        Returns raw pdfplumber word dictionaries with bounding boxes.
+        Useful for text clustering in table detection.
+
+        Args:
+            page_number: Zero-indexed page number
+
+        Returns:
+            List of word dictionaries with keys:
+            - text: The word text
+            - x0, top, x1, bottom: Bounding box coordinates
+            - fontname, size: Font information
+
+        Example:
+            >>> words = doc.get_page_words(0)
+            >>> for word in words:
+            ...     print(f"{word['text']} at ({word['x0']}, {word['top']})")
+        """
+        page = self._get_page(page_number)
+        return page.extract_words() or []
+
+    def get_page_rects(self, page_number: int) -> list[dict[str, Any]]:
+        """
+        Extract raw rectangle dictionaries from a page.
+
+        Returns pdfplumber rectangle dictionaries for use in
+        table structure classification.
+
+        Args:
+            page_number: Zero-indexed page number
+
+        Returns:
+            List of rectangle dictionaries with coordinate keys
+        """
+        page = self._get_page(page_number)
+        return page.rects or []
+
+    def get_page_lines_raw(self, page_number: int) -> list[dict[str, Any]]:
+        """
+        Extract raw line dictionaries from a page.
+
+        Returns pdfplumber line and edge dictionaries for use in
+        table structure classification.
+
+        Args:
+            page_number: Zero-indexed page number
+
+        Returns:
+            List of line dictionaries with coordinate keys
+        """
+        page = self._get_page(page_number)
+        lines = list(page.lines or [])
+        edges = list(page.edges or [])
+        return lines + edges
+
     def get_all_text(self) -> str:
         """
         Extract text from all pages concatenated.
