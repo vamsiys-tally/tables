@@ -219,11 +219,14 @@ class TableMerger:
 
         for page_idx, page_number in enumerate(table_definition.page_numbers):
             # Extract rows from this page
+            # Always skip headers on first page
+            # On subsequent pages, skip only if headers repeat
+            skip_headers = (page_idx == 0) or table_definition.header_repeats_on_pages
             page_rows = self.cell_extractor.extract_rows(
                 pdf_document,
                 page_number,
                 table_definition,
-                skip_header_rows=(page_idx > 0 and table_definition.header_repeats_on_pages),
+                skip_header_rows=skip_headers,
             )
 
             if not page_rows:

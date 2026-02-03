@@ -301,8 +301,19 @@ class RowBuilder:
                 # If date is present and non-empty, don't merge
                 if date_cell and not is_empty_cell(date_cell.text):
                     return False
-                # If date is empty, this suggests continuation - merge
+                # If date is empty, check balance too
+                # Only merge if BOTH date AND balance are empty
+                # (A row with a balance is a complete transaction, not a continuation)
                 if date_cell and is_empty_cell(date_cell.text):
+                    # Check balance column before merging
+                    if self.merge_context.has_balance_column:
+                        balance_col_id = self.merge_context.balance_column_index
+                        if balance_col_id is not None:
+                            balance_cell = current.cells.get(balance_col_id)
+                            # If balance has a value, this is a complete row - don't merge
+                            if balance_cell and not is_empty_cell(balance_cell.text):
+                                return False
+                    # Both date and balance are empty - likely continuation
                     return True
 
         # Rule 2: If no date column but balance column exists and is empty, merge

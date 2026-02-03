@@ -449,7 +449,11 @@ class TableDetector:
 
             # Check if this row is a potential header row
             row_texts = [block.text for block in text_row]
-            if len(row_texts) < 3:  # Headers typically have at least 3 columns
+
+            # Headers typically have 3-15 columns
+            # Less than 3 = probably not a table header
+            # More than 15 = probably a paragraph (each word is a "column")
+            if len(row_texts) < 3 or len(row_texts) > 15:
                 continue
 
             from tables.detector.keywords import is_likely_header_row
@@ -1230,6 +1234,23 @@ class TableDetector:
             if col.semantic_type
         }
 
+        header_texts = {
+            normalize_header_text(col.header_text)
+            for col in table.columns
+        }
+        header_text_combined = " ".join(header_texts)
+
+        # Check for summary table FIRST - "summary" in headers is a strong signal
+        # that this is NOT a transaction table even if it has date/amount columns
+        if any(kw in header_text_combined for kw in SUMMARY_KEYWORDS):
+            table.content_type = ContentType.SUMMARY
+            return
+
+        # Check for account info (before transaction)
+        if any(kw in header_text_combined for kw in ACCOUNT_INFO_KEYWORDS):
+            table.content_type = ContentType.ACCOUNT_INFO
+            return
+
         # Check for transaction table
         if semantic_types & TRANSACTION_KEYWORDS:
             # Must have date and at least one amount-related column
@@ -1237,22 +1258,16 @@ class TableDetector:
             has_amount = bool(semantic_types & {"debit", "credit", "balance", "amount"})
 
             if has_date and has_amount:
-                table.content_type = ContentType.TRANSACTION
-                return
-
-        # Check for summary table
-        header_texts = {
-            normalize_header_text(col.header_text)
-            for col in table.columns
-        }
-        if any(kw in " ".join(header_texts) for kw in SUMMARY_KEYWORDS):
-            table.content_type = ContentType.SUMMARY
-            return
-
-        # Check for account info
-        if any(kw in " ".join(header_texts) for kw in ACCOUNT_INFO_KEYWORDS):
-            table.content_type = ContentType.ACCOUNT_INFO
-            return
+                # Additional check: headers should contain typical transaction keywords
+                # This prevents tables like "SAC / HSN code" from being classified as transaction
+                transaction_header_keywords = {"transaction", "txn", "debit", "credit", "withdrawal", "deposit", "balance"}
+                has_transaction_header = any(
+                    any(kw in header.lower() for kw in transaction_header_keywords)
+                    for header in header_texts
+                )
+                if has_transaction_header:
+                    table.content_type = ContentType.TRANSACTION
+                    return
 
         # Default to OTHER
         table.content_type = ContentType.OTHER
